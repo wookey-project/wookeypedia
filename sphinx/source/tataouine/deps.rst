@@ -9,10 +9,15 @@ build your first firmware.
 .. note::
    **TL;DR**: summary of the tools needed by the Tataouine SDK, and detailed in the next paragraphs.
   
+   **To syncrhonize the repositories:**
+       * repo
+
    **For the firmware compilation:**
        * *perl*
        * *python*, and specifically its *python-bincopy* package
-       * A Kconfig parser (for example *kconfig-frontends*: http://ymorin.is-a-geek.org/projects/kconfig-frontends)
+       * A Kconfig parser
+          There is no constraint on the Kconfig parser tool that can be used. Nevertheless, we have tested
+          the `kconfiglib <https://github.com/ulfalizer/Kconfiglib>`_ python tool and `kconfig-frontends <https://salsa.debian.org/Philou-guest/kconfig-frontends/tree/upstream/latest>`_
        * A GNU ARM none-eabi toolchain (usually *gcc-arm-none-eabi*)
        * The *AdaCore ARM cross-toolchain* for the Ada microkernel (https://www.adacore.com/download/more)
 
@@ -28,12 +33,31 @@ build your first firmware.
 Local tools and utilities
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Repo
+""""
+
+Repo is a tool created by Google to manage the multiple repositories of Android in order to keep a
+consistent structure when building an Android image from the sources. It has been used for various
+projects requiring the integration of multiple softwares in a single SDK to simplify the deployment,
+development phases and integration.
+
+Installing repo can be done by following the steps of the 'Install Repo' part of the `Android documentation <https://source.android.com/setup/build/downloading>`_.
+
+.. hint::
+   Only the install step is needed for Wookey, other steps targeting the Android project
+
+Perl
+""""
+
 The SDK depends on perl for its internal tools (including *ldscripts* generators). You need
 to have perl installed on your host. There is no specific constraint on the version of perl you use.
 
 .. hint::
    Most of the time, no action is requested here, as perl is usually installed by default in
    many distributions
+
+Python-bincopy
+""""""""""""""
 
 You need python-bincopy (and as a consequence python) to be installed. This tool is used to
 generate .hex files from multiple elf files when generating the firmware. On Debian, python-bincopy
@@ -42,23 +66,42 @@ is not packaged, but you can install it using pip (pip install bincopy).
 .. hint::
    On any system having python and pip installed, just run pip install bincopy to download and deploy locally the bincopy module
 
-You need a kconfig-conf and kconfig-nconf binaries. These binaries parse the Kconfig format
-as defined in the Linux kernel sources. One of the existing projects supporting a standalone
-implementation of such parsers is *kconfig-frontends* (http://ymorin.is-a-geek.org/projects/kconfig-frontends).
-This is a C-based implementation of the Kconfig parsers. This software is currently being
-integrated in the Debian distributions by our team but is still in the new queue by now (middle sept. 2017):
-https://ftp-master.debian.org/new/kconfig-frontendsi\_4.11.0.1%2Bdfsg-1.html
+Kconfig parser
+""""""""""""""
 
-We hope it will be integrated as fast as possible in the Debian main pool for unstable and testing
-distributions, and in the Ubuntu current one in the same time.
+As explained before, we don't want to impose any Kconfig parsing tool to the user. There is various
+tools which support parsing Kconfig files and manipulate .config configuration files.
 
-.. hint::
-   While the package is not yet deployed in Debian, or if you are using another distribution or OS, you can still compile it:
-      * wget http://ymorin.is-a-geek.org/download/kconfig-frontends/kconfig-frontends-4.11.0.1.tar.xz
-      * tar -xJvf  kconfig-frontends-4.11.0.1.tar.xz
-      * cd kconfig-frontends-4.11.0.1
-      * ./configure && make
-      * sudo make install # if you wish
+Whe have tested kconfiglib::
+
+   pip install kconfiglib
+
+We have tested kconfig-frontends (downloadable from the `Debian salsa <https://salsa.debian.org/Philou-guest/kconfig-frontends/tree/upstream/latest>`_ repository, and installable as ususally::
+
+   wget https://salsa.debian.org/Philou-guest/kconfig-frontends/-/archive/upstream/latest/kconfig-frontends-upstream-latest.tar.bz2
+   cd kconfig-frontend-upstream-latest
+   ./configure
+   make
+
+In order to let you choose the tool of your choice, you can specify the tool you which using the following variables when
+calling make:
+
+   * MCONF: the menuconfig binary
+   * CONF:  the oldconfig binary
+   * CONF_ARGS: the oldconfig binary options (if needed)
+
+MCONF and CONF binaries are called with the Kconfig file as last argument. CONF binary supports the CONF_ARGS to add specific argument if needed, for e.g. to add *--silentoldconfig* argument.
+
+Here is an example of custom Kconfig parser usage::
+
+    MCONF=my_mconf_tool CONF=my_conf_tool CONF_ARGS='' make menuconfig
+
+
+.. caution::
+   Only kconfig-frontends and kconfiglib python tool have been tested with the Kconfig files of the project. The Kconfig syntax is a Linux standard, but tools may differ in their way to parse an generate the configuration file. If you have problems with another tool, check with one of the above
+
+Doc tools
+"""""""""
 
 If you wish to generate the documentation, you will need *doxygen* (to generate the technical manuals), and
 *sphinx* (to generate the complete documentation website). As doxygen generates LaTeX sources that

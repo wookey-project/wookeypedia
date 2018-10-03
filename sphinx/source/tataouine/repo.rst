@@ -1,3 +1,5 @@
+.. _repo:
+
 Tataouine and repo
 -----------------
 

@@ -5,6 +5,15 @@ Install and build procedure
 
 .. contents::
 
+Install the project
+-------------------
+
+The project working directory is downloaded using repo (see :ref:`dependencies` for more information about the tool).
+
+The installation is explained in the :ref:`repo` page.
+
+The working directory is then deployed in the *wookey* local subdirectory. You can then enter it.
+
 Build the project
 -----------------
 
