@@ -89,16 +89,22 @@ calling make:
    * MCONF: the menuconfig binary
    * CONF:  the oldconfig binary
    * CONF_ARGS: the oldconfig binary options (if needed)
+   * CONFGEN: the C header generation binary
+   * CONFGEN_ARGS: the C header generation binary arguments (typically the path to the header, which is include/generated/autoconf.h in Wookey)
 
 MCONF and CONF binaries are called with the Kconfig file as last argument. CONF binary supports the CONF_ARGS to add specific argument if needed, for e.g. to add *--silentoldconfig* argument.
 
 Here is an example of custom Kconfig parser usage::
 
-    MCONF=my_mconf_tool CONF=my_conf_tool CONF_ARGS='' make menuconfig
+    MCONF=my_mconf_tool CONF=my_conf_tool CONF_ARGS='' CONFGEN=my_header_gen_tool \
+       CONFGEN_ARGS=include/generated/autoconf.h make menuconfig
 
 
 .. caution::
    Only kconfig-frontends and kconfiglib python tool have been tested with the Kconfig files of the project. The Kconfig syntax is a Linux standard, but tools may differ in their way to parse an generate the configuration file. If you have problems with another tool, check with one of the above
+
+.. hint::
+   If your tool doesn't need a separate call to a specific oldconfig and header generation tool but use a single step for the whole generation, you can use 'true' as the missing header name
 
 Doc tools
 """""""""
