@@ -173,3 +173,9 @@ Lock actions
 .. include:: syscalls/sys_lock.rst
    :start-line: 4
 
+RNG access
+^^^^^^^^^^
+
+.. include:: syscalls/sys_get_random.rst
+   :start-line: 4
+

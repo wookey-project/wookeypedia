@@ -24,7 +24,8 @@ MANS_SYSCALLS_SRC := \
     $(MANS_SYSCALLS_SRC_DIR)/sys_get_systick.rst \
     $(MANS_SYSCALLS_SRC_DIR)/sys_reset.rst \
     $(MANS_SYSCALLS_SRC_DIR)/sys_sleep.rst \
-    $(MANS_SYSCALLS_SRC_DIR)/sys_lock.rst
+    $(MANS_SYSCALLS_SRC_DIR)/sys_lock.rst \
+    $(MANS_SYSCALLS_SRC_DIR)/sys_get_random.rst
 MANS_SYSCALLS := $(patsubst %.rst,$(BUILD_DIR)/doc/man/man2/%.2,$(notdir $(MANS_SYSCALLS_SRC)))
 MANS_SYSCALLS := $(patsubst %.rst,$(BUILD_DIR)/doc/man/man2/%.2,$(notdir $(MANS_SYSCALLS_SRC)))
 
