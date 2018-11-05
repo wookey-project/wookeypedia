@@ -30,10 +30,10 @@ EwoK supports the following properties:
    * Strict memory partitioning
    * Strict partitioning of physical resources (devices, etc.)
    * Fixed permissions management, set at compile time and easily verifiable
-   * Stack smashing protection (at kernel level, work in progress at userspace
-     level)
-   * Heap/Stack smashing protection
-   * W⊕X memory mappings
+   * Kernel Random Number Generation support (based on True RNG HW on STM32)
+   * Stack smashing protection in both kernel and userspace tasks
+   * Userspace Heap/Stack smashing protection (Work In Progress)
+   * Proved W⊕X memory mappings
    * Strict temporal separation between declarative phase and execution phase
 
 Ewok provides to the userspace drivers a specific interface to allow them to use the DMA engines.
