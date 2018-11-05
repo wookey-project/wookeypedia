@@ -116,7 +116,8 @@ The scheduling buffer keeps three information:
 
 Printing the scheduler ring buffer is easy using gdb::
 
-   arm-none-eabi-gdb -x tools/gdbinit
+   arm-none-eabi-gdb
+   (gdb) target extended-remote localhost:3333
    (gdb) monitor reset halt
    (gdb) c
    ... wait for some time

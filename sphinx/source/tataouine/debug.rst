@@ -82,7 +82,7 @@ It connects to the on-board ST-LinkV2, listening for a debug
 connection  on local port 3333. You can then start arm-none-eabi-gdb and
 connect it to openocd::
    
-   $ arm-none-eabi-gdb -x tools/gdbinit
+   $ arm-none-eabi-gdb
    (gdb) target extended-remote localhost:3333
    ...
    (gdb) info registers
