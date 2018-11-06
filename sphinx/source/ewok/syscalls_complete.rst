@@ -72,6 +72,7 @@ The device gpio table hosts the following structure::
       	uint32_t            afr;
       	uint32_t            lck;
         gpio_exti_trigger_t exti_trigger;
+        gpio_exti_lock_t    exti_lock;
       	user_handler_t      exti_handler;
    } dev_gpio_info_t;
 
@@ -125,6 +126,7 @@ The GPIO structure of the device abstracts the complexity of the EXTI integratio
 and only requires two fields:
 
    * exti_trigger: which type of EXTI trigger implies the execution of the handler
+   * exti_lock: specify wether the EXTI line has to be muted each time an EXTI interrupt arrises (see sys_cfg(SYS_CFG_UNLOCK_EXTI) syscall manual)
    * exti_handler: the ISR handler to execute
 
 There is no need to declare an IRQ line for the EXTI IRQ as it is fully managed by
@@ -136,6 +138,11 @@ The EXTI trigger is one of the following:
    * GPIO_EXTI_TRIGGER_RISE: trigger only on rising GPIO (value rising from 0 to 1)
    * GPIO_EXTI_TRIGGER_FALL: trigger only on falling GPIO (value rising from 1 to 0)
    * GPIO_EXTI_TRIGGER_BOTH: trigger each time the GPIO value varies
+
+The EXTI_lock is one of the following:
+
+   * GPIO_EXTI_UNLOCKED: the EXTI line is not muted, the ISR is called each time a new EXTI interrupt arrises
+   * GPIO_EXTI_LOCKED: the EXTI line is muted at the first interrupt. There is no more EXTI interrupt on this line while the userspace task doesn't voluntary unlock the associated EXTI line (see sys_cfg(SYS_CFG_UNLOCK_EXTI) syscall manual)
 
 Declaring a device IRQ
 """"""""""""""""""""""

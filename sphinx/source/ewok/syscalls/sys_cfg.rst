@@ -12,8 +12,12 @@ prototypes::
 
    e_syscall_ret sys_cfg(CFG_GPIO_SET, uint8_t gpioref, uint8_t value);
    e_syscall_ret sys_cfg(CFG_GPIO_GET, uint8_t gpioref, uint8_t *val);
+   e_syscall_ret sys_cfg(CFG_GPIO_UNLOCK_EXTI, uint8_t gpioref)
    e_syscall_ret sys_cfg(CFG_DMA_RECONF, dma_t*dma, dma_reconf_mask_t reconfmask);
    e_syscall_ret sys_cfg(CFG_DMA_RELOAD, uint32_t dma_id);
+   e_syscall_ret sys_cfg(CFG_DMA_DISABLE, uint32_t dma_id);
+   e_syscall_ret sys_cfg(CFG_DEV_MAP, uint8_t dev_id);
+   e_syscall_ret sys_cfg(CFG_DEV_UNMAP, uint8_t dev_id);
 
 
 sys_cfg(CFG_GPIO_SET)
@@ -55,11 +59,42 @@ The value read is set in the syscall third argument.
 .. important::
   The GPIO value to get must have been previously declared in the initialization phase.
 
+sys_cfg(CFG_GPIO_UNLOCK_EXTI)
+"""""""""""""""""""""""""""""
+
+.. note::
+   Synchronous syscall, executable in ISR mode
+
+There are times when external interrupts may:
+   * arrise only one time and need to be muted voluntary for a given amount of time
+   * be unstable and generate uncontrolled bursts, when the external IP is not clean and has hardware bugs
+
+For these two above cases, the EwoK kernel support a specific GPIO configuration which permits, when an EXTI interrupt is configure, to choose whether:
+
+   * the EXTI line is shut at handler time, by the kernel. The user ISR will be executed but there will be no more EXTI interrupts pending on the interrupt line.
+   * the EXTI line is not shut, and the EXTI is only acknowledged. The EXTI source can continue to emit other interrupts and the userspace ISR handler will be executed for each of them
+
+The choice is done using the `exti_lock` field of the gpio structure, using wether:
+
+   * GPIO_EXTI_UNLOCKED value: the EXTI line is not muted and will continue to arrise when the external HW IP emit an event on its EXTI line
+   * GPIO_EXTI_LOCKED value: the EXTI line is muted each time the interrupt arrise. As a consequence, the userspace task need to unmutte it voluntary using a specific syscall, otherwhise no other EXTI are received.
+
+To unmutte a given EXTI interrupt, a userspace task uses the ``sys_cfg(CFG_GPIO_UNLOCK_EXTI)`` syscall. This syscall as the following API::
+
+   e_syscall_ret sys_cfg(CFG_GPIO_EXTI_UNLOCK, uint8_t gpioref);
+
+The gpioref value is the kref identifier of the GPIO, like the one used in the other GPIO manipulation syscalls. Unlocking the EXTI line is a synchronous syscall.
+
+.. important::
+  The GPIO value to get must have been previously declared in the initialization phase.
+
+
+
 sys_cfg(CFG_DMA_RECONF)
 """""""""""""""""""""""
 
 .. note::
-   Syncrhonous syscall, executable in ISR mode
+   Synchronous syscall, executable in ISR mode
 
 In a generic DMA channel usage, it is a standard behavior to reconfigure a part of the DMA channel
 informations. This is for example the case for input or output buffers when using direct access mode
@@ -98,7 +133,7 @@ sys_cfg(CFG_DMA_RELOAD)
 """""""""""""""""""""""
 
 .. note::
-   Syncrhonous syscall, executable in ISR mode
+   Synchronous syscall, executable in ISR mode
 
 There is some time when we only want the DMA controller to restart a copy action, without modifying
 any of its properties. In that later case, only a reload is needed. The kernel only need to identify
@@ -116,7 +151,7 @@ sys_cfg(CFG_DMA_DISABLE)
 """"""""""""""""""""""""
 
 .. note::
-   Syncrhonous syscall, executable in ISR mode
+   Synchronous syscall, executable in ISR mode
 
 It is possible to disable a DMA stream. In that case, the DMA is stopped and can be re-enabled only by calling
 one of sys_cfg(CFG_DMA_RELOAD) or sys_cfg(CFG_DMA_RECONF) syscalls.
@@ -134,7 +169,7 @@ sys_cfg(CFG_DEV_MAP)
 """"""""""""""""""""
 
 .. note::
-   Syncrhonous syscall, executable only in main thread mode
+   Synchronous syscall, executable only in main thread mode
 
 It is possible to declare a device as voluntary mapped (field ``map_mode`` of the *device_t* structure.
 This field can be set to the following values:
@@ -169,7 +204,7 @@ sys_cfg(CFG_DEV_UNMAP)
 """"""""""""""""""""""
 
 .. note::
-   Syncrhonous syscall, executable only in main thread mode
+   Synchronous syscall, executable only in main thread mode
 
 When using DEV_MAP_VOLUNTARY, a previoulsy voluntary mapped device can be unmap by the task.
 Unmapping a device free a MPU slot when the task requires more than the maximum number of concurrently
@@ -190,5 +225,5 @@ which is set by the kernel at registration time.
 
 Unmapping a device is done with the following API::
 
-   e_syscall_ret sys_cfg(CFG_DEV_UMAP, uint8_t dev_id);
+   e_syscall_ret sys_cfg(CFG_DEV_UNMAP, uint8_t dev_id);
 
