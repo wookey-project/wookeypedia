@@ -74,7 +74,7 @@ tools which support parsing Kconfig files and manipulate .config configuration f
 
 Whe have tested kconfiglib::
 
-   pip install kconfiglib
+   pip3 install kconfiglib
 
 We have tested kconfig-frontends (downloadable from the `Debian salsa <https://salsa.debian.org/Philou-guest/kconfig-frontends/tree/upstream/latest>`_ repository, and installable as ususally::
 
