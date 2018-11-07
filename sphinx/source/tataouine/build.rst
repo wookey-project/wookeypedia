@@ -17,6 +17,50 @@ The working directory is then deployed in the *wookey* local subdirectory. You c
 Build the project
 -----------------
 
+First you have to set your environment to specify some paths and prefix depending on your current installation.
+This permit to support various user intallations such as various GNU/Linux distros, \*BSD or MacOS installations.
+
+This is done through the setenv.sh script. This script is highly documented, but here is how it works:
+
+the setenv.sh script is the script for setting user environment in order to set the various
+tools paths and names. It is separated from the Kconfig content in order to allow the user
+to specify its own paths and name without having them overloaded when using
+defconfig files.
+
+The environment variables that can be configurable by the user are the following:
+
+   * ADA_RUNTIME: The path to your Ada cross-toolchain installation. Needed if you use the Ada version of the EwoK kernel
+   * ST_FLASH: The path to the st-flash tool binary, used to flash the device. This make the *make burn* operational
+   * ST_UTIL: the path to the st-link tool binary, which can be useful to get informational infos about the board
+   * CROSS_COMPILE: the C cross-compiler prefix
+
+As the user is intented to update this very variables with
+this own values, this script is sourcing the local file named 'setenv.local.sh'
+in the same way as OpenBSD configuration scripts. This last script is not keeped in git and is yours.
+This permit to write a setenv.local.conf file with its own variables set, with a fallback to the setenv.sh variables if not needed.
+The setenv.local.sh file is not requested if the following variables are correctly set for the local user's configuration.
+
+.. hint::
+   Take a look at the setenv.sh script, which is highly documented
+
+Once you have set your environment variables in your `setenv.local.sh` script, just source the `setenv.sh` script::
+
+In the root directory::
+
+   $ . setenv.sh
+   =========================================================
+   === Tataouine environment configuration
+   =========================================================
+
+     ADA_RUNTIME   = /home/user/opt/adacore-toolchain
+     ST_FLASH      = /home/user/opt/stlink/st-flash
+     ST_UTIL       = /home/user/opt/stlink/st-util
+     CROSS_COMPILE = arm-none-eabi-
+
+   =========================================================
+
+Now that your environment is set, you are ready to configure and compile the project.
+
 In the root directory::
 
    $ make defconfig_list
