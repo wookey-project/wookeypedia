@@ -41,6 +41,8 @@ The permission API defines a list of ressource name:
 +-------------------------+-----------------------------------------------------------------------+
 | PERM_RES_TSK_UPGRADE    | task is able to upgrade the firmware (i.e. map the internal flash)    |
 +-------------------------+-----------------------------------------------------------------------+
+| PERM_RES_TSK_RNG        | task is able to request random data from the kernel RNG source        |
++-------------------------+-----------------------------------------------------------------------+
 | PERM_RES_MEM_DYNAMIC_MAP| task is able to (un)map its own devices declared as voluntary mapped  |
 +-------------------------+-----------------------------------------------------------------------+
 
@@ -201,7 +203,8 @@ Here is the generated Ada specification::
          TSK_FIPC        : bit;
          TSK_RESET       : bit;
          TSK_UPGRADE     : bit;
-         TSK_reserved    : bits_4;
+         TSK_RANDOM      : bit;
+         TSK_reserved    : bits_3;
          MEM_DYNAMIC_MAP : bit;
          MEM_reserved    : bits_7;
       end record
@@ -220,7 +223,8 @@ Here is the generated Ada specification::
          TSK_FIPC        at 0 range 14 .. 14;
          TSK_RESET       at 0 range 13 .. 13;
          TSK_UPGRADE     at 0 range 12 .. 12;
-         TSK_reserved    at 0 range  8 .. 11;
+         TSK_RANDOM      at 0 range 11 .. 11;
+         TSK_reserved    at 0 range  8 .. 10;
          MEM_DYNAMIC_MAP at 0 range  7 .. 7;
          MEM_reserved    at 0 range  0 .. 6;
       end record;
@@ -242,8 +246,9 @@ Here is the generated Ada specification::
            TIM_reserved   => 0,
            TSK_FISR       => 1,
            TSK_FIPC       => 0,
-           TSK_RESET       => 0,
-           TSK_UPGRADE       => 0,
+           TSK_RESET      => 0,
+           TSK_UPGRADE    => 0,
+           TSK_RANDOM     => 0,
            TSK_reserved   => 0,
            MEM_DYNAMIC_MAP => 0,
            MEM_reserved   => 0),
@@ -261,6 +266,7 @@ Here is the generated Ada specification::
            TSK_FIPC       => 0,
            TSK_RESET       => 0,
            TSK_UPGRADE       => 0,
+           TSK_RANDOM     => 1,
            TSK_reserved   => 0,
            MEM_DYNAMIC_MAP => 0,
            MEM_reserved   => 0),
@@ -278,6 +284,7 @@ Here is the generated Ada specification::
            TSK_FIPC       => 0,
            TSK_RESET       => 0,
            TSK_UPGRADE       => 0,
+           TSK_RANDOM     => 0,
            TSK_reserved   => 0,
            MEM_DYNAMIC_MAP => 0,
            MEM_reserved   => 0),
@@ -295,6 +302,7 @@ Here is the generated Ada specification::
            TSK_FIPC       => 0,
            TSK_RESET       => 1,
            TSK_UPGRADE       => 0,
+           TSK_RANDOM     => 1,
            TSK_reserved   => 0,
            MEM_DYNAMIC_MAP => 0,
            MEM_reserved   => 0),
@@ -312,6 +320,7 @@ Here is the generated Ada specification::
            TSK_FIPC       => 0,
            TSK_RESET       => 0,
            TSK_UPGRADE       => 0,
+           TSK_RANDOM     => 0,
            TSK_reserved   => 0,
            MEM_DYNAMIC_MAP => 0,
            MEM_reserved   => 0));
