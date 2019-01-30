@@ -8,7 +8,7 @@ build your first firmware.
 
 .. note::
    **TL;DR**: summary of the tools needed by the Tataouine SDK, and detailed in the next paragraphs.
-  
+
    **To syncrhonize the repositories:**
        * repo
 
@@ -25,10 +25,10 @@ build your first firmware.
        * *sphinx* for the main documentation
        * *doxygen* for the technical API amnuals, and *doxygen-latex* to compile
          the generated TeX documentation
-   
+
    **For the firmware flashing on the target board:**
-       * *OpenOCD* **or** *st-link* (https://github.com/texane/stlink.git) 
-       
+       * *OpenOCD* **or** *st-link* (https://github.com/texane/stlink.git)
+
 
 Local tools and utilities
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -55,16 +55,6 @@ to have perl installed on your host. There is no specific constraint on the vers
 .. hint::
    Most of the time, no action is requested here, as perl is usually installed by default in
    many distributions
-
-Python-bincopy
-""""""""""""""
-
-You need python-bincopy (and as a consequence python) to be installed. This tool is used to
-generate .hex files from multiple elf files when generating the firmware. On Debian, python-bincopy
-is not packaged, but you can install it using pip (pip install bincopy).
-
-.. hint::
-   On any system having python and pip installed, just run pip install bincopy to download and deploy locally the bincopy module
 
 Kconfig parser
 """"""""""""""
@@ -114,8 +104,14 @@ If you wish to generate the documentation, you will need *doxygen* (to generate 
 need to be compiled, you also have to install a LaTeX compiler. On Debian *doxygen-latex* will do
 this for you.
 
+The sphinx documentation also depend on LaTeX source image which are converted into png image using imagemagick.
+You will need *imagemagick* in order to build the sphinx documentation properly.
+
 .. hint::
    doxygen and sphinx are proposed in nearly all the OSes and distributions. You can use these packages as there is no specific usage that would make specific requirements on them
+
+In order to generate man pages for the kernel API and Ewok stdlib, you need rst2man tool. This tool
+is a part of the python *docutils*. It is packaged, on Debian & derivative, as *python-docutils*.
 
 About the toolchain
 ^^^^^^^^^^^^^^^^^^^
@@ -144,6 +140,28 @@ The AdaCore GNAT toolchain will help you installing the toolchain with a graphic
 
 .. warning::
    Having the gnat toolchain binaries in your PATH is required as the Makefiles call them directly without using a full path.
+
+About the binary generation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Python-IntelHex
+"""""""""""""""
+
+You need IntelHex python module (and as a consequence python) to be installed. This tool is used to
+generate .hex files from multiple elf and create bin files from hex files. On Debian, IntelHex
+is not packaged, but you can install it using pip or pip3 (pip3 install IntelHex).
+
+.. hint::
+   On any system having python and pip installed, just run pip3 install IntelHex to download and deploy locally the IntelHex module
+
+Cryptographic part
+""""""""""""""""""
+
+In order to sign and generate keys for firmwares, python cryptographic modules are needed.
+The SDK is using the  *python-pyscard* tool for smartcard interaction and *python-crypto* in order
+to handle AES cryptographic content.
+
+These two packages are required at build time.
 
 About the flashing tools
 ^^^^^^^^^^^^^^^^^^^^^^^^
