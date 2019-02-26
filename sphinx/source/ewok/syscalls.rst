@@ -111,6 +111,7 @@ in order to allow direct memory access.
 From now on, the task is no more authorized to execute any of the ``sys_init()`` syscalls family. Other syscalls can
 be used:
 
+   * ``sys_log()`` to transmit a message on the kernel logging facility
    * ``sys_ipc()`` syscalls family, to communicate through kernel IPC with other tasks
    * ``sys_cfg()`` syscalls family, to (re)configure previously declared devices and DMA
    * ``sys_get_systick()`` to get time stamping information
@@ -126,11 +127,16 @@ Overview of the syscalls
 ---------------------------
 
 Initializing and declaring content
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. include:: syscalls/sys_init.rst
    :start-line: 4
 
+Logging information on kernel console
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. include:: syscalls/sys_log.rst
+   :start-line: 4
 
 (Re)configuration requests
 ^^^^^^^^^^^^^^^^^^^^^^^^^^

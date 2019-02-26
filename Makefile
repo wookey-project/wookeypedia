@@ -18,6 +18,7 @@ TODEL_DISTCLEAN +=
 MANS_SYSCALLS_SRC_DIR := $(PROJ_FILES)/doc/sphinx/source/ewok/syscalls
 MANS_SYSCALLS_SRC := \
 	$(MANS_SYSCALLS_SRC_DIR)/sys_init.rst \
+	$(MANS_SYSCALLS_SRC_DIR)/sys_log.rst \
     $(MANS_SYSCALLS_SRC_DIR)/sys_cfg.rst  \
     $(MANS_SYSCALLS_SRC_DIR)/sys_ipc.rst \
     $(MANS_SYSCALLS_SRC_DIR)/sys_yield.rst \
