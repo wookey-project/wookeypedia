@@ -53,10 +53,10 @@ The permission API also export the following prototypes::
 
    bool perm_ipc_is_granted(e_task_id from,
                             e_task_id to);
-   
+
    bool perm_ressource_is_granted(uint32_t  ressource_name,
                                   task_t*   task);
-                                  
+
    bool perm_same_ipc_domain(e_task_id      src,
                              e_task_id      dst);
 
@@ -91,13 +91,11 @@ The ressource permission register is 32bits length and has the following mapping
 
 .. image:: img/perm_reg-0.png
    :width: 500 px
-   :scale: 100 %
    :alt: permissions register
    :align: center
 
 .. image:: img/perm_reg-1.png
    :width: 500 px
-   :scale: 100 %
    :alt: permissions register
    :align: center
 
@@ -147,7 +145,7 @@ Here is a typical gen_perms.h content::
 
    /* ressource register */
    typedef uint32_t ressource_reg_t;
-   
+
    static const ressource_reg_t ressource_perm_tab[] = {
        0x10000000, /* benchlog */
        0xc000a000, /* crypto */
@@ -156,7 +154,7 @@ Here is a typical gen_perms.h content::
        0x50008000, /* smart */
        0x90000000, /* usb */
    };
-   
+
    /* ipc communication permissions */
    static const bool com_ipc_perm[][6] = {
        {0, 0, 0, 0, 0, 0},
@@ -166,7 +164,7 @@ Here is a typical gen_perms.h content::
        {0, 1, 1, 0, 0, 0},
        {0, 1, 0, 0, 0, 0}
    };
-   
+
    /* dmashm communication permissions */
    static const bool com_dmashm_perm[][6] = {
        {0, 0, 0, 0, 0, 0},
@@ -188,7 +186,7 @@ Here is the generated Ada specification::
    package ewok.perm_auto
       with spark_mode => on
    is
-   
+
       -- ressource register definition
       type t_ressource_reg is record
          DEV_DMA         : bit;
@@ -209,7 +207,7 @@ Here is the generated Ada specification::
          MEM_reserved    : bits_7;
       end record
          with Size => 32;
-   
+
       for t_ressource_reg use record
          DEV_DMA         at 0 range 31 .. 31;
          DEV_CRYPTO      at 0 range 29 .. 30;
@@ -228,10 +226,10 @@ Here is the generated Ada specification::
          MEM_DYNAMIC_MAP at 0 range  7 .. 7;
          MEM_reserved    at 0 range  0 .. 6;
       end record;
-   
+
       type t_com_matrix is
         array (t_real_task_id'range, t_real_task_id'range) of Boolean;
-   
+
       ressource_perm_register_tab : array (t_real_task_id'range) of t_ressource_reg :=
          (
           -- ressource_perm_register for CRYPTO
@@ -324,28 +322,28 @@ Here is the generated Ada specification::
            TSK_reserved   => 0,
            MEM_DYNAMIC_MAP => 0,
            MEM_reserved   => 0));
-   
+
       CRYPTO : constant t_real_task_id := ID_APP1;
       PIN : constant t_real_task_id := ID_APP2;
       SDIO : constant t_real_task_id := ID_APP3;
       SMART : constant t_real_task_id := ID_APP4;
       USB : constant t_real_task_id := ID_APP5;
-   
+
       -- ipc communication permissions
-      com_ipc_perm : constant t_com_matrix := 
+      com_ipc_perm : constant t_com_matrix :=
          (CRYPTO	=> (ID_APP1 => false, ID_APP2 => false, ID_APP3 => true,  ID_APP4 => true,  ID_APP5 => true),
           PIN	=> (ID_APP1 => false, ID_APP2 => false, ID_APP3 => false, ID_APP4 => true,  ID_APP5 => false),
           SDIO	=> (ID_APP1 => true,  ID_APP2 => false, ID_APP3 => false, ID_APP4 => false, ID_APP5 => false),
           SMART	=> (ID_APP1 => true,  ID_APP2 => true,  ID_APP3 => false, ID_APP4 => false, ID_APP5 => false),
           USB	=> (ID_APP1 => true,  ID_APP2 => false, ID_APP3 => false, ID_APP4 => false, ID_APP5 => false));
-   
+
       -- dmashm communication permissions
-      com_dmashm_perm : constant t_com_matrix := 
+      com_dmashm_perm : constant t_com_matrix :=
          (CRYPTO	=> (ID_APP1 => false, ID_APP2 => false, ID_APP3 => true,  ID_APP4 => false, ID_APP5 => true),
           PIN	=> (ID_APP1 => false, ID_APP2 => false, ID_APP3 => false, ID_APP4 => false, ID_APP5 => false),
           SDIO	=> (ID_APP1 => true,  ID_APP2 => false, ID_APP3 => false, ID_APP4 => false, ID_APP5 => false),
           SMART	=> (ID_APP1 => false, ID_APP2 => false, ID_APP3 => false, ID_APP4 => false, ID_APP5 => false),
           USB	=> (ID_APP1 => true,  ID_APP2 => false, ID_APP3 => false, ID_APP4 => false, ID_APP5 => false));
-   
+
    end ewok.perm_auto;
- 
+

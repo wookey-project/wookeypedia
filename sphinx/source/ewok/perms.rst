@@ -98,9 +98,6 @@ The ipc family permissions, if allowed, is separated in different independent pe
 By now, all tasks are allowed to use the ``sys_ipc(IPC_LOG)`` IPC, whose peer
 is the kernel USART manager.
 
-.. todo::
-   It might be possible to use time access and ipc_log to detect other task's behavior in order to create a covert channel detecting the sys_ipc(IPC_LOG) latency
-
 Inter-process communication are a specific case as they require two tasks permissions interacting independently.
 Communication permission can't be formalized using a basic register, but requires a communication matrix,
 declaring which task can communicate with which other tasks.
@@ -199,7 +196,7 @@ IPC matrix is hosted in ``apps/ipc.config`` file::
    # This matrix is converted into a static const matrix in
    # C and Ada defining the permissions of all tasks
    #
-   
+
    comment "------ SDIO  USB CRYPTO SMART PIN"
    comment "SDIO    [#]  [ ]  [ ]   [ ]  [ ]"
    comment "USB     [ ]  [#]  [ ]   [ ]  [ ]"
@@ -221,7 +218,7 @@ DMA SHM matrix is hosted in ``apps/dmashm.config`` file::
    # This matrix is converted into a static const matrix in
    # C and Ada defining the permissions of all tasks
    #
-   
+
    comment "------ SDIO  USB CRYPTO SMART PIN"
    comment "SDIO    [#]  [ ]  [ ]   [ ]  [ ]"
    comment "USB     [ ]  [#]  [ ]   [ ]  [ ]"

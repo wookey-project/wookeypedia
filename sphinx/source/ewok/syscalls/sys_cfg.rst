@@ -18,6 +18,7 @@ prototypes::
    e_syscall_ret sys_cfg(CFG_DMA_DISABLE, uint32_t dma_id);
    e_syscall_ret sys_cfg(CFG_DEV_MAP, uint8_t dev_id);
    e_syscall_ret sys_cfg(CFG_DEV_UNMAP, uint8_t dev_id);
+   e_syscall_ret sys_cfg(CFG_DEV_RELEASE, uint8_t dev_id);
 
 
 sys_cfg(CFG_GPIO_SET)
@@ -227,3 +228,26 @@ Unmapping a device is done with the following API::
 
    e_syscall_ret sys_cfg(CFG_DEV_UNMAP, uint8_t dev_id);
 
+
+sys_cfg(CFG_DEV_RELEASE)
+""""""""""""""""""""""""
+
+.. note::
+   Synchronous syscall, executable only in main thread mode
+
+A task may want, at a given time of its lifecycle, to stop to use a given device. This can be done by
+requesting the kernel to release the device using its device descriptor.
+The device is then fully deactivated (including associated RCC clock and interrupts) and fully removed from the task context.
+
+Because of the EwoK task lifecycle paradigm including a separated declarative phase (so called initialization phase), a released
+device should never be allocated by another task. This can only happend if the device is released by a given task before
+another task has finished its initialization phase.
+
+.. danger::
+   You should **not** use nominal and initializing phase overlapping between tasks to avoid potential unvoluntary device sharing
+   associated to device release, Take care to synchronize init sequence correctly.
+   The kernel **does not** clear the device registers at release time
+
+Releasing a device is done with the following API::
+
+   e_syscall_ret sys_cfg(CFG_DEV_RELEASE, uint8_t dev_id);

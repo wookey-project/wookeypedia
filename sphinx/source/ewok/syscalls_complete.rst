@@ -16,6 +16,7 @@ Declaring a device
 ^^^^^^^^^^^^^^^^^^
 
 Declaring a device is required for any device type other than DMA controllers.
+.. highlight:: c
 
 The device structure is the following::
 
@@ -59,6 +60,7 @@ the time only a part of a more complex device block.
 
 Instead, each device requiring them has to declare all the needed GPIOs and their associated configuration, and the microkernel
 will enable and configure the GPIO itself.
+.. highlight:: c
 
 The device gpio table hosts the following structure::
 
@@ -205,7 +207,7 @@ or is scheduled, there is no more forced execution before the next ISR execution
 As this behavior is highly impacting, its is associated to a specific permission (see EwoK permissions).
 Only tasks with this permissions are allowed to declare forced execution for some of their ISRs.
 
-ISRs are not executed synchronously to IRQ handler mode, but 
+ISRs are not executed synchronously to IRQ handler mode, but
 in thread mode, in their own thread in their parent task context. This behavior has been implemented to disallow any user implementation
 to be executed in supervisor mode. On the other hand, there are some drawbacks to this design choice:
 
@@ -338,6 +340,7 @@ A task can declare multiple DMA if the channel and stream couple is not already 
 It can reconfigure some parts of the previously configured stream after the
 initialization phase but is not able to reconfigure elements such as the
 controller, the stream or the channel identifier.
+.. highlight:: c
 
 The DMA structure is the following::
 
@@ -424,6 +427,7 @@ Reconfiguring a DMA stream most of the time requires to reconfigure
 the buffer address and size (when using flip/flop buffers, or FIFO mode).
 Only the DMA circular mode does not require any action as the DMA is fully
 autonomous until the user task requires a DMA reset to stop the DMA action.
+.. highlight:: c
 
 Here is a typical, easy, DMA reconfiguration::
 
@@ -488,3 +492,57 @@ It can then use the CFG_DMA_RELOAD syscall::
    ret = sys_cfg(CFG_DMA_RELOAD, dma->id);
 
 The associated DMA stream is then re-enabled.
+
+Declaring a DMA SHM
+^^^^^^^^^^^^^^^^^^^
+
+Sometimes, a dataplane may be implemented using multiple tasks communicating with
+each others. When the internal device dataplane is manipulating DMA streams, the
+tasks may whish to optimize the data buffer transfer by using only DMA transfer
+between them instead of using manual buffer copy through IPC. This is the case
+in the Wookey project in which data buffers are transmitted through the CRYP device
+(in order to en(de)crypt data on the go, without requiring manual data copy between
+tasks.
+
+For this case, EwoK permits to a given tasks couple to voluntary share a memory buffer.
+One of the task (the caller) is the owner of the memory buffer region and has it mapped
+in its own slot.
+
+The other task (the receiver), will then be able to request DMA transaction *from* or
+*toward* this memory buffer and a given hardware device (e.g. CRYP, HASH, or any device
+that read data stream through DMA requests as input).
+The receiver can never access to the memory buffer directly, and the memory buffer is
+never mapped in the receiver memory slots.
+
+Sharing a memory buffer as a DMA SHM is controlled by the DMA SHM permission matrix.
+This permission matrix works in the same way the IPC matrix does, by creating one way
+communication channels between two tasks.
+
+.. note::
+   As DMA SHM memory buffer address is usually not fixed at compile or build time,
+   DMA SHM declaration is often associated to an IPC which inform the receiver of the
+   buffer address and size
+
+Here is a typicall usage of DMA SHM buffer::
+
+   const uint32_t bufsize = 4096;
+   buf[bufsize] = { 0 };
+
+   dma_shm_t dmashm_rd;
+
+   dmashm_rd.target = id_receiver;
+   dmashm_rd.source = task_id;
+   dmashm_rd.address = (physaddr_t)flash_buf;
+   dmashm_rd.size = bufsize;
+   /* receiver can only create DMA request *from* this buffer (read only) */
+   dmashm_rd.mode = DMA_SHM_ACCESS_RD;
+
+   printf("Declaring DMA_SHM for read flow\n");
+   ret = sys_init(INIT_DMA_SHM, &dmashm_rd);
+   printf("sys_init returns %s !\n", strerror(ret));
+
+   sys_init(INIT_DONE);
+
+   /* [...] */
+   /* Sending an IPC to the receiver giving it buf addr and size */
+   // sys_ipc(IPC_SEND_SYNC, id_receiver, ...);
