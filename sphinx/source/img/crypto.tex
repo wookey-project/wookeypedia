@@ -1,0 +1,119 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{tikz-qtree}
+\usetikzlibrary{arrows,positioning}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes}
+\usetikzlibrary{automata}
+\usetikzlibrary{calc}
+\usetikzlibrary{fit,calc,positioning,decorations.pathreplacing,matrix,chains}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.text}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+
+\begin{document}
+
+\begin{tikzpicture}
+\def\XLR#1{\xleftrightarrow[\rule{3cm}{0pt}]{#1}}% \rule defines the width
+\def\XR#1{\xrightarrow[\rule{3cm}{0pt}]{#1}}
+\def\XL#1{\xleftarrow[\rule{3cm}{0pt}]{#1}}
+
+\newcommand\XRSEC[2]{%
+    \mathrel{%
+        \begin{tikzpicture}[%
+            baseline={(current bounding box.south)}
+            ]
+        \node[%
+            ,inner sep=.44ex
+            ,align=center, minimum width=#2,
+            ] (tmp) {$\scriptstyle #1$};
+        \path[%
+            ,draw,<-, solid
+            ,decorate,decoration={%
+                ,zigzag
+                ,amplitude=.8pt
+                ,segment length=1.2mm,pre length=3.5pt
+                }
+            ]
+        (tmp.south east) -- (tmp.south west);
+        \end{tikzpicture}
+        }
+    }
+\newcommand\XLSEC[2]{%
+    \mathrel{%
+        \begin{tikzpicture}[%
+            baseline={(current bounding box.south)}
+            ]
+        \node[%
+            ,inner sep=.44ex
+            ,align=center, minimum width=#2,
+            ] (tmp) {$\scriptstyle #1$};
+        \path[%
+            ,draw,<-, solid
+            ,decorate,decoration={%
+                ,zigzag
+                ,amplitude=.8pt
+                ,segment length=1.2mm,pre length=3.5pt
+                }
+            ]
+        (tmp.south west) -- (tmp.south east);
+        \end{tikzpicture}
+        }
+    }
+%\def\XRSEC#1{\xrightarrow[\rule{3cm}{0pt}]{#1}}
+\begin{tikzpicture}[overlay, remember picture]
+\node[minimum width=8.5cm, minimum height=1.74cm, fill=gray!20, yshift=1.20cm, xshift=4.4cm] (a) {};
+\node[rotate=-90, yshift=.2cm] (alabel) at (a.east) {$\scriptstyle\text{\underline{Stage 1}}$};
+
+\node[minimum width=8.5cm, minimum height=2.1cm, fill=gray!30, yshift=-1.2cm, xshift=4.4cm] (b) {};
+\node[rotate=-90, yshift=.2cm] (blabel) at (b.east) {$\scriptstyle\text{\underline{Stage 2}}$};
+\end{tikzpicture}
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+%\resizebox{\linewidth}{!}{
+\scalemath{.8}{
+%\[
+\begin{array}{@{} c c c @{}}
+\text{\underline{Platform}}  &  & \text{\underline{Token}} \\
+   \text{\underline{User} enters PetPIN}& \XR{\text{DK=PBKDF2(PetPIN)}} \\
+   &  & \text{KPK=Dec}_{\text{DK}}\text{(ELK)} \\
+   & \XL{\text{KPK}} &    \\
+   \text{PK=Dec}_{\text{KPK}}\text{(EPK)} & &    \\
+   & \XLR{\text{Establish secure channel}} &  \\
+   & \XRSEC{\text{PetPIN}}{3.3cm} &  \text{PetPIN OK?}\\
+   \text{\underline{User} checks PetName} & \XLSEC{\text{PetName}}{3.3cm} & \text{PetName} \\
+   \text{\underline{User} enters UserPIN} & \XRSEC{\text{UserPIN}}{3.3cm} &\text{UserPIN OK?} \\
+   & &  \\
+    & \XLSEC{\text{Secrets}}{3.3cm} &\text{Send sensitive data} \\
+%\text{[...]}
+ \end{array}
+%\]
+}
+\vskip.2cm
+\scalebox{.7}{\hskip2.5cm
+\begin{tikzpicture}[]
+\node[draw=none, fill=gray!5, draw=black, dashed]{
+\begin{tikzpicture}
+\node[anchor=north west] (one) {DK: derived key from PetPIN};
+\node[anchor=north west] (onebis) at (one.south west) {ELK: encrypted local key (stored in the token)};
+\node[anchor=north west] (two) at (onebis.south west){KPK: platform keys encryption key};
+\node[anchor=north west] (three) at (two.south west) {EPK: encrypted platform keys};
+\node[anchor=north west] (gout) at (three.south west) {PK: (decrypted) platform keys};
+\node[anchor=north west, xshift=.7cm] (xr) at (gout.south west) {$\xrightarrow[\rule{3.35cm}{0pt}]{\text{Send in clear}}$};
+\node[anchor=north west, yshift=.3cm] (xrsec) at (xr.south west) {$\XRSEC{\text{Send inside secure channel}}{3cm}$};
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+%\caption{Sensitive data protection in Wookey\label{crypto}}
+%\end{figure}
+\end{tikzpicture}
+\end{document}

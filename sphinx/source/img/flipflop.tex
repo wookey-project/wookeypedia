@@ -1,0 +1,127 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{tikz-qtree}
+\usetikzlibrary{arrows,positioning}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes}
+\usetikzlibrary{automata}
+\usetikzlibrary{calc}
+\usetikzlibrary{fit,calc,positioning,decorations.pathreplacing,matrix,chains}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.text}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=0.6]
+  \draw          (-1.5,12.5) node[right] {\bf STM32 Flash Memory};
+  \draw[black] (0,0) -- (4,0) -- (4,12) -- (0,12) -- (0,0);
+  \draw[fill=white, draw=none] (0,0) -- (4,0) -- (4,1) -- (0,1) -- (0,0);
+  \draw[fill=gray!20, draw=none] (0,1) -- (4,1) -- (4,2) -- (0,2) -- (0,1);
+  \draw[fill=gray!10, draw=none] (0,2) -- (4,2) -- (4,5) -- (0,5) -- (0,2);
+  \draw[fill=gray!60, draw=none] (0,5) -- (4,5) -- (4,6) -- (0,6) -- (0,5);
+  %
+  \draw[fill=white, draw=none, yshift=6cm, pattern=north west lines] (0,0) -- (4,0) -- (4,1) -- (0,1) -- (0,0);
+  \draw[fill=gray!20, draw=none, yshift=6cm] (0,1) -- (4,1) -- (4,2) -- (0,2) -- (0,1);
+  \draw[fill=gray!10, draw=none, yshift=6cm] (0,2) -- (4,2) -- (4,5) -- (0,5) -- (0,2);
+  \draw[fill=gray!60, draw=none, yshift=6cm] (0,5) -- (4,5) -- (4,6) -- (0,6) -- (0,5);
+  %
+
+  %
+  \draw[latex-latex] (-3.5, 0) -- node[sloped, anchor=center, above] {Dual-bank (2~MB)} (-3.5, 12);
+  \draw[latex-latex] (-2, 0) -- node[sloped, anchor=center, above] {Bank 1 = FLIP} (-2, 6);
+  \draw[latex-latex] (-2, 6) -- node[sloped, anchor=center, above] {Bank 2 = FLOP} (-2, 12);
+
+  \draw[latex-latex, dashed] (10, 5.5) -- node[sloped, anchor=center, below] {DFU mode tasks} (10, 11.5);
+  \draw[latex-latex, dashed] (10, -1) -- node[sloped, anchor=center, below] {Nominal mode tasks} (10, 5);
+  % flash stack definition
+  \draw          (0.5,11.5) node[right] {DFU 2};
+  \draw [] (0,11) -- (4,11);
+  \draw          (0.5,9.5) node[right] {Firmware 2};
+  \draw [] (0,8) -- (4,8);
+  \draw          (0.5,7.5) node[right] {Boot Info};
+  \draw [] (0,7) -- (4,7);
+  \draw          (0.5,6.5) node[right] {};
+  \draw [] (0,6) -- (4,6);
+
+  %
+  \draw          (0.5,5.5) node[right] {DFU 1};
+  \draw [] (0,5) -- (4,5);
+  \draw          (0.5,3.5) node[right] {Firmware 1};
+  \draw [] (0,2) -- (4,2);
+  \draw          (0.5,1.5) node[right] {Boot Info};
+  \draw [] (0,1) -- (4,1);
+  \draw          (0.5,0.5) node[right] {Loader};
+ % firmware zoom (zoom arrow)
+  \draw[dashed]          (4,2) -- (5.5,-1);
+  \draw[dashed]          (4,5) -- (5.5,5);
+
+ % fw structure
+  \draw[fill=gray!10, xshift=5.5cm, yshift=-1cm] (0,0) -- (4,0) -- (4,6) -- (0,6) -- (0,0);
+  \draw[xshift=-1.5cm, yshift=-1cm]          (7,6) -- (11,6);
+  \draw[xshift=-1.5cm, yshift=-1cm]          (7.5,5.5) node[right] {USB SCSI};
+  \draw[xshift=-1.5cm, yshift=-1cm]          (7,5) -- (7,6);
+  \draw[xshift=-1.5cm, yshift=-1cm] (11,5) -- (11,6);
+  \draw[xshift=-1.5cm, yshift=-1cm] (7,5) -- (11,5);
+  \draw[xshift=-1.5cm, yshift=-1cm]          (7.5,4.5) node[right] {SDIO};
+  \draw[xshift=-1.5cm, yshift=-1cm]          (7,4) -- (7,5);
+  \draw[xshift=-1.5cm, yshift=-1cm] (11,4) -- (11,5);
+  \draw[xshift=-1.5cm, yshift=-1cm] (7,4) -- (11,4);
+  \draw [xshift=-1.5cm, yshift=-1cm] (7,4) -- (11,4);
+  \draw[xshift=-1.5cm, yshift=-1cm]          (7.5,3.5) node[right] {crypto};
+  \draw[xshift=-1.5cm, yshift=-1cm]          (7,3) -- (7,4);
+  \draw[xshift=-1.5cm, yshift=-1cm] (11,3) -- (11,4);
+  \draw [xshift=-1.5cm, yshift=-1cm] (7,3) -- (11,3);
+  \draw[xshift=-1.5cm, yshift=-1cm]          (7.5,2.5) node[right] {smart~card};
+  \draw[xshift=-1.5cm, yshift=-1cm]          (7,2) -- (7,3);
+  \draw[xshift=-1.5cm, yshift=-1cm] (11,2) -- (11,3);
+  \draw [xshift=-1.5cm, yshift=-1cm] (7,2) -- (11,2);
+  \draw[xshift=-1.5cm, yshift=-1cm]          (7.5,1.5) node[right] {pin};
+  \draw[xshift=-1.5cm, yshift=-1cm]          (7,1) -- (7,2);
+  \draw[xshift=-1.5cm, yshift=-1cm] (11,1) -- (11,2);
+  \draw [xshift=-1.5cm, yshift=-1cm] (7,1) -- (11,1);
+  \draw[xshift=-1.5cm, yshift=-1cm]          (7.5,0.5) node[right] {kernel};
+  \draw[xshift=-1.5cm, yshift=-1cm]          (7,1) -- (7,0) -- (11,0) -- (11,1);
+
+ % DFU zoom (zoom arrow)
+  \draw[dashed]          (4,6) -- (5.5,11.5);
+  \draw[dashed]          (4,5) -- (5.5,5.5);
+
+ % DFU structure
+  \draw[fill=gray!60, xshift=5.5cm, yshift=5.5cm] (0,0) -- (4,0) -- (4,6) -- (0,6) -- (0,0);
+  \draw[xshift=-1.5cm, yshift=5.5cm]          (7,6) -- (11,6);
+  \draw[xshift=-1.5cm, yshift=5.5cm]          (7.5,5.5) node[right] {USB DFU};
+  \draw[xshift=-1.5cm, yshift=5.5cm]          (7,5) -- (7,6);
+  \draw[xshift=-1.5cm, yshift=5.5cm] (11,5) -- (11,6);
+  \draw[xshift=-1.5cm, yshift=5.5cm] (7,5) -- (11,5);
+  \draw[xshift=-1.5cm, yshift=5.5cm]          (7.5,4.5) node[right] {Flash};
+  \draw[xshift=-1.5cm, yshift=5.5cm]          (7,4) -- (7,5);
+  \draw[xshift=-1.5cm, yshift=5.5cm] (11,4) -- (11,5);
+  \draw[xshift=-1.5cm, yshift=5.5cm] (7,4) -- (11,4);
+  \draw [xshift=-1.5cm, yshift=5.5cm] (7,4) -- (11,4);
+  \draw[xshift=-1.5cm, yshift=5.5cm]          (7.5,3.5) node[right] {crypto};
+  \draw[xshift=-1.5cm, yshift=5.5cm]          (7,3) -- (7,4);
+  \draw[xshift=-1.5cm, yshift=5.5cm] (11,3) -- (11,4);
+  \draw [xshift=-1.5cm, yshift=5.5cm] (7,3) -- (11,3);
+  \draw[xshift=-1.5cm, yshift=5.5cm]          (7.5,2.5) node[right] {smart card};
+  \draw[xshift=-1.5cm, yshift=5.5cm]          (7,2) -- (7,3);
+  \draw[xshift=-1.5cm, yshift=5.5cm] (11,2) -- (11,3);
+  \draw [xshift=-1.5cm, yshift=5.5cm] (7,2) -- (11,2);
+  \draw[xshift=-1.5cm, yshift=5.5cm]          (7.5,1.5) node[right] {pin};
+  \draw[xshift=-1.5cm, yshift=5.5cm]          (7,1) -- (7,2);
+  \draw[xshift=-1.5cm, yshift=5.5cm] (11,1) -- (11,2);
+  \draw [xshift=-1.5cm, yshift=5.5cm] (7,1) -- (11,1);
+  \draw[xshift=-1.5cm, yshift=5.5cm]          (7.5,0.5) node[right] {kernel};
+  \draw[xshift=-1.5cm, yshift=5.5cm]          (7,1) -- (7,0) -- (11,0) -- (11,1);
+\end{tikzpicture}
+
+\end{document}

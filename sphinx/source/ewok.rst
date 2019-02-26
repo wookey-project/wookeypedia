@@ -32,7 +32,7 @@ EwoK supports the following properties:
    * Fixed permissions management, set at compile time and easily verifiable
    * Kernel Random Number Generation support (based on True RNG HW on STM32)
    * Stack smashing protection in both kernel and userspace tasks
-   * Userspace Heap/Stack smashing protection (Work In Progress)
+   * Userspace Heap/Stack smashing protection
    * Proved W⊕X memory mappings
    * Strict temporal separation between declarative phase and execution phase
 
@@ -134,7 +134,7 @@ component requiring external inputs (like syscalls) or critical for the security
 formalism required.
 
 .. note::
-   The Ada/SPARK kernel is based on about 10 Klines of Ada and 
+   The Ada/SPARK kernel is based on about 10 Klines of Ada and
    about 500 lines of C and assembly.
 
 The methodology we used to create an hybrid kernel is described in the
@@ -176,5 +176,6 @@ If you want to hack into the kernel, EwoK internals are described here:
 .. toctree::
   EwoK permissions internals <ewok/perms_internals>
   EwoK syscalls internals <ewok/syscalls_internals>
+  EwoK IRQ & ISR internals <ewok/isr_internals>
 
 .. include:: ewok/faq.rst

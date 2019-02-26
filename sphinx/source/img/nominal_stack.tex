@@ -1,0 +1,142 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{fit,calc,positioning,decorations.pathreplacing,patterns,matrix}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+
+\begin{document}
+\begin{tikzpicture}[scale=0.95]
+  \draw (0,0) circle (1);
+  \draw (0,0) circle (1.1);
+  \draw (0,0) node {\small EwoK};
+  \draw (0,0) circle (3.1);
+
+  \fill [color=white] (1.05,-0.05) rectangle (3.15,0.05);
+  \draw (1.1,0.05) -- (3.1,0.05);
+  \draw (1.1,-0.05) -- (3.1,-0.05);
+
+  \fill [color=white] (-3.15,-0.05) rectangle (-1.05,0.05);
+  \draw (-1.1,0.05) -- (-3.1,0.05);
+  \draw (-1.1,-0.05) -- (-3.1,-0.05);
+
+  \fill [color=white] (-0.05,-1.05) rectangle (0.05,-3.15);
+  \draw (-0.05,-1.1) -- (-0.05,-3.1);
+  \draw (0.05,-1.1) -- (0.05,-3.1);
+
+  \fill [color=white] (60.7:1.0) rectangle (59.3:1.2);
+  \draw (62:1.1) -- (61:2.25) -- (76:2.35) -- (73:3.1);
+  \draw (58:1.1) -- (59:2.35) -- (74:2.42) -- (71.5:3.1);
+
+  \fill [color=white] (120.7:1.0) rectangle (119.3:1.2);
+  \draw (122:1.1) -- (121:2.35) -- (107:2.4) -- (108:3.1);
+  \draw (118:1.1) -- (119:2.25) -- (105:2.33) -- (106:3.1);
+  %\draw [dashed] (120:1.1) -- (120:3.1);
+
+  \draw (225:2.1) node {\small PIN code};
+  \draw (240:2.1) node {\small manager};
+  \draw (-45:2.0) node {\small Smart card};
+  \draw (30:2.1) node {\small USB};
+  \draw (20:2.1) node {\small SCSI stack};
+  \draw (90:2.0) node {\small crypto};
+  \draw (150:2.1) node {\small mass storage};
+  \draw (160:2.1) node {\small manager};
+  \draw (170:2.1) node {\small (SD)};
+
+  % crypto to smartcard
+  \draw [very thick] (0.8,0) arc (0:90:0.8);
+  \draw [very thick] (0.8,0) arc (0:-20:0.8);
+  \draw (0.2,0.5) node {\it \tiny IPC};
+  \draw [very thick,-latex] (0,0.8) -- (0,1.8);
+  \draw [very thick,-latex] (0.72,-0.25) -- (1.7,-0.25);
+  % crypto touchscreen/screen
+  \draw [very thick,latex-latex] (-0.4,-1.7) -- (-0.4,-0.8) -- (0.4,-0.8) -- (0.4,-1.7);
+  \draw (0,-0.6) node {\it \tiny IPC};
+
+  % shms
+  \filldraw [color=gray!20,draw=black,dashed] (70:2.5) -- (70:3) -- (50:3) --
+  (50:2.50) -- cycle;
+  \draw (65:2.75) node {\it \tiny DMA};
+  \draw (56:2.75) node {\it \tiny SHM};
+  \filldraw [color=gray!20,draw=black,dashed] (130:2.5) -- (130:3) -- (110:3) -- (110:2.50) -- cycle;
+  \draw (124:2.75) node {\it \tiny SHM};
+  \draw (116:2.75) node {\it \tiny DMA};
+
+  \draw [thick,-latex] (55:2.5) arc (0:-120:0.5);
+  \draw (48:2) node {\it \tiny declare};
+
+  \draw [thick,-latex] (125:2.5) arc (180:300:0.5);
+  \draw (132:2) node {\it \tiny declare};
+
+  % devices
+  %
+  \draw [dashed] (35:3.1)--(35:2.7)--(25:2.7)--(25:3.1);
+  \draw [double distance=1pt,-latex] (30:3.1) -- (30:3.5);
+  \draw (30:3.5) node[right] {\small USB FS/HS};
+  \draw (30:3.5) node[below right] {\footnotesize\it memory mapped};
+  \draw (25:3.5) node[below right] {\footnotesize\it device};
+  %
+  \draw [dashed] (155:3.1)--(155:2.7)--(145:2.7)--(145:3.1);
+  \draw [double distance=1pt,-latex] (150:3.1) -- (150:3.5);
+  \draw (150:3.5) node[left] {\small SDIO};
+  \draw (150:3.5) node[below left] {\footnotesize\it memory mapped};
+  \draw (155:3.5) node[below left] {\footnotesize\it device};
+  %
+  \draw [dashed] (-20:3.1)--(-20:2.7)--(-30:2.7)--(-30:3.1);
+  \draw [double distance=1pt,-latex] (-25:3.1) -- (-25:3.5);
+  \draw (-25:3.5) node[right] {\small ISO7816};
+  \draw (-25:3.5) node[below right] {\small (USART)};
+  \draw (-33:3.3) node[below right] {\footnotesize\it memory mapped};
+  \draw (-38:3.3) node[below right] {\footnotesize\it device};
+
+   %
+  \draw [dashed] (-65:3.1)--(-65:2.7)--(-55:2.7)--(-55:3.1);
+  \draw [double distance=1pt,-latex] (-60:3.1) -- (-60:3.5);
+  \draw (-60:3.5) node[right, xshift=.1cm, yshift=-.25cm] (cryp2l) {};
+  \filldraw [fill=gray!30] (cryp2l) circle (0.4);
+  \draw (-60:3.5) node[right, yshift=-.25cm, xshift=-.26cm] (cryp2) {\texttt{CRYP}};
+  \draw (-60:3.5) node[below right, yshift=0cm, xshift=.7cm] {\footnotesize\it Key injection};
+  \draw (-63:3.7) node[below right, xshift=.7cm] {\footnotesize\it only};
+
+  %
+  \draw [dashed] (-165:3.1)--(-165:2.7)--(-155:2.7)--(-155:3.1);
+  \draw [double distance=1pt,-latex] (-160:3.1) -- (-160:3.5);
+  \draw (-160:3.5) node[left] {\small Screen};
+  \draw (-160:3.5) node[below left] {\footnotesize\it memory mapped};
+  \draw (-155:3.5) node[below left] {\footnotesize\it device};
+
+  \draw [dashed] (-135:3.1)--(-135:2.7)--(-125:2.7)--(-125:3.1);
+  \draw [double distance=1pt,-latex] (-130:3.1) -- (-130:3.5);
+  \draw (-130:3.5) node[left] {\small Touch screen};
+  \draw (-130:3.5) node[below left] {\footnotesize\it memory mapped};
+  \draw (-123:3.5) node[below left] {\footnotesize\it device};
+
+  %
+  \draw [dashed] (95:3.1)--(95:2.7)--(85:2.7)--(85:3.1);
+  \draw [double distance=1pt,-latex] (90:3.1) -- (90:3.6);
+  %\draw (90:4.6) node {\small Cryp};
+  \draw (90:4.4) node[below, yshift=.5cm] {\footnotesize\it (de/en)cryption requests only};
+
+  % DMA reqs
+  \draw [very thick,dashed,color=red,latex-latex] (32:3.1) arc (0:105:1);
+  \draw (45:3.3) node[above right] {\tiny\color{red}{DMA}};
+
+  \draw [very thick,dashed,color=red,latex-latex] (120:3.0) arc (75:190:0.95);
+  \draw (135:3.3) node[above left] {\tiny\color{red}{DMA}};
+
+  \filldraw [fill=gray!30, yshift=.1cm, yshift=.3cm] (90:3.6) circle (0.4);
+  \draw[yshift=.4cm,] (90:3.6) node (cryp) {\texttt{CRYP}};
+
+  % crypto transfer
+  \draw [very thick,dashed,color=red,latex-latex] (65:3) arc (20:75:1.5);
+  \draw (100:3.5) node[above left] {\tiny\color{red}{DMA}};
+
+  \draw [very thick,dashed,color=red,latex-latex] (115:3) arc (160:105:1.5);
+  \draw (80:3.5) node[above right] {\tiny\color{red}{DMA}};
+
+
+\end{tikzpicture}
+
+\end{document}
