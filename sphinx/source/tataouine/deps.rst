@@ -17,7 +17,7 @@ build your first firmware.
        * *python*, and specifically its *python-bincopy* package
        * A Kconfig parser
           There is no constraint on the Kconfig parser tool that can be used. Nevertheless, we have tested
-          the `kconfiglib <https://github.com/ulfalizer/Kconfiglib>`_ python tool and `kconfig-frontends <https://salsa.debian.org/Philou-guest/kconfig-frontends/tree/upstream/latest>`_
+          the `kconfiglib <https://github.com/ulfalizer/Kconfiglib>`_ python tool and `kconfig-frontends <http://ymorin.is-a-geek.org/download/kconfig-frontends/`_
        * A GNU ARM none-eabi toolchain (usually *gcc-arm-none-eabi*)
        * The *AdaCore ARM cross-toolchain* for the Ada microkernel (https://www.adacore.com/download/more)
 
@@ -66,12 +66,14 @@ Whe have tested kconfiglib::
 
    pip3 install kconfiglib
 
-We have tested kconfig-frontends (downloadable from the `Debian salsa <https://salsa.debian.org/Philou-guest/kconfig-frontends/tree/upstream/latest>`_ repository, and installable as ususally::
+We have tested kconfig-frontends (downloadable from the `developer's website <http://ymorin.is-a-geek.org/download/kconfig-frontends/>`_, and installable as ususally::
 
-   wget https://salsa.debian.org/Philou-guest/kconfig-frontends/-/archive/upstream/latest/kconfig-frontends-upstream-latest.tar.bz2
+   wget http://ymorin.is-a-geek.org/download/kconfig-frontends/kconfig-frontends-4.11.0.1.tar.bz2
    cd kconfig-frontend-upstream-latest
    ./configure
    make
+
+On Debian Buster and higher, this software is packaged under the *kconfig-frontends* package name.
 
 In order to let you choose the tool of your choice, you can specify the tool you which using the following variables when
 calling make:
