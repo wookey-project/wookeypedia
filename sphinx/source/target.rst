@@ -320,7 +320,7 @@ private key, derive encryption keys, and is used on the firmware production plat
 
 .. image:: img/crypto.png
    :alt: Wookey cryptography
-   :width: 70%
+   :width: 90%
    :align: center
 
 
@@ -404,27 +404,32 @@ our microkernel.
 
 Because MCUs have a quite limited volatile memory, firmware upload
 and verification have to be performed in-place in the flash area where it will be executed.
-This inclined us to adopt a \emph{flip-flop mechanism} ensuring software redundancy in order
+This inclined us to adopt a *flip-flop mechanism* ensuring software redundancy in order
 to handle file corruption (hazardous disconnection, corruption, invalid signature, etc.).
 
-Fig.~\ref{fwmapping} provides a high level logical view of the flash layout. The
-2~MB \emph{dual-bank} of the \texttt{STM32F439} SoC internal flash is split
+Previous Figure provides a high level logical view of the flash layout. The
+2MB *dual-bank* of the *STM32F439* SoC internal flash is split
 in two. The first bank consists of the flip partition. It contains the initial
-loader, some boot information, Firmware~1 which encapsulates the kernel and the tasks
-of the nominal mode, and DFU~1 that contains the kernel and the tasks of the DFU mode.
+loader, some boot information, Firmware1 which encapsulates the kernel and the tasks
+of the nominal mode, and DFU1 that contains the kernel and the tasks of the DFU mode.
 The second bank is a replica of the first one with a mirrored
-layout containing a different version for Firmware~2 and DFU~2. The advantage
+layout containing a different version for Firmware2 and DFU2. The advantage
 of dual-banking is that a bank (the one being executed) can be write-protected
 with hardware ensurance, while the other bank is being updated.
 
 The Boot Information section contains the current state of the firmware in
 the bank, namely a version number, a flag indicating if the last update
 has been consistently achieved, and a SHA-256 hash value to be checked
-by the initial loader. This loader is not upgradable but is \emph{very minimal} with no I/O interactions (except for
-the DFU button). Since downgrading can be a boon for the adversary~\cite{chen2017downgrade},
-a strict \emph{anti-rollback} policy is enforced both during the upgrade phase
+by the initial loader. This loader is not upgradable but is *very minimal* with no I/O interactions (except for
+the DFU button). Since downgrading can be a boon for the adversary,
+a strict *anti-rollback* policy is enforced both during the upgrade phase
 and at boot time.
 
+
+.. image:: img/crypto_dfu.png
+   :alt: Wookey cryptography
+   :width: 90%
+   :align: center
 
 Firmware signature and encryption
 """""""""""""""""""""""""""""""""
@@ -440,8 +445,8 @@ the legitimate user presence.
 
 Such a strategy suffers from two major drawbacks. First, the DFU token is uncorrelated to
 the update procedure (it is only used for access control), meaning that time of check to time
-of use (TOCTOU) attacks are possible. Secondly, this process is inherently susceptible to \emph{fault attacks}.
-Indeed, a voltage glitch or an EM pulse performed at the right timing on the STM32~\cite{nxpcrpbroken,trezorattacks,walletfail} could completely
+of use (TOCTOU) attacks are possible. Secondly, this process is inherently susceptible to *fault attacks*.
+Indeed, a voltage glitch or an EM pulse performed at the right timing on the STM32 could completely
 bypass the signature check, yielding in a malleable binary in flash and a full privileged compromise
 of the platform with another fault at boot time. As we have already stated, secure elements
 of the tokens are on the other hand protected against faults.
@@ -449,12 +454,12 @@ of the tokens are on the other hand protected against faults.
 To limit such fault attacks, we use actively the DFU token during the whole update process as
 an oracle to derive session keys for firmware decryption using a dedicated enclosed secret key.
 Since the firmware is deciphered on-the-fly using keys unknown to the attacker, the data in flash
-is still malleable but its value is now \emph{not controlled} by the adversary. Fig.~\ref{dfucrypto} illustrates how the
+is still malleable but its value is now *not controlled* by the adversary. Previous Figure illustrates how the
 platform opens a session with the token and asks for key derivation to handle successive chunks. As
 we can see on the figure, we have designed a dedicated simple file format for update binaries.
-It consists of a header $\text{HDR}$ followed by a body of encrypted chunks. The header is
+It consists of a header HDR followed by a body of encrypted chunks. The header is
 composed of metadata regarding the file (total size, version, chunks size, etc.), the ECDSA signature,
-an IV (initial value to produce keys) and HMAC-SHA-256 of $\overline{\text{HDR}}$ (i.e. the header except the HMAC itself).
+an IV (initial value to produce keys) and HMAC-SHA-256 of HDR (except the HMAC itself).
 The signature covers the metadata and the firmware binary in clear (since we have to check this signature
 after writing clear data in flash). To avoid any padding related issue, we use an AES-CTR mode for firmware ciphering.
 The rationale behind the HMAC is to avoid malleability of the header and to early prevent opening illegal

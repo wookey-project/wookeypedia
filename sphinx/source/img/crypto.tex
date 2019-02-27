@@ -13,16 +13,15 @@
 \usetikzlibrary{decorations.text}
 \usepackage{mathtools}
 \usepackage{tikz-cd}
-
-\usepackage{tikz}
 \usepackage{verbatim}
 \usepackage{color}
+\usepackage{array}
 \usepackage[active,tightpage]{preview}
-\PreviewEnvironment{tikzpicture}
+\PreviewEnvironment{center}
 
 \begin{document}
 
-\begin{tikzpicture}
+\begin{center}
 \def\XLR#1{\xleftrightarrow[\rule{3cm}{0pt}]{#1}}% \rule defines the width
 \def\XR#1{\xrightarrow[\rule{3cm}{0pt}]{#1}}
 \def\XL#1{\xleftarrow[\rule{3cm}{0pt}]{#1}}
@@ -98,9 +97,10 @@
 %\]
 }
 \vskip.2cm
-\scalebox{.7}{\hskip2.5cm
-\begin{tikzpicture}[]
-\node[draw=none, fill=gray!5, draw=black, dashed]{
+\scalebox{.7}{
+\hskip 2.5cm
+\begin{tikzpicture}
+\node[draw=none, fill=gray!5, draw=black, dashed] {
 \begin{tikzpicture}
 \node[anchor=north west] (one) {DK: derived key from PetPIN};
 \node[anchor=north west] (onebis) at (one.south west) {ELK: encrypted local key (stored in the token)};
@@ -113,7 +113,6 @@
 };
 \end{tikzpicture}
 }
-%\caption{Sensitive data protection in Wookey\label{crypto}}
-%\end{figure}
-\end{tikzpicture}
+\end{center}
+
 \end{document}

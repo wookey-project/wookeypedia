@@ -1,0 +1,188 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{tikz-qtree}
+\usetikzlibrary{arrows,positioning}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes}
+\usetikzlibrary{automata}
+\usetikzlibrary{calc}
+\usetikzlibrary{fit,calc,positioning,decorations.pathreplacing,matrix,chains}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.text}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{array}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{center}
+
+\begin{document}
+
+\begin{center}
+\def\XLR#1{\xleftrightarrow[\rule{3cm}{0pt}]{#1}}% \rule defines the width
+\def\XR#1{\xrightarrow[\rule{3cm}{0pt}]{#1}}
+\def\XL#1{\xleftarrow[\rule{3cm}{0pt}]{#1}}
+\newcommand\XRSEC[2]{%
+    \mathrel{%
+        \begin{tikzpicture}[%
+            baseline={(current bounding box.south)}
+            ]
+        \node[%
+            ,inner sep=.44ex
+            ,align=center, minimum width=#2,
+            ] (tmp) {$\scriptstyle #1$};
+        \path[%
+            ,draw,<-, solid
+            ,decorate,decoration={%
+                ,zigzag
+                ,amplitude=.8pt
+                ,segment length=1.2mm,pre length=3.5pt
+                }
+            ]
+        (tmp.south east) -- (tmp.south west);
+        \end{tikzpicture}
+        }
+    }
+\newcommand\XLSEC[2]{%
+    \mathrel{%
+        \begin{tikzpicture}[%
+            baseline={(current bounding box.south)}
+            ]
+        \node[%
+            ,inner sep=.44ex
+            ,align=center, minimum width=#2,
+            ] (tmp) {$\scriptstyle #1$};
+        \path[%
+            ,draw,<-, solid
+            ,decorate,decoration={%
+                ,zigzag
+                ,amplitude=.8pt
+                ,segment length=1.2mm,pre length=3.5pt
+                }
+            ]
+        (tmp.south west) -- (tmp.south east);
+        \end{tikzpicture}
+        }
+    }
+%\def\XRSEC#1{\xrightarrow[\rule{3cm}{0pt}]{#1}}
+%\vskip3.65cm
+%\rotatebox{90}{
+\begin{tikzpicture}[overlay, remember picture]
+\node[minimum width=8.5cm, minimum height=1.15cm, fill=gray!20, yshift=1.2cm, xshift=4.4cm] (a) {};
+\node[rotate=-90, yshift=.2cm, xshift=-.15cm] (alabel) at (a.east) {$\scriptstyle\text{\underline{Open session}}$};
+
+\node[minimum width=8.5cm, minimum height=1.0cm, fill=gray!40, yshift=-.2cm, xshift=4.4cm] (b) {};
+\node[rotate=-90, yshift=.2cm, xshift=.05cm] (blabel) at (b.east) {$\scriptstyle\text{\underline{Chunk 0}}$};
+
+\node[minimum width=8.5cm, minimum height=1.0cm, fill=gray!40, yshift=-1.65cm, xshift=4.4cm] (c) {};
+\node[rotate=-90, yshift=.2cm, xshift=.05cm] (blabel) at (c.east) {$\scriptstyle\text{\underline{Chunk n}}$};
+\end{tikzpicture}
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+%\resizebox{\linewidth}{!}{
+\scalemath{.8}{
+%\[
+\begin{array}{@{} c c c @{}}
+\text{\underline{Platform}}  &  & \text{\underline{Token}} \\
+   \text{Firmware = HDR||chunks}& \XRSEC{\text{HDR}}{2.0cm} & \text{HMAC}_{\text{KHDFU}}(\overline{\text{HDR}}) \\
+   \text{Begin decrypt session} &  & \text{OK?} \\
+   & \XLSEC{\text{Session OK}}{2.0cm} & \text{Extract IV from HDR}  \\
+    & &    \\
+   \text{Process chunk 0} & \XRSEC{\text{Derive Key 0}}{2.0cm} & \text{DK0=Enc}_\text{KDDFU}\text{(IV+0)} \\
+   \text{Decrypt chunk 0} & \XLSEC{\text{DK0}}{2.0cm} & \\
+    & \vdots &    \\
+   \text{Process chunk N} & \XRSEC{\text{Derive Key n}}{2.0cm} & \text{DKn=Enc}_\text{KDDFU}\text{(IV+n)} \\
+   \text{Decrypt chunk N} & \XLSEC{\text{DKn}}{2.0cm} & \\
+
+%\text{[...]}
+ \end{array}
+%\]
+}
+\vskip.2cm
+\scalebox{.7}{\hskip2.1cm
+\begin{tikzpicture}[]
+\node[draw=none, fill=gray!5, draw=black, dashed]{
+\begin{tikzpicture}
+\node[anchor=north west] (one) {HDR: firmware header};
+\node[anchor=north west] (onebis) at (one.south west) {KHDFU: HMAC secret key (stored in the token)};
+\node[anchor=north west] (two) at (onebis.south west){KDDFU: key derivation secret key (stored in the token)};
+\node[anchor=north west] (three) at (two.south west) {DKi: derived decryption key number i};
+%\node[anchor=north west] (gout) at (three.south west) {PK: (decrypted) platform keys};
+%\node[anchor=north west, xshift=.7cm] (xr) at (gout.south west) {$\xrightarrow[\rule{3.35cm}{0pt}]{\text{Send in clear}}$};
+\node[anchor=north west, yshift=.0cm, xshift=1cm] (xrsec) at (three.south west) {$\XRSEC{\text{Send inside secure channel}}{3cm}$};
+\end{tikzpicture}
+};
+\end{tikzpicture}
+}
+\\
+\vskip3.5cm
+\scalebox{.75}{
+    \begin{tikzpicture}[overlay, remember picture,rotate=90,transform shape,
+node distance = 0mm,
+  start chain = going right,
+     N/.style = {draw,
+                 minimum width=#1 mm,
+                 outer sep=0pt,
+                 text height=2ex, text depth=0.5ex,
+                 on chain},
+                        ]
+%--- 1
+\node (n11) [N=15,right] at (0,-2)        {Magic};
+\node (n14) [N=15]  {Type};
+%--- 2
+\node (n21) [N=15,
+      below right=of n11.south west]    {Version};
+\node (n22) [N=15]  {Len};
+%--- 3
+\node (n31) [N=15,
+      below right=of n21.south west]    {Siglen};
+\node (n32) [N=15]  {ChSz};
+\node (n33) [N=30, below right=of n31.south west, fill=gray!20]  {Signature};
+%\node (n34) [N=30, below right=of n33.south west, fill=white]  {Padding};
+%--- 4,5,6
+\node (n41) [N=30, below right=of n33.south west, minimum height=.5cm, fill=gray!30]    {IV};
+\node (n51) [N=30, below=of n41, minimum height=.5cm, fill=gray!40]    {HMAC($\overline{\text{HDR}}$)};
+\node (n61) [N=30, below=of n51, minimum height=1.5cm, fill=gray!10]    {Chunk 0};
+\node (n71) [N=30, below=of n61, minimum height=2cm, fill=gray!30]    {\vdots};
+\node (n81) [N=30, below=of n71, minimum height=1.5cm, fill=gray!60]    {Chunk N};
+%----------------
+\node (00) [xshift=-.75cm, above=2mm of n14.north] {Signed Firmware};
+%---
+\draw[latex-latex, dashed] ([xshift=.2cm+.5cm]n14.north east) -- node[sloped, anchor=center, above] {Metadata} ([xshift=.2cm+.5cm]n32.south east);
+\draw[latex-latex, dashed] ([xshift=.65cm+.5cm]n14.north east) -- node[sloped, anchor=center, above] {$\overline{\text{HDR}}$} ([xshift=.65cm+.5cm]n41.south east);
+\draw[latex-latex, dashed] ([xshift=1.2cm+.5cm]n14.north east) -- node[sloped, anchor=center, above] {$\text{HDR}$} ([xshift=1.2cm+.5cm]n51.south east);
+\draw[latex-latex, dashed] ([xshift=1.2cm+.5cm]n61.north east) -- node[sloped, anchor=center, above] {$\text{Encrypted firmware chunks}$} ([xshift=1.2cm+.5cm]n81.south east);
+
+%
+\tikzset{
+    position label/.style={
+       below = 3pt,
+       text height = 1.5ex,
+       text depth = 1ex
+    },
+   braceabove/.style={
+     decoration={brace},
+     decorate
+   },
+   bracebelow/.style={
+     decoration={brace, mirror},
+     decorate
+   }
+}
+\draw [braceabove,decoration={raise=1ex}, thick] ([xshift=0cm]n14.north east) -- node [sloped, anchor=center, above, yshift=.0cm, xshift=-.05cm] (sig1) {} ([xshift=0cm]n32.south east);
+\draw [braceabove,decoration={raise=1ex}, thick] ([xshift=0cm]n61.north east) -- node [sloped, anchor=center, above, yshift=0.05cm, xshift=.1cm] (sig2) {} ([xshift=0cm]n81.south east);
+\path[-latex, thick] (n33.east) edge[bend right=70] node [left] {} (sig1);
+\path[-latex, thick] (n33.east) edge[bend right=-35] (sig2);
+\draw[decoration={raise=.5ex,text along path,
+      text={on decrypted data},text align={center}},decorate]  (n33.east) to [bend right=-35] (sig2);
+%
+\draw [bracebelow,decoration={raise=1ex}, thick] ([xshift=0cm]n11.north west) -- node [sloped, anchor=center, above, yshift=-.2cm, xshift=-.1cm] (hmac1) {} ([xshift=0cm]n41.south west);
+\path[-latex, thick] (n51.west) edge[bend right=-60] node [left] {} (hmac1);
+
+    \end{tikzpicture}
+%}
+}
+\end{center}
+\end{document}
