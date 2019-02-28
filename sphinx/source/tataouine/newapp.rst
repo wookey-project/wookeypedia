@@ -135,8 +135,8 @@ integrated in it.
        hazardous errors!
      * The user must check the consistency of device drivers usage when adding new
        applications. For instance, if two applications both try to use USART4 concurrently,
-       this will lead to runtime erroneous or weird behaviors. As a general rule of thumb, sharing the
-       same piece of hardware in two or more applications (i.e. registers handling the same peripheral) is clearly a bad idea and
-       is certainly not advertised!
+       one of it will have its request refused by the kernel. As a general rule of thumb, sharing the
+       same piece of hardware in two or more applications (i.e. registers handling the same peripheral) is
+       not permitted and must be resolved by using a userspace proxy.
 
 

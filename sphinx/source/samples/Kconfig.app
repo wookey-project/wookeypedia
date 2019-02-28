@@ -1,3 +1,4 @@
+# starting PIN application configuration
 menu "PIN custom app"
 
 config APP_PIN
@@ -7,6 +8,8 @@ config APP_PIN
   ---help---
     Say y if you want to embbed USER custom application.
 
+# start of (de)actication PIN option list
+# all the config entry here depends on the activation of the application
 if APP_PIN
 
 config APP_PIN_FW
@@ -43,34 +46,9 @@ config APP_PIN_STACKSIZE
     Specify the application stack size, in bytes. By default, set to 8192
     (i.e. 8k). Depending on the number of slots required, and the usage,
     the stack can be bigger or smaller.
-    
-config APP_PIN_SHM
-  bool "Shared memory usage"
-  default n
-  ---help---
-    say YES if PIN requires shared memory to communicate with others
 
-choice
-  prompt "PIN human interaction mode"
-  default APP_PIN_INPUT_USART
-    config APP_PIN_INPUT_USART
-      bool "PIN is asked through USART"
-      ---help---
-      User interaction for PIN ask is done using dedicated
-      USART interface
-    config APP_PIN_INPUT_SCREEN
-      bool "PIN is asked through graphical interface"
-      ---help---
-      User interaction for PIN ask is done using dedicated
-      screen/touchscreen couple
-endchoice
 
-if APP_PIN_INPUT_USART
-  config APP_PIN_INPUT_USART_ID
-  int "PIN USART interface identifier"
-  range 1 6 
-endif
-
+# start of PIN permission configuration
 menu "Permissions"
 
 menu "Devices"
@@ -183,8 +161,43 @@ endmenu
 
 
 endmenu
+# end of PIN permission configuration
 
-# end of APP_PIN configuration
+# Here we can add one (or more) menu, submenu and so on, which
+# are specific to the application behavior.
+# The menu structure is free, but the option prefix should respect
+# the global application prefix (here APP_PIN) to avoid any collision
+# or confusion with other part of the configuration
+#
+# start of PIN specific option configuration
+menu "Application specific options"
+
+choice
+  prompt "PIN human interaction mode"
+  default APP_PIN_INPUT_USART
+    config APP_PIN_INPUT_USART
+      bool "PIN is asked through USART"
+      ---help---
+      User interaction for PIN ask is done using dedicated
+      USART interface
+    config APP_PIN_INPUT_SCREEN
+      bool "PIN is asked through graphical interface"
+      ---help---
+      User interaction for PIN ask is done using dedicated
+      screen/touchscreen couple
+endchoice
+
+if APP_PIN_INPUT_USART
+  config APP_PIN_INPUT_USART_ID
+  int "PIN USART interface identifier"
+  range 1 6
 endif
 
 endmenu
+# end of PIN specific option configuration
+
+# end of (de)actication PIN option list
+endif
+
+endmenu
+# end of PIN application configuration
