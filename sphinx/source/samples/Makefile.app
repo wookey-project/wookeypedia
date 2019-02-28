@@ -3,9 +3,9 @@
 ###################################################################
 
 # Application name, can be suffixed by the SDK
-APP_NAME ?= pin
+APP_NAME ?= crypto
 # application build directory name
-DIR_NAME := pin
+DIR_NAME := crypto
 
 # project root directory, relative to app dir
 PROJ_FILES = ../../
@@ -27,7 +27,8 @@ APP_BUILD_DIR = $(BUILD_DIR)/apps/$(DIR_NAME)
 # About the compilation flags
 ###################################################################
 
-# Application CFLAGS, first yours...
+# Application CFLAGS, first yours... Remember no use '+=' as the SDK
+# create an initial CLFAGS value for application
 CFLAGS += -Isrc/ -Iinc/ -MMD -MP
 # and the SDK ones
 CFLAGS += $(APPS_CFLAGS)
@@ -40,15 +41,16 @@ CFLAGS += $(APPS_CFLAGS)
 # the SDK in multi-bank case.
 # this is an option of the linker.
 EXTRA_LDFLAGS ?= -Tpin.fw1.ld
- 
+
 # linker options to add the layout file
 LDFLAGS += $(EXTRA_LDFLAGS) -L$(APP_BUILD_DIR)
 
 # generic linker options
 LDFLAGS += $(AFLAGS) -fno-builtin -nostdlib -nostartfiles
 
-# project's library you whish to use...
-LD_LIBS += -lstd -lshell -lconsole -lusart
+# project's library/drivers you whish to use..., dont forget to add your application
+# build directory as library source path (-L argument)
+LD_LIBS += -lcryp -laes -lstd -L$(APP_BUILD_DIR)
 
 ###################################################################
 # okay let's list our source files and generated files now
@@ -75,12 +77,82 @@ TODEL_DISTCLEAN += $(APP_BUILD_DIR)
 
 .PHONY: app
 
+#############################################################
+# Informations about the applications
+#############################################################
+
+show:
+	@echo
+	@echo "\t\tAPP_BUILD_DIR\t=> " $(APP_BUILD_DIR)
+	@echo
+	@echo "C sources files:"
+	@echo "\t\tSRC\t=> " $(SRC)
+	@echo "\t\tASM\t=> " $(ASM)
+	@echo "\t\tOBJ\t=> " $(OBJ)
+	@echo "\t\tDEP\t=> " $(DEP)
+	@echo
+	@echo "\t\tCFLAGS\t=> " $(CFLAGS)
+	@echo "\t\tLDLAGS\t=> " $(LDLAGS)
+
+
+
 ###################################################################
 # build targets (driver, core, SoC, Board... and local)
 ###################################################################
 
 # all (default) build the app
-all: $(APP_BUILD_DIR) app
+all: $(APP_BUILD_DIR) alldeps app
+
+############################################################
+# eplicit dependency on the application libs and drivers
+# compiling the application requires the compilation of its
+# dependencies
+# This permit to compile all the application dependencies
+# when requesting the application compilation
+############################################################
+
+# library dependencies, here we have 2 libs
+LIBDEP := $(BUILD_DIR)/libs/libstd/libstd.a \
+          $(BUILD_DIR)/libs/libaes/libaes.a
+
+libdep: $(LIBDEP)
+
+$(LIBDEP):
+	$(Q)$(MAKE) -C $(PROJ_FILES)libs/$(patsubst lib%.a,%,$(notdir $@))
+
+
+# drivers dependencies, here only one
+SOCDRVDEP := $(BUILD_DIR)/drivers/libcryp/libcryp.a
+
+socdrvdep: $(SOCDRVDEP)
+
+$(SOCDRVDEP):
+	$(Q)$(MAKE) -C $(PROJ_FILES)drivers/socs/$(SOC)/$(patsubst lib%.a,%,$(notdir $@))
+
+# board drivers dependencies. If none, leave the variable empty
+BRDDRVDEP    :=
+
+brddrvdep: $(BRDDRVDEP)
+
+$(BRDDRVDEP):
+	$(Q)$(MAKE) -C $(PROJ_FILES)drivers/boards/$(BOARD)/$(patsubst lib%.a,%,$(notdir $@))
+
+# external dependencies
+EXTDEP    :=
+
+extdep: $(EXTDEP)
+
+$(EXTDEP):
+	$(Q)$(MAKE) -C $(PROJ_FILES)externals
+
+
+# alldeps, including all dependencies (see 'all' target, which depends on it)
+alldeps: libdep socdrvdep brddrvdep extdep
+
+
+###################################################################
+# build targets (driver, core, SoC, Board... and local)
+###################################################################
 
 # app build the hex and elf binaries
 app: $(APP_BUILD_DIR)/$(ELF_NAME) $(APP_BUILD_DIR)/$(HEX_NAME)
@@ -106,3 +178,5 @@ $(APP_BUILD_DIR)/$(BIN_NAME): $(APP_BUILD_DIR)/$(ELF_NAME)
 $(APP_BUILD_DIR):
 	$(call cmd,mkdir)
 
+# including automaticaly calculated headers/sources dependencies
+-include $(DEP)
