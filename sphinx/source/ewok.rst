@@ -10,6 +10,7 @@ The EwoK microkernel
 
 
 .. contents::
+   :depth: 2
 
 What is Ewok ?
 --------------
@@ -141,9 +142,11 @@ The methodology we used to create an hybrid kernel is described in the
 following sections:
 
 .. toctree::
-   * Ada/C integration <ewok/ada_c>
-   * Ada code architecture <ewok/ada_arch>
-   * About SPARK <ewok/ada_spark>
+   :maxdepth: 1
+
+   Ada/C integration <ewok/ada_c>
+   Ada code architecture <ewok/ada_arch>
+   About SPARK <ewok/ada_spark>
 
 EwoK API
 --------
@@ -164,9 +167,11 @@ Some syscalls require some specific permissions. Those permissions are staticall
 The EwoK API is fully described in the following:
 
 .. toctree::
-  EwoK syscalls in large <ewok/syscalls>
-  EwoK syscalls complete guide <ewok/syscalls_complete>
-  EwoK permissions model <ewok/perms>
+   :maxdepth: 1
+
+   EwoK syscalls in large <ewok/syscalls>
+   EwoK syscalls complete guide <ewok/syscalls_complete>
+   EwoK permissions model <ewok/perms>
 
 EwoK internals
 --------------
@@ -174,8 +179,24 @@ EwoK internals
 If you want to hack into the kernel, EwoK internals are described here:
 
 .. toctree::
-  EwoK permissions internals <ewok/perms_internals>
-  EwoK syscalls internals <ewok/syscalls_internals>
-  EwoK IRQ & ISR internals <ewok/isr_internals>
+   :maxdepth: 1
 
-.. include:: ewok/faq.rst
+   EwoK permissions internals <ewok/perms_internals>
+   EwoK syscalls internals <ewok/syscalls_internals>
+   EwoK IRQ & ISR internals <ewok/isr_internals>
+
+
+EwoK API FAQ
+------------
+
+Here are the answers to (we hope) the most common questions you may have when using EwoK kernel. The EwoK FAQ will be regulary updated when new questions arrises from the community.
+
+.. toctree::
+   :maxdepth: 1
+
+    General FAQ <ewok/faq_general>
+    Syscalls FAQ <ewok/faq_syscalls>
+    Permissions FAQ <ewok/faq_perms>
+    Security FAQ <ewok/faq_security>
+    Build process FAQ <ewok/faq_build>
+
