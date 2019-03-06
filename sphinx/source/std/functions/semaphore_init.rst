@@ -24,16 +24,22 @@ The semaphore API respects the following prototypes::
 
    bool semaphore_trylock(volatile uint32_t* semaphore);
 
+   void semaphore_lock(volatile uint32_t* semaphore);
+
    bool semaphore_release(volatile uint32_t* semaphore);
 
 
 It is possible to use multiple semaphores at the same time.
 
-It is possible to create mutually exclusive access (also known as mutex) to a variable or a specific function when setting the semaphore to 1 at initialization time.
+It is possible to create mutually exclusive access (also known as mutex) to a variable or a specific function when setting the semaphore to 1 at initialization time. Although, you should use the mutex API instead for this last case.
 
 .. caution:: There is no protection against dead-lock, you must be aware of the impact of using semaphore and lock mechanisms in your software
 
-.. caution:: The semaphore **must** be declared as volatile to avoid any border effect associated to the compilation process. The assembler backend manipulates the semaphore using specific synchronisation instructions
+.. caution:: The semaphore **must** be declared as volatile to avoid any border effect associated to the compilation process. The assembler backend manipulates the semaphore is using specific synchronisation instructions
 
 .. hint:: When a lock is required between a thread and an ISR for which a treatment can't be postponed (i.e. the application whishes to avoid the lock to happend instead to detect it). The kernel sys_lock() API is a better choice
 
+
+semaphore_trylock is nonblocking and try to lock the semaphore, returning false if the lock fails.
+
+semaphore_lock is a blocking function, waiting for the samaphore to be free to be locked before returning.

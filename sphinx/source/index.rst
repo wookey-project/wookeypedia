@@ -6,7 +6,7 @@
 Welcome to the WooKey project documentation!
 ============================================
 
-.. image:: img/wookey.png
+.. image:: img/wookie.png
    :height: 250px
    :width: 250 px
    :scale: 100 %
