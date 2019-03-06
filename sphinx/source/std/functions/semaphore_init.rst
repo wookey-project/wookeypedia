@@ -1,6 +1,5 @@
 semaphore
 ---------
-
 Syncrhonization primitives with counters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -1,6 +1,5 @@
 aprintf
 -------
-
 Asynchronous pretty printing
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -53,7 +53,21 @@ MANS_STD_SRC := \
 	$(MANS_STD_SRC_DIR)/strncpy.rst \
 	$(MANS_STD_SRC_DIR)/wfree.rst \
 	$(MANS_STD_SRC_DIR)/wmalloc_init.rst \
-	$(MANS_STD_SRC_DIR)/wmalloc.rst
+	$(MANS_STD_SRC_DIR)/wmalloc.rst \
+	$(MANS_STD_SRC_DIR)/read_reg_value.rst \
+	$(MANS_STD_SRC_DIR)/write_reg_value.rst \
+	$(MANS_STD_SRC_DIR)/get_reg_value.rst \
+	$(MANS_STD_SRC_DIR)/set_reg_value.rst \
+	$(MANS_STD_SRC_DIR)/read_reg16_value.rst \
+	$(MANS_STD_SRC_DIR)/write_reg16_value.rst \
+	$(MANS_STD_SRC_DIR)/to_big32.rst \
+	$(MANS_STD_SRC_DIR)/to_big16.rst \
+	$(MANS_STD_SRC_DIR)/to_little32.rst \
+	$(MANS_STD_SRC_DIR)/to_little16.rst \
+	$(MANS_STD_SRC_DIR)/from_big32.rst \
+	$(MANS_STD_SRC_DIR)/from_big16.rst \
+	$(MANS_STD_SRC_DIR)/from_little32.rst \
+	$(MANS_STD_SRC_DIR)/from_little16.rst
 
 MANS_STD      := $(patsubst %.rst,$(BUILD_DIR)/doc/man/man3/%.3,$(notdir $(MANS_STD_SRC)))
 

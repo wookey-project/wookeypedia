@@ -33,6 +33,8 @@ The libstd API is decomposed in various and small foot-print specific components
 Each component is described bellow.
 
 .. toctree::
+  :maxdepth: 1
+
   EwoK libstd's libstring <std/libstring>
   EwoK libstd's libembed <std/libembed>
   EwoK libstd's libstream <std/libstream>
