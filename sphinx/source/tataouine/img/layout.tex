@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{tikz-qtree}
+\usetikzlibrary{arrows,positioning}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes}
+\usetikzlibrary{automata}
+\usetikzlibrary{calc}
+\usetikzlibrary{fit,calc,positioning,decorations.pathreplacing,matrix,chains}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.text}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{array}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+
+\begin{document}
+
+\begin{tikzpicture}
+\draw (1,1) node (json) [draw, rounded rectangle] {JSON file};
+\draw (4,0) node (kernel) [draw, rounded rectangle] {Drivers devmap};
+\draw (4,2) node (drv) [draw, rounded rectangle] {Kernel devmap};
+% arrows
+\draw[dashed,->,>=latex] (json) to[out=-90,in=180] (kernel);
+\draw[dashed,->,>=latex] (json) to[out=90,in=180] (drv);
+% legend
+\draw (1,2.1) node {\color{gray}{\tiny{devs map, clock}}};
+\draw (1,1.8) node[left] {\color{gray}{\tiny{\& perms}}};
+\draw (1,0.1) node[left,below] {\color{gray}{\tiny{devs map}}};
+
+% file names
+\draw (4,1.5) node {\small\it{k/generated/devmap.h}};
+
+\draw (4,-0.5) node {\small\it{layout/generated/*.h}};
+\end{tikzpicture}
+\end{document}

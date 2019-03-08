@@ -35,6 +35,12 @@ userspace application and how you can build and flash it.
    Flashing a new firmware <tataouine/flash>
    Creating a new application <tataouine/newapp>
 
+About memory layout
+-------------------
+
+.. toctree::
+   Layout and portability <tataouine/layout>
+
 About Tataouine hierarchy
 ------------------------
 
