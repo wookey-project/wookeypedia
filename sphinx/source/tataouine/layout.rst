@@ -37,10 +37,7 @@ The JSON file as the following syntax::
          "size":"0x400",
          "memory_subregion_mask":"0",
          "irqs": [
-           "USART1_IRQ", 0, 0, 0
-         ],
-         "irqs_literal": [
-           53, 0, 0, 0
+           { "name":"USART1_IRQ", "value":"53" }
          ],
          "gpios": [
            { "name":"USART1_TX", "port":"GPIO_PB", "pin":"6" },
