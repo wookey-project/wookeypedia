@@ -68,3 +68,5 @@ Tataouine contains the following main directories:
 .. toctree::
    Debugging the project <tataouine/debug>
    About the configuration <tataouine/config>
+   About tataouine internals <tataouine/internals>
+
