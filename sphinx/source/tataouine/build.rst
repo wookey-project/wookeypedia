@@ -133,8 +133,8 @@ we let the user chosse between:
 
 **1. Compiling everything from the sources**
 
-      If you are ready to compile everything, install maven and the maven surefire test framework.
-      When it is done::
+If you are ready to compile everything, install maven and the maven surefire test framework.
+When it is done::
 
    $ make -C externals gp
    $ make -C externals antjavacard
