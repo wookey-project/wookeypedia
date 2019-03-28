@@ -48,6 +48,9 @@ MANS_STD_SRC := \
 	$(MANS_STD_SRC_DIR)/printf.rst \
 	$(MANS_STD_SRC_DIR)/sprintf.rst \
 	$(MANS_STD_SRC_DIR)/snprintf.rst \
+	$(MANS_STD_SRC_DIR)/vprintf.rst \
+	$(MANS_STD_SRC_DIR)/vsprintf.rst \
+	$(MANS_STD_SRC_DIR)/vsnprintf.rst \
 	$(MANS_STD_SRC_DIR)/strcmp.rst \
 	$(MANS_STD_SRC_DIR)/strncmp.rst \
 	$(MANS_STD_SRC_DIR)/strlen.rst \

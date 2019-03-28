@@ -8,13 +8,21 @@ Synopsys
 
 This implementation of printf implement a subset of the POSIX.1-2001 and C99 standard API (as we are in an embedded system).
 
+the stdio printf API uses variatic arguments. stdard printf API uses va_list arg for dynamic arguments list.
+
 The printf familly respects the following prototype::
 
-   #include "api/print.h"
+   #include "api/stdio.h"
 
-   void printf(char *fmt, ...);
-   void sprintf(char *dest, char *fmt, ...);
-   void snprintf(char *dest, size_t len, char *fmt, ...);
+   void printf(const char *fmt, ...);
+   void sprintf(char *dest, const char *fmt, ...);
+   void snprintf(char *dest, size_t len, const char *fmt, ...);
+
+   #include "api/stdarg.h"
+
+   void vprintf(const char *fmt, va_list args);
+   void vsprintf(char *dest, const char *fmt, va_list args);
+   void vsnprintf(char *dest, size_t len, const char *fmt, va_list args);
 
 
 Description
