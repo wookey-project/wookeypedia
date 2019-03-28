@@ -59,6 +59,11 @@ MANS_STD_SRC := \
 	$(MANS_STD_SRC_DIR)/wfree.rst \
 	$(MANS_STD_SRC_DIR)/wmalloc_init.rst \
 	$(MANS_STD_SRC_DIR)/wmalloc.rst \
+    $(MANS_STD_SRC_DIR)/queue_available_space.rst \
+    $(MANS_STD_SRC_DIR)/queue_create.rst \
+    $(MANS_STD_SRC_DIR)/queue_dequeue.rst \
+    $(MANS_STD_SRC_DIR)/queue_enqueue.rst \
+    $(MANS_STD_SRC_DIR)/queue_is_empty.rst \
 	$(MANS_STD_SRC_DIR)/read_reg_value.rst \
 	$(MANS_STD_SRC_DIR)/write_reg_value.rst \
 	$(MANS_STD_SRC_DIR)/get_reg_value.rst \
