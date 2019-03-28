@@ -26,8 +26,8 @@ Random source generation API
    :start-line: 4
 
 
-Bitwise and registers manipulation API
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+registers manipulation API
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. include:: functions/set_reg_value.rst
    :start-line: 4

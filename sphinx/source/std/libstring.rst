@@ -3,27 +3,15 @@ Libstd libstring API
 
 .. highlight:: c
 
-Strlen
-^^^^^^
+String length API
+^^^^^^^^^^^^^^^^^
 
 .. include:: functions/strlen.rst
    :start-line: 4
 
-Itoa
-^^^^
+String copy API
+^^^^^^^^^^^^^^^
 
-.. include:: functions/itoa.rst
-   :start-line: 4
-
-Sprintf
-^^^^^^^
-
-.. include:: functions/sprintf.rst
-   :start-line: 4
-
-Strncpy
-^^^^^^^
-
-.. include:: functions/strncpy.rst
+.. include:: functions/strcpy.rst
    :start-line: 4
 

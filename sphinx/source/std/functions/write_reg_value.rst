@@ -24,15 +24,6 @@ The register manipulation helpers respect the following API::
    uint16_t read_reg16_value(volatile uint16_t * reg);
    void     write_reg16_value(volatile uint16_t * reg, uint16_t value);
 
-   uint32_t to_big32(uint32_t value);
-   uint16_t to_big16(uint16_t value);
-   uint32_t to_little32(uint32_t value);
-   uint16_t to_little16(uint16_t value);
-   uint32_t from_big32(uint32_t value);
-   uint16_t from_big16(uint16_t value);
-   uint32_t from_little32(uint32_t value);
-   uint16_t from_little16(uint16_t value);
-
 Description
 """""""""""
 
@@ -49,6 +40,5 @@ They use the following arguments:
 
 get_reg_value() return the field value independently of its position.
 
-The bitwise API also propose big-endian and little-endian conversion helpers.
 These helpers are not made to be used directly on registers (volatile pointers) but on basic variables.
 

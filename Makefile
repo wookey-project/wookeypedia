@@ -36,20 +36,22 @@ MANS_STD_SRC := \
 	$(MANS_STD_SRC_DIR)/aprintf.rst \
 	$(MANS_STD_SRC_DIR)/get_random.rst \
 	$(MANS_STD_SRC_DIR)/hexdump.rst \
-	$(MANS_STD_SRC_DIR)/itoa.rst \
 	$(MANS_STD_SRC_DIR)/memcmp.rst \
 	$(MANS_STD_SRC_DIR)/mutex_init.rst \
 	$(MANS_STD_SRC_DIR)/mutex_lock.rst \
 	$(MANS_STD_SRC_DIR)/mutex_trylock.rst \
 	$(MANS_STD_SRC_DIR)/mutex_unlock.rst \
-	$(MANS_STD_SRC_DIR)/printf.rst \
 	$(MANS_STD_SRC_DIR)/semaphore_init.rst \
 	$(MANS_STD_SRC_DIR)/semaphore_lock.rst \
 	$(MANS_STD_SRC_DIR)/semaphore_release.rst \
 	$(MANS_STD_SRC_DIR)/semaphore_trylock.rst \
+	$(MANS_STD_SRC_DIR)/printf.rst \
 	$(MANS_STD_SRC_DIR)/sprintf.rst \
+	$(MANS_STD_SRC_DIR)/snprintf.rst \
 	$(MANS_STD_SRC_DIR)/strcmp.rst \
+	$(MANS_STD_SRC_DIR)/strncmp.rst \
 	$(MANS_STD_SRC_DIR)/strlen.rst \
+	$(MANS_STD_SRC_DIR)/strcpy.rst \
 	$(MANS_STD_SRC_DIR)/strncpy.rst \
 	$(MANS_STD_SRC_DIR)/wfree.rst \
 	$(MANS_STD_SRC_DIR)/wmalloc_init.rst \
@@ -60,14 +62,10 @@ MANS_STD_SRC := \
 	$(MANS_STD_SRC_DIR)/set_reg_value.rst \
 	$(MANS_STD_SRC_DIR)/read_reg16_value.rst \
 	$(MANS_STD_SRC_DIR)/write_reg16_value.rst \
-	$(MANS_STD_SRC_DIR)/to_big32.rst \
-	$(MANS_STD_SRC_DIR)/to_big16.rst \
-	$(MANS_STD_SRC_DIR)/to_little32.rst \
-	$(MANS_STD_SRC_DIR)/to_little16.rst \
-	$(MANS_STD_SRC_DIR)/from_big32.rst \
-	$(MANS_STD_SRC_DIR)/from_big16.rst \
-	$(MANS_STD_SRC_DIR)/from_little32.rst \
-	$(MANS_STD_SRC_DIR)/from_little16.rst
+	$(MANS_STD_SRC_DIR)/htonl.rst \
+	$(MANS_STD_SRC_DIR)/htons.rst \
+	$(MANS_STD_SRC_DIR)/ntohl.rst \
+	$(MANS_STD_SRC_DIR)/ntohs.rst
 
 MANS_STD      := $(patsubst %.rst,$(BUILD_DIR)/doc/man/man3/%.3,$(notdir $(MANS_STD_SRC)))
 
