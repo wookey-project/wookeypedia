@@ -15,7 +15,7 @@ TODEL_DISTCLEAN +=
 
 # list of man pages (by now
 #
-MANS_SYSCALLS_SRC_DIR := $(PROJ_FILES)/doc/sphinx/source/ewok/syscalls
+MANS_SYSCALLS_SRC_DIR := $(PROJ_FILES)/kernel/doc/syscalls
 MANS_SYSCALLS_SRC := \
 	$(MANS_SYSCALLS_SRC_DIR)/sys_init.rst \
 	$(MANS_SYSCALLS_SRC_DIR)/sys_log.rst \
@@ -30,7 +30,7 @@ MANS_SYSCALLS_SRC := \
 MANS_SYSCALLS := $(patsubst %.rst,$(BUILD_DIR)/doc/man/man2/%.2,$(notdir $(MANS_SYSCALLS_SRC)))
 MANS_SYSCALLS := $(patsubst %.rst,$(BUILD_DIR)/doc/man/man2/%.2,$(notdir $(MANS_SYSCALLS_SRC)))
 
-MANS_STD_SRC_DIR := $(PROJ_FILES)/doc/sphinx/source/std/functions
+MANS_STD_SRC_DIR := $(PROJ_FILES)/libs/std/doc/functions
 MANS_STD_SRC := \
 	$(MANS_STD_SRC_DIR)/aprintf_flush.rst \
 	$(MANS_STD_SRC_DIR)/aprintf.rst \
