@@ -10,7 +10,7 @@ as well as a secure storage area for the sensitive master keys of WooKey
 user data encryption.
 
 Software security relies on a microkernel that enforces privilege separation,
-memory isolation, W⊕X principle, stack and heap anti-smashing
+memory isolation, W^X principle, stack and heap anti-smashing
 techniques. The most sensitive parts are implemented with a safe language
 (SPARK/Ada).
 

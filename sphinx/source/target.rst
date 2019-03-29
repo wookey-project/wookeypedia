@@ -506,7 +506,7 @@ Integrating high security properties in both hardware and software design
 impact the overall performance.
 
 The software architecture, based on a microkernel with various security
-features such as W⊕X protection, MPU-based partitioning and full userspace
+features such as W^X protection, MPU-based partitioning and full userspace
 drivers and stacks including secure DMA usage inherently generates performance
 impact in comparison to basic bare metal implementations.
 
