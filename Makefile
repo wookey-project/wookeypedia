@@ -83,13 +83,14 @@ show:
 	@echo "MANS_STD_SRC:      $(MANS_STD_SRC)"
 	@echo "MANS_STD:          $(MANS_STD)"
 
-.PHONY: $(BUILD_DIR)/doc/kernel_devmap $(BUILD_DIR)/doc/kernel_api $(BUILD_DIR)/doc/man $(BUILD_DIR)/doc/sphinx $(BUILD_DIR)/doc/libstd_api
+.PHONY: $(BUILD_DIR)/doc/kernel_devmap $(BUILD_DIR)/doc/kernel_api $(BUILD_DIR)/doc/man $(BUILD_DIR)/doc/sphinx $(BUILD_DIR)/doc/libstd_api preparesphinx
 
-$(BUILD_DIR)/doc/sphinx:
+$(BUILD_DIR)/doc/sphinx: preparesphinx
 	$(call cmd,mkdir)
 	$(call cmd,mkhtml)
+	$(call cmd,mklatex)
 
-sphinx: preparesphinx $(BUILD_DIR)/doc/sphinx
+sphinx: $(BUILD_DIR)/doc/sphinx
 
 preparesphinx:
 	$(Q)$(MAKE) -C sphinx/source prepare_sphinx
