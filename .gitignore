@@ -1,6 +1,7 @@
 sphinx/source/ewok
 sphinx/source/std
 sphinx/source/dfu
+sphinx/source/massstorage
 sphinx/source/img/ewok_precise_arch.png
 sphinx/source/img/ewok_stack.png
 sphinx/source/img/std_arch.png
