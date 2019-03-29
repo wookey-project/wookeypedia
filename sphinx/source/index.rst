@@ -45,8 +45,14 @@ for the PCB design to ease its manufacturing and reproducibility.
    Quickstart <quickstart>
    Target of the project <target>
    About Security concerns <security>
-   EwoK microkernel <ewok>
-   EwoK standard library <std>
+
+.. include:: autogen.ewok.rst
+
+.. include:: autogen.libs.rst
+
+.. include:: autogen.drvs.rst
+
+.. toctree::
    Tataouine SDK <tataouine>
    Basic applications <basicapps>
    Publications <publi>

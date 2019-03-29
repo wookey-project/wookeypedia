@@ -89,7 +89,10 @@ $(BUILD_DIR)/doc/sphinx:
 	$(call cmd,mkdir)
 	$(call cmd,mkhtml)
 
-sphinx: $(BUILD_DIR)/doc/sphinx
+sphinx: preparesphinx $(BUILD_DIR)/doc/sphinx
+
+preparesphinx:
+	$(Q)$(MAKE) -C sphinx/source prepare_sphinx
 
 $(BUILD_DIR)/doc/kernel_api: Doxyfile.api
 	$(call cmd,mkdir)
