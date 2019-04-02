@@ -5,8 +5,8 @@ Publications and technical documentation
 
 Technical documents
 -------------------
-   * EwoK kernel API :download:`The complete EwoK syscall manual <_downloads/kernel_api.pdf>`.
-   * EwoK libstd :download:`Generic C abstraction library for Ewok API description <_downloads/libstd_api.pdf>`.
+
+.. include:: publi.rst.gen
 
 Presentations:
 --------------

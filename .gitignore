@@ -17,3 +17,4 @@ sphinx/source/tataouine/img/layout.png
 sphinx/source/autogen.drvs.rst
 sphinx/source/autogen.ewok.rst
 sphinx/source/autogen.libs.rst
+*.gen

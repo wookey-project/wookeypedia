@@ -83,7 +83,7 @@ show:
 	@echo "MANS_STD_SRC:      $(MANS_STD_SRC)"
 	@echo "MANS_STD:          $(MANS_STD)"
 
-.PHONY: $(BUILD_DIR)/doc/kernel_devmap $(BUILD_DIR)/doc/kernel_api $(BUILD_DIR)/doc/man $(BUILD_DIR)/doc/sphinx $(BUILD_DIR)/doc/libstd_api preparesphinx
+.PHONY: $(BUILD_DIR)/doc/kernel_devmap $(BUILD_DIR)/doc/man $(BUILD_DIR)/doc/sphinx preparesphinx
 
 $(BUILD_DIR)/doc/sphinx: preparesphinx
 	$(call cmd,mkdir)
@@ -106,11 +106,7 @@ $(BUILD_DIR)/doc/kernel_api: Doxyfile.api
 #	$(call cmd,doxygen)
 #	$(call cmd,doxy_custom)
 
-$(BUILD_DIR)/doc/libstd_api: Doxyfile.std
-	$(call cmd,mkdir)
-	$(call cmd,doxygen)
-
-doc:  $(BUILD_DIR)/doc/sphinx $(BUILD_DIR)/doc/libstd_api $(BUILD_DIR)/doc/kernel_api $(BUILD_DIR)/doc/man man
+doc:  $(BUILD_DIR)/doc/sphinx $(BUILD_DIR)/doc/man man
 
 $(BUILD_DIR)/doc/man/man2:
 	$(call cmd,mkdir)
