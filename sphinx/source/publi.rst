@@ -6,6 +6,8 @@ Publications and technical documentation
 Technical documents
 -------------------
 
+Technical documents are generated for each software component dedicated documentation. These documents  are independent PDF files that describe the component usage, principles, and for complex components such as the kernel, the internals.
+
 .. include:: publi.rst.gen
 
 Presentations:
