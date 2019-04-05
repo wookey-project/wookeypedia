@@ -1,6 +1,6 @@
 sphinx/source/ewok
-sphinx/source/std
-sphinx/source/dfu
+sphinx/source/lib*
+sphinx/source/drv*
 sphinx/source/massstorage
 sphinx/source/img/ewok_precise_arch.png
 sphinx/source/img/ewok_stack.png
@@ -17,4 +17,5 @@ sphinx/source/tataouine/img/layout.png
 sphinx/source/autogen.drvs.rst
 sphinx/source/autogen.ewok.rst
 sphinx/source/autogen.libs.rst
+sphinx/source/_downloads/*.pdf
 *.gen
