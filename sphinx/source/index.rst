@@ -53,6 +53,8 @@ for the PCB design to ease its manufacturing and reproducibility.
 .. include:: autogen.drvs.rst
 
 .. toctree::
+   :maxdepth: 2
+
    Tataouine SDK <tataouine>
    Basic applications <basicapps>
    Publications <publi>
