@@ -40,6 +40,7 @@ About memory layout
 
 .. toctree::
    Layout and portability <tataouine/layout>
+   Using layout in drivers <tataouine/layout_usage>
 
 About Tataouine hierarchy
 ------------------------
