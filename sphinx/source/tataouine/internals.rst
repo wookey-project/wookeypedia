@@ -27,12 +27,12 @@ Integrating the Configuration set in Kconfig
 ---------------------------------------------
 
 The configuration generated (through menuconfig) is hosted in the .config file. This file is
-sourced and its variables are cleaned by the ./Makefile.conf file. This Makefile also creates a minimal
+sourced and its variables are cleaned by the ./m_config.mk file. This Makefile also creates a minimal
 configuration to support some targets when no .config file exists. This file can be hosted from any
 Makefile in the project while the variable PROJ\_FILES exists and targets the project root directory.
 
 Some targets are common to all apps (clean, distclean, all etc.) and are therefore hosted in the
-root Makefile.gen (for generic) file. This file can be hosted from any Makefile in the project while
+root m_generic.mk (for generic) file. This file can be hosted from any Makefile in the project while
 the variable PROJ\_FILES exists and targets the project root directory.
 
 The pretty-printing build system
@@ -54,11 +54,11 @@ syntax in the Makefile targets, where:
    * `if_changed` is the macro to use when the command has to be executed if any requirements have changed
    * `cmd` is the macro to use when the command has to be always executed
 
-The macros are written in Makefile.build file. This is the very same file as the Linux Kernel and
+The macros are written in m_build.mk file. This is the very same file as the Linux Kernel and
 most other files and should not be modified.
 
-The buildcmd is the name of the command, as defined in the Makefile.build file. This file does not have
-to be included explicitly, as it is included by Makefile.gen.
+The buildcmd is the name of the command, as defined in the m_build.mk file. This file does not have
+to be included explicitly, as it is included by m_generic.mk.
 The buildcmd corresponds to the command name without the "(quiet\_)\_cmd\_" string.
 
 Here is an example of a classical compilation of object files from source files:::
@@ -98,8 +98,8 @@ Here, drv-y is first set to (null), and then, for each option:
      added to drv-y
    * If the option is set to n, the file is added to drv-n.
 
-All Makefile.objs fulfill their variables. Makefile.gen then includes all Makefile.objs. As said above, this
-inclusion can be done from any Makefile including Makefile.gen file, whatever its directory is, while PROJ\_FILES
+All Makefile.objs fulfill their variables. m_generic.mk then includes all Makefile.objs. As said above, this
+inclusion can be done from any Makefile including m_generic.mk file, whatever its directory is, while PROJ\_FILES
 variable exists.
 
 .. FIXME

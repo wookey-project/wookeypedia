@@ -1,7 +1,7 @@
 PROJ_FILES := ../../../
 
-include $(PROJ_FILES)Makefile.conf
-include $(PROJ_FILES)Makefile.gen
+include $(PROJ_FILES)m_config.mk
+include $(PROJ_FILES)m_generic.mk
 
 .PHONY: prepare_sphinx
 

@@ -8,8 +8,8 @@ ELF_NAME = $(APP_NAME).elf
 VERSION = 1
 #############################
 
--include $(PROJ_FILES)/Makefile.conf
--include $(PROJ_FILES)/Makefile.gen
+-include $(PROJ_FILES)/m_config.mk
+-include $(PROJ_FILES)/m_generic.mk
 
 # use an app-specific build dir
 APP_BUILD_DIR = $(BUILD_DIR)/$(APP_NAME)

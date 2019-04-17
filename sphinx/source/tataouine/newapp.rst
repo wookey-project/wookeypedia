@@ -70,7 +70,7 @@ the SDK and overloaded as input variables for advanced mechanisms such as multi-
    * APP_NAME
    * EXTRA_LDFLAGS
 
-Some variables are set by the SDK (through the included Makefile.conf file):
+Some variables are set by the SDK (through the included m_config.mk file):
 
    * BUILD_DIR       : the build directory of the project
    * AFLAGS          : the architecture-specific compilation flags
