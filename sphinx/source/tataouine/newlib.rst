@@ -30,8 +30,8 @@ A library should be named wisely, depending on its content. When implementing a 
 .. hint::
    A library should not require a specific permission. Only on rare cases (e.g. for TRNG access) a permission can be requested. Other permissions (like device access permission) are handled by the driver with which the library is communicating
 
-About the driver library integration
-""""""""""""""""""""""""""""""""""""
+About the library integration
+"""""""""""""""""""""""""""""
 
 A basic library requires only the following files:
 
@@ -56,13 +56,13 @@ A library's Makefile is short and straightforward. Like drivers Makefile, it loo
    # About the library name and path
    ###################################################################
 
-   # driver library name, without extension
+   # library name, without extension
    LIB_NAME ?= libdfu
 
    # project relative root directory
    PROJ_FILES = ../../
 
-   # driver library name, with extension
+   # library name, with extension
    LIB_FULL_NAME = $(LIB_NAME).a
 
    # SDK helper Makefiles inclusion
@@ -80,7 +80,7 @@ A library's Makefile is short and straightforward. Like drivers Makefile, it loo
    CFLAGS += -MMD -MP
 
    #############################################################
-   # About driver sources
+   # About library sources
    #############################################################
 
    SRC_DIR = .
@@ -137,14 +137,14 @@ Considering that the sources are hold in the library root directory. Only
 the *LIB_NAME* variable needs to be updated. The other part of the Makefile
 are generic to any library.
 
-Here, we see that the driver's Makefile support the following targets:
+Here, we see that the library's Makefile support the following targets:
 
    * all (and default): build the library
    * doc: build the doc, if there is some
    * show: show the library build info (sources, objects, etc.)
    * lib: called by all target, build the library
 
-You should not need to take care about CFLAGS, as drivers CFLAGS are
+You should not need to take care about CFLAGS, as libraries CFLAGS are
 distributed by the LIBS_CFLAGS variable. Although, it is possible
 to add any other compilation flag if needed.
 
@@ -158,8 +158,8 @@ to add any other compilation flag if needed.
    Beware to use **CFLAGS +=** to keep the previous CFLAGS content
 
 
-The driver's build directory
-""""""""""""""""""""""""""""
+The libraries build directory
+"""""""""""""""""""""""""""""
 
 All libraries are built in their *APP_BUILD_DIR* directory. This directory must
 be named as shown above. for DFU library, all library's built files are hold in the $(BUILD_DIR)/libs/libdfu directory.
@@ -171,12 +171,12 @@ In this directory, you will find:
    * All the object and library compilation commands
 
 The library's compilation command files are hold in files named like the corresponding object file, prefixed with a dot, finishing with a .cmd extension.
-For example, if the library's Makefile has built the *dfu.o* file, from the *dfu.c* file, the compilation step can be found in the driver's build directory under the name *.dfu.o.cmd*
+For example, if the library's Makefile has built the *dfu.o* file, from the *dfu.c* file, the compilation step can be found in the library's build directory under the name *.dfu.o.cmd*
 
 Configuring the library
 """""""""""""""""""""""
 
-The library source root directory must hold a Kconfig file. This file will be automatically loaded by the configuration mechanism and will make your driver appear in the libraries list.
+The library source root directory must hold a Kconfig file. This file will be automatically loaded by the configuration mechanism and will make your library appear in the libraries list.
 
 Each library's Kconfig must contain, at least, the following::
 
@@ -189,7 +189,7 @@ Each library's Kconfig must contain, at least, the following::
 .. danger::
    The Kconfig library entry **must** be named using the following: USR_LIB_*<drvname>*. This is required as the library list and library CFLAGS list is calculated using the USR_LIB prefix.
 
-A library, like other EwoK userspace components, can have various other configuration items in this same file. Here is an example of such a more complete configurable driver Kconfig file::
+A library, like other EwoK userspace components, can have various other configuration items in this same file. Here is an example of such a more complete configurable library Kconfig file::
 
    config USR_LIB_DFU
      bool  "userspace DFU stack library"
