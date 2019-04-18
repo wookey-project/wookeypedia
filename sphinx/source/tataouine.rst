@@ -33,6 +33,7 @@ userspace application and how you can build and flash it.
 .. toctree::
    Building a blinky project <tataouine/build>
    Flashing a new firmware <tataouine/flash>
+   Creating a new driver <tataouine/newdriver>
    Creating a new application <tataouine/newapp>
 
 About memory layout

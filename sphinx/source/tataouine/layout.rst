@@ -1,6 +1,8 @@
 About the hardware layout
 =========================
 
+.. _layout:
+
 Managing the portability
 ------------------------
 
