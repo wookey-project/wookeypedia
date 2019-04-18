@@ -62,6 +62,7 @@ A basic driver requires only the following files:
 .. warning::
    By convention, the driver API should be named using the driver name. Here, the API file would be *aio4237.h*. This avoid any header collision.
 
+
 About the driver build mechanism
 --------------------------------
 
@@ -192,7 +193,7 @@ The driver's compilation command files are hold in files named like the correspo
 For example, if the driver's Makefile has built the *aio4237.o* file, from the *aio4237.c* file, the compilation step can be found in the driver's build directory under the name *.aio4237.o.cmd*
 
 Configuring the driver
-----------------------
+""""""""""""""""""""""
 
 The driver source root directory must hold a Kconfig file. This file will be automatically loaded by the configuration mechanism and will make your driver appear in the driver list.
 
@@ -238,6 +239,16 @@ A driver, like other EwoK userspace components, can have various other configura
 .. warning::
    You are free to add whatever entry you wish in the driver Kconfig file, but each entry **must be named with the driver Kconfig prefix**. This avoid any collision or errors. It also helps when grep'ing in the generated .config file
 
+Integrating your driver to the Tataouine SDK
+""""""""""""""""""""""""""""""""""""""""""""
+
+This is done by updating the manifest file to add your driver repository. Add your driver to the corresponding path, as described above. The SDK automatically detects that your driver is added and integrates it to the configuration subsystem.
+
+Now, you only have to activate it using menuconfig, in the same way you configure the Linux kernel, by executing::
+
+   make menuconfig
+
+Go to Userspace drivers and features, Drivers. You should see your driver and should be able to activate it. Until your configuration is saved, you can now directly compile and flash the new version of the firmware with an application using your driver integrated in it.
 
 Interacting with devices
 ------------------------
