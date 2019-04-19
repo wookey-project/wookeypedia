@@ -160,6 +160,16 @@ You can directly download the jar files in the *javacard/applet* directory of ta
 Now that you have everything needed to compile the applets, you can build them::
 
    $ make javacard_compile
+   $ make javacard_push
+
+You might have an error like this one:
+*Error [...] you have asked to use one smartcard per token.Please insert a virgin token*
+
+The reason is that by default, the menuconfig is configured so that we use dedicated
+smartcard for each cryptographic usage. You can use a single smartcard by
+unsetting the following option in menuconfig:
+*Use a dedicated (different) physical smartcard for each token type (AUTH/DFU/<SIG>)*
+Note that using a single smartcard is not recommanded.
 
 Build the firmware
 """"""""""""""""""
