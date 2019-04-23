@@ -6,36 +6,28 @@
 Welcome to the WooKey project documentation!
 ============================================
 
-.. image:: img/wookie.png
-   :height: 250px
-   :width: 250 px
-   :scale: 100 %
-   :alt: alternate text
-   :align: center
+Securing the USB stack, and hence the USB hosts and devices, has been a growing
+subject of research since exploitable flaws have been revealed with the BadUSB
+threat [nohl2014badusb]_.
 
+The Wookey is a custom STM32 based USB thumb drive with mass storage capabilities
+designed for user data encryption and protection, with a full-fledged set of in-depth security defenses:
 
-The USB bus has been a growing subject of research in recent years.
-More specifically, securing the USB stack (and hence the USB hosts and devices)
-started to draw interest from the academic community since major and massively
-exploitable flaws have been revealed with the BadUSB threat [nohl2014badusb]_.
+- A secure DFU (Device Firmware Update) ensuring firmware integrity and
+  authenticity
+- Up-to-date cryptography
+- An external and extractable authentication token embedding a secure element
+- **EwoK**, a secure microkernel implemented in
+  Ada/SPARK
+- Memory confinement using the MPU (Memory Protection Unit), privilege
+  separation, W^X principle, stack and heap anti-smashing
+- **Tataouine**, a versatile SDK developed to easily integrate user
+  applications in C and Rust.
+- Open source and open hardware
 
-The work presented in this project takes place in the design initiatives that have emerged to thwart
-such attacks. While some proposals have focused on the host side by enhancing the
-Operating System's USB sub-module robustness or adding a proxy between the host and
-the device, we have chosen to focus our efforts on the device side. More specifically, our work
-presents the Wookey platform: a custom STM32 based USB thumb drive with mass storage capabilities
-designed for user data encryption and protection, with a full-fledged set of in-depth security defenses.
+Informations about the security concerns are details in some publications_.
 
-The device embeds a firmware with a secure DFU (Device Firmware Update) implementation using up-to-date cryptography as well
-as an external and extractable authentication token embedding a secure element. The runtime software
-security is built upon **EwoK**: a custom microkernel implementation designed
-with advanced security paradigms in mind, such as memory confinement using the MPU (Memory Protection Unit) and
-the integration of safe languages and formal methods for very sensitive modules.
-
-This microkernel comes along with **Tataouine**: a versatile and modular SDK that has been developed to easily integrate
-user applications in C, Ada and Rust. Another strength of this project is its core guiding
-principle: provide an open source and open hardware platform using off-the-shelf components
-for the PCB design to ease its manufacturing and reproducibility.
+.. _publications: publi.rst
 
 .. toctree::
    :caption: Table of Contents
@@ -43,20 +35,14 @@ for the PCB design to ease its manufacturing and reproducibility.
    :maxdepth: 2
 
    Quickstart <quickstart>
-   Target of the project <target>
-   About Security concerns <security>
-
-.. include:: autogen.ewok.rst
-
-.. include:: autogen.libs.rst
-
-.. include:: autogen.drvs.rst
-
-.. toctree::
-   :maxdepth: 2
-
+   Wookey architecture <architecture>
+   EwoK kernel <ewok/index>
+   Libraries <libs>
+   Drivers <drivers>
    Tataouine SDK <tataouine>
    Basic applications <basicapps>
+
+   About the WooKey project <target>
    Publications <publi>
 
 

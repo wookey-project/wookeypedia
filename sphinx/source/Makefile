@@ -8,4 +8,3 @@ include $(PROJ_FILES)m_generic.mk
 prepare_sphinx:
 	$(call cmd,load_libs_docs)
 	$(call cmd,load_drvs_docs)
-	$(call cmd,load_ewok_docs)
