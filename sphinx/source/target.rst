@@ -1,7 +1,7 @@
 .. _target:
 
-The WooKey project
-=====================
+WooKey project
+==============
 
 .. contents::
 
