@@ -12,7 +12,7 @@ with the GPIOs, in both output mode (with the LEDs: PD12, PD13, PD14 and PD15)
 and input mode (with the push Button: PA0).
 
 .. toctree::
-The 'blinky' basic app :ref:`blinkyapp`.
+The blinky application: :ref:`blinkyapp`.
 
-The 'blinky with IPC' basic apps :ref:`blinkyipcapp`.
+The blinky with IPC application: :ref:`blinkyipcapp`.
 

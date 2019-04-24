@@ -1,8 +1,10 @@
+.. _quickstart:
+
 Quick start
 ============
 
 Welcome to the WooKey project quick start guide. The philosophy, main purpose and features of the project are
-summarized in the :ref:`targetofproject` section.
+summarized in the :ref:`target` section.
 
 The project needs some dependencies, please check the :ref:`dependencies` section to fetch them.
 

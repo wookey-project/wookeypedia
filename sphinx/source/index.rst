@@ -1,3 +1,5 @@
+.. _index:
+
 .. Wookey documentation master file, created by
    sphinx-quickstart on Thu Mar 22 10:31:37 2018.
    You can adapt this file completely to your liking, but it should at least

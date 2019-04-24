@@ -1,3 +1,5 @@
+.. _tataouine:
+
 The Tataouine SDK
 ================
 
