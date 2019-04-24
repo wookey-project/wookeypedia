@@ -1,13 +1,16 @@
 .. _tataouine:
 
 The Tataouine SDK
-================
+=================
 
-About the dependencies
-----------------------
+Dependencies
+------------
+
+To compile and to run the project, some dependencies need to be installed.
+Please check the :ref:`dependencies` section to fetch them.
 
 Downloading Tataouine
---------------------
+---------------------
 
 Tataouine allows to deploy the complete WooKey SDK using repo to collect and
 deploy the overall WooKey git repositories.
@@ -20,10 +23,9 @@ of software elements.
 
 .. toctree::
    Downloading Tataouine with repo <tataouine/repo>
-   About the dependencies <tataouine/deps>
 
 Using Tataouine
---------------
+---------------
 
 Now that the SDK has been downloaded, we detail how to use it.
 More precisely, we describe how to build the sample application given with
@@ -47,7 +49,7 @@ About memory layout
    Using layout in drivers <tataouine/layout_usage>
 
 About Tataouine hierarchy
-------------------------
+-------------------------
 
 Now that the basics have been covered, we can dive deeper in the Tataouine architecture
 to understand how it works and how software modules are integrated, configured, built and flashed.

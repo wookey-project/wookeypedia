@@ -1,7 +1,7 @@
 .. _repo:
 
 Tataouine and repo
------------------
+------------------
 
 The goal of Tataouine is to propose a full modular Software Development Kit. As a consequence, the
 following are *not* a part of Tataouine

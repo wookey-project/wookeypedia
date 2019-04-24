@@ -5,6 +5,8 @@ Dependencies
 
 Some tools need to be installed in order to build your first firmware.
 
+.. contents::
+
 
 To fetch and to manage the project
 ----------------------------------
@@ -153,3 +155,4 @@ On debian ::
 
 .. warning:: These packages are required only for the whole WooKey project, but
              not for the demo examples.
+
