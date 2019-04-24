@@ -1,3 +1,5 @@
+.. _publi:
+
 Publications and technical documentation
 ========================================
 
