@@ -22,6 +22,10 @@ the project with ``repo`` ::
    repo init -u https://github.com/wookey-project/manifest.git -m disco407.xml
    repo sync
 
+The ``disco407.xml`` is called a *manifest file*. It's
+used to deploy a complete image of the SDK by cloning multiple git repositories
+depending on this profile.
+
 Set the environment
 -------------------
 
@@ -61,10 +65,14 @@ The following table shows the variables set by this script.
 .. hint::
    Take a look at the ``setenv.sh`` script, which is highly documented
 
-To overload those settings, you should not directly edit the ``setenv.sh`` file.
-Instead create and use a file name ``setenv.local.sh`` .
-Once you have set your environment variables in your `setenv.local.sh` script,
-just source the `setenv.sh` script as described above.
+Most of the time, the paths proposed in this script are not the one you use in
+your specific installation. 
+If you need to overload some of those variables, you should not directly edit
+the ``setenv.sh`` script. Instead, create a ``setenv.local.sh`` file in the
+same directory and set the variables in this file.  
+
+Once you have set your environment variables in your ``setenv.local.sh``
+script, just source the ``setenv.sh`` script as described above.
 
 
 Configure the target
@@ -74,6 +82,9 @@ To list the predefined configuration profiles, use the *defconfig\_list* target 
 
    make defconfig_list
 
+If you get an error message like '*m_config.mk: Recursive variable
+'CROSS_COMPILE' references itself*', check that you have sourced
+the ``setenv.sh`` file as explained above.
 Then, you can select a configuration profile ::
 
    make <defconfig_file>
@@ -122,7 +133,7 @@ Build the applets
 -----------------
 
 .. warning:: Required only for the whole WooKey project relying on an external
-             token, but not for the demo examples.
+             token, but not for the demo examples described in section :ref:`basicapps`.
 
 Install extra-dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -199,5 +210,27 @@ and so on).
 
 This file can be directly used by any DFU tool to update the target, such as
 standard dfu-util package.
+
+
+Build the documentation
+-----------------------
+
+If you wish to build **all** the documentation, you can execute the *doc*
+target ::
+
+   make doc
+
+This will build the following content
+
+   * The sphinx website (including all the documentation, helpers, principles
+     and security explanations)
+   * The man pages of the kernel and libstd API
+   * The Doxygen-generated datasheets, less readable than sphinx but including
+     all the API and structures.
+
+You can also build only the sphinx website if you prefer not to install doxygen
+and the (heavy) LaTeX backend with the following command ::
+
+   make -C doc sphinx
 
 

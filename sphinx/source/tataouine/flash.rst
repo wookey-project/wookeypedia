@@ -3,74 +3,111 @@
 Flashing a new firmware
 -----------------------
 
-As explained in the dependencies section, there is no constraint on how to flash the firmware. Multiple solutions exist,
-some use open source tools and others can use proprietary tools. In the sequel, we will focus on using the
+Multiple solutions exist to flash the firmware, some use open source tools and
+others can use proprietary tools. We will focus here on using the
 *openocd* open source tool.
 
-After the wookey.hex file is built (using the make all target), use the following steps to flash it on the target board.
+After building the ``wookey.hex`` file, use the
+following steps to flash it on the target board.
 
 .. note::
-   For now, this help targets the STM32 F407 Discovery board (https://www.st.com/en/evaluation-tools/stm32f4discovery.html).
+   For now, this help targets the STM32F407 Discovery board
 
-   Future evolutions of the Tataouine SDK will include more boards: the current section will be updated
-   accordingly.
+Connect the board to the host
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Connecting OpenOCD to the board
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-First you have to setup openocd to communicate with the board connected to one of your USB ports.
-If your board is connected, you should see something like this when running lsusb::
+The board should be connected to the host via USB.
+You should see something like this when running ``lsusb`` command ::
 
     Bus 001 Device 005: ID 0483:374b STMicroelectronics ST-LINK/V2.1
 
-You can see the vendor and product id here (0483 and 374b). In tataouine, you have openocd configuration files for Discovery boards.
-For the STM32 Discovery F407, just run::
+You can see the *vendor* and *product id* (here 0483 and 374b).
 
-   $ openocd -f tools/stm32f4disco1.cfg
+On Debian Stretch, the board is seen as the ``/dev/ttyACM0`` device.
+You need some extra privileges to be able to access (read and write) that
+device.
+You may decide to be root (for example by using the ``sudo`` command)
+but it's usually safer to add your current user in the `plugdev`.
 
-You may need to be root (try with sudo) depending on your groups and user permissions.
+Connect OpenOCD to the board
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. hint::
-   If stm32f4disco1.cfg fails, try stm32f4disco0.cfg, if it doesn't, check the file for the vendor and product id and compare them to the one you have seen using lsusb.
-   Actually, these two openocd configurations are due to various revisions of the F407 board (explaining diverging openocd setups).
+The ``tools/`` directory contains some configuration files for STM32 Discovery boards.
+To connect OpenOCD to the board, launch ``openocd`` command with the appropriate
+configuration file ::
 
-Now that openocd is connected, you can interact with it through a local server.
+   openocd -f tools/stm32f4disco1.cfg
 
-This can be done:
-   * with a cross-gdb which will connect to it
-   * directly using telnet and typing openocd commands
+Note also that the ``stm32f4disco1.cfg`` configuration file may fails.
+If so, try with the ``stm32f4disco0.cfg`` file. A tip is to compare the *vendor*
+and the *product id* returned by the ``lsusb`` command with the one found
+in the configuration file.
 
-If you use telnet, you can just connect to openocd on localhost, port 4444::
+Flashing the device
+^^^^^^^^^^^^^^^^^^^
 
-   $ telnet localhost 4444
+When OpenOCD is succesfully connected to the board, you can interact with it
+through its inner local server. This can be done with ``gdb`` or ``telnet``.
+However, the simplest way to flash a new firmware is to use ``openocd``
+command as describe below.
 
-Now you have a command line on openocd server, in which you can execute commands to manipulate the board debug interface.
+Using the telnet client
+"""""""""""""""""""""""
+Connect the server listening on *localhost:4444* ::
 
-Reseting and flashing the device
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   telnet localhost 4444
 
-The first command is usually a reset command::
+Then, it's possible to send some commands to the OpenOCD local server in order
+to interact with the board. To flash the board, use the following
+commands.
+
+First, asks to the board to reset and to halt at startup, freezing
+the core on its first instruction so that flashing it is safe ::
 
    reset halt
 
-This asks the board to reset and to halt at startup, freezing the core on its first instruction so that flashing
-it is safe.
+Now you can flash the board with the new firmware ::
 
-Now you can flash the board with the image you have built::
+   flash write_image erase build/armv7-m/32f407discovery/32f407discovery.hex
 
-   flash write_image erase build/armv7-m/32f407discovery/wookey.hex
-
-Now that the firmware is flashed, you can reset and start the board::
+Then, you can reset and start the board ::
 
    reset run
+
+Using OpenOCD
+"""""""""""""
+It's possible to flash the firmware by using a subsequent configuration file in
+parameter ::
+
+   openocd -f tools/stm32f4disco1.cfg -f ocd.cfg
+
+The file ``ocd.cfg`` should contain ::
+
+   init
+   reset halt
+   flash write_image erase build/armv7-m/32f407discovery/32f407discovery.hex
+   reset
+   shutdown
+
+Using GDB
+"""""""""
+GDB conntects to OpenOCD through *localhost:3333* instead of *localhost:4444*.
+For example, to debug the EwoK kernel, the file ``gdb.cfg`` can contain ::
+
+   target extended-remote 127.0.0.1:3333
+   mon reset halt
+   symbol-file build/armv7-m/wookey/apps/kernel/kernel.fw1.elf
+   b main
+   c
+
+It's invocated through the following ::
+
+   arm-eabi-gdb -x gdb.cfg
 
 Other ways
 ^^^^^^^^^^
 
-You can also use the ST-link tool to flash the firmware, simply by using the st-flash tool of the st-link project.
+You can also use the ST-link tool to flash the firmware, simply by using the
+``st-flash`` tool of the st-link project.
 
-.. hint::
-   You can also use gdb to flash the image, by calling monitor command through the gdb shell connected to openocd. Using gdb allows to create breakpoints and to debug the embedded software easily
 
-.. hint::
-   If you use a cross-gdb to connect to openocd (in order to flash but also to debug the board) you must use the port 3333 instead of the port 4444, which is dedicated to telnet connection

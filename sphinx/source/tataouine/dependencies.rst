@@ -13,7 +13,11 @@ To fetch and to manage the project
 
 Repo
 ^^^^
-Repo is a tool made by Google to manage the Android projects.
+The WooKey project deployment depends on repo, a tool made by Google to manage
+the Android projects.
+It allows the support of various profiles and various end-user applications,
+drivers and libraries without requiring complex modification of the SDK.
+
 Installing repo is describe in the 'Install Repo' section on
 `this page <https://source.android.com/setup/build/downloading>`_.
 
@@ -45,10 +49,13 @@ The *python-bincopy* package is needed ::
 
    pip3 install bincopy
 
+This tool is used to generate .hex files from multiple elf files when
+generating the firmware.
+
 A Kconfig parser
 ^^^^^^^^^^^^^^^^
 Various tools for parsing and managing *Kconfig* files exist.
-It's possible to use the Python *Kconfiglib* ::
+It's possible to use the Python library *kconfiglib* ::
 
    pip3 install kconfiglib
 
@@ -64,6 +71,8 @@ It's also possible to use the *kconfig-frontends*, downloadable from it's develo
 On Debian Buster and higher, this software is packaged under the name *kconfig-frontends* ::
 
    apt-get install kconfig-frontends
+
+By overloading the KCONF variable (see :ref:`buildprocedure`), you can use an other Kconfig parser.
 
 GNU make
 ^^^^^^^^
@@ -144,6 +153,9 @@ On debian ::
 Cryptographic tools
 -------------------
 
+.. warning:: Cryptographic packages are required only for the whole WooKey project, but
+             not for the demo examples.
+
 In order to sign and generate keys for firmwares, python cryptographic modules
 are needed. The SDK is using the  *python-pyscard* tool for smartcard
 interaction and *python-crypto* in order to handle AES cryptographic content.
@@ -153,6 +165,4 @@ On debian ::
    apt-get install python-pyscard
    apt-get install python-crypto
 
-.. warning:: These packages are required only for the whole WooKey project, but
-             not for the demo examples.
 
