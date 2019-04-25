@@ -8,6 +8,13 @@
 Welcome to the WooKey project documentation!
 ============================================
 
+Welcome to the WooKey project quick start guide. The philosophy, main purpose
+and features of the project are summarized in the :ref:`target` section.
+More detailed about the project can be found in the :ref:`publi` section.
+
+To experiment with a demo WooKey project on STM32F407 Discovery board,
+directly go to the :ref:`quickstart` section.
+
 .. toctree::
    :caption: Table of Contents
    :name: mastertoc

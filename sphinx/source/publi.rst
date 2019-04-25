@@ -12,12 +12,3 @@ Articles and publications
 -------------------------
    * SSTIC 2018: `WooKey: USB Devices Strike Back <https://www.sstic.org/media/SSTIC2018/SSTIC-actes/wookey_usb_devices_strike_back/SSTIC2018-Article-wookey_usb_devices_strike_back-michelizza_lefaure_renard_thierry_trebuchet_benadjila_saV2IIT.pdf>`_
 
-   .. _technical-docs:
-
-Technical documents
--------------------
-
-Technical documents are generated for each software component dedicated documentation. These documents  are independent PDF files that describe the component usage, principles, and for complex components such as the kernel, the internals.
-
-.. include:: publi.rst.gen
-

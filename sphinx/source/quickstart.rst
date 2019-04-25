@@ -3,9 +3,6 @@
 Quick start
 ===========
 
-Welcome to the WooKey project quick start guide. The philosophy, main purpose
-and features of the project are summarized in the :ref:`target` section.
-
 To compile and to run the project, some dependencies need to be installed.
 Please check the :ref:`dependencies` section to fetch them.
 
