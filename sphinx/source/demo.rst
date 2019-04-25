@@ -1,7 +1,7 @@
 .. _demo:
 
-Basic applications
-==================
+Demo examples
+=============
 
 This section describes a simple application to make the four LEDs
 of the STM32 Discovery F407 blinking and reacting to the press
