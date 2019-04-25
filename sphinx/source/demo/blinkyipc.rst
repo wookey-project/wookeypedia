@@ -1,10 +1,10 @@
-.. _blinkyipcapp:
+.. _blinkyipc:
 
-The 'blinky with IPC basic' apps
-================================
+Blinky with IPC demo
+====================
 
 This example provides the same functionality as the one provided
-by the 'blinky' standalone application described in :ref:`blinkyapp`.
+by the 'blinky' standalone application described in :ref:`blinky`.
 
 The main difference is that **two applications** are used: one 'button' app
 handling the button push events, and one 'leds' app handling the LEDs toggling.
@@ -12,8 +12,9 @@ When the button is pushed, the 'button' app send a message to the 'leds' app
 by using the **IPC** mechanism.
 
 To load the default Ada/SPARK version of the menuconfig, launch `make`
-with::
-  $ make boards/32f407disco/configs/disco_blinky_ipc_ada_defconfig
+with ::
+
+  make boards/32f407disco/configs/disco_blinky_ipc_ada_defconfig
 
 The 'button' app
 ----------------
@@ -60,6 +61,7 @@ Yielding permits to release the CPU when no work have to be performed by
 the task.
 
 .. code-block:: c
+
         sys_yield();
 
 The 'leds' app
@@ -99,6 +101,7 @@ Since the IPC reception is asynchronous, three cases can occur:
     improper parameters (ie. invalid task id)
 
 .. code-block:: c
+
     while (1) {
         id = id_button;
         msg_size = sizeof(button_pressed);

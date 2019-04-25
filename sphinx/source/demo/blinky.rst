@@ -1,9 +1,9 @@
-.. _blinkyapp:
+.. _blinky:
 
-The 'blinky' basic app
-===========================
+Blinky demo
+===========
 
-The 'blinky' app is in the directory `app/blinky`.
+The 'blinky' demo is in the directory `app/blinky`.
 
 Building and running the demo
 -----------------------------
