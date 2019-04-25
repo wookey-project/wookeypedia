@@ -49,7 +49,7 @@ The following table shows the variables set by this script.
        Needed by the *make burn* target.
    * - ``ST_UTIL``
      - To the *st-link* binary, which can be useful to get
-        informational infos about the board
+       informational infos about the board
    * - ``CROSS_COMPILE``
      - Prefix used by the C cross-compiler
    * - ``USE_LLVM``

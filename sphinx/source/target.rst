@@ -12,7 +12,7 @@ Securing the USB stack, and hence the USB hosts and devices, has been a growing
 concern since exploitable flaws have been revealed with the BadUSB
 threat [nohl2014badusb]_.
 As a consequence: USB devices firmwares, operating systems, and user data are
-at risk! 
+at risk!
 
 The WooKey project aims at prototyping a secure and trusted USB mass storage
 device featuring user data encryption and strong user authentication, with
@@ -50,10 +50,10 @@ We consider that the adversary has logical or physical access to the
 device:
 
 * The adversary may try to read the data simply by connecting the device
-  to a host 
+  to a host
 
 * The adversary may try to physically reading the mass storage cells, for
-  example when the device is lost or stolen. 
+  example when the device is lost or stolen.
 
 * The adversary may try to tamper with the device using logical attacks,
   for example when it is connected to an untrusted host, exploiting
@@ -91,7 +91,7 @@ The WooKey provides the following main security features:
 
 * **Secure device software update (DFU)**: the device’s software is securely
   upgradable for system maintenance (e.g. security patches). Update files
-  are authenticated and integrity is checked with no possible rollback to 
+  are authenticated and integrity is checked with no possible rollback to
   old versions. A software upgrade must be a voluntary and
   authenticated action. The firmware updates is reliable with no
   possible platform bricking.
@@ -103,4 +103,8 @@ The WooKey provides the following main security features:
   to gain access to the critical materials (such as sensitive cryptographic
   keys). The MPU (Memory Protection Unit) is used to confine
   software attacks in unprivileged and isolated containers.
+
+.. rubric:: References
+
+.. [nohl2014badusb] BadUSB-On accessories that turn evil, Karsten Nohl and Jakob Lell, Black Hat USA, 2014
 

@@ -39,7 +39,3 @@ directly go to the :ref:`quickstart` section.
    * :ref:`modindex`
    * :ref:`search`
 
-.. rubric:: References
-
-.. [nohl2014badusb] BadUSB-On accessories that turn evil, Karsten Nohl and Jakob Lell, Black Hat USA, 2014
-
