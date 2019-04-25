@@ -44,7 +44,7 @@ This manifest permits to deploy the entire Wookey project.
 
 
 Initialize the SDK
-------------------
+^^^^^^^^^^^^^^^^^^
 
 Initialize the SDK is made using the standard repo command ::
 
@@ -67,3 +67,4 @@ This will create a named branch in the repository.
 
 .. hint::
    The repo tool command reference can be `read here <https://source.android.com/setup/develop/repo>`_
+
