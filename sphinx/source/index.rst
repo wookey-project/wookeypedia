@@ -19,6 +19,7 @@ directly go to the :ref:`quickstart` section.
    :caption: Table of Contents
    :name: mastertoc
    :maxdepth: 2
+   :numbered:
 
    About the WooKey project <target>
    Quickstart <quickstart>
