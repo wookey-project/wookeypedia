@@ -79,9 +79,9 @@ Using OpenOCD
 It's possible to flash the firmware by using a subsequent configuration file in
 parameter ::
 
-   openocd -f tools/stm32f4disco1.cfg -f ocd.cfg
+   openocd -f tools/stm32f4disco1.cfg -f tools/ocd_demo.cfg
 
-The file ``ocd.cfg`` should contain ::
+The file ``tools/ocd_demo.cfg`` should contain ::
 
    init
    reset halt
@@ -91,18 +91,18 @@ The file ``ocd.cfg`` should contain ::
 
 Using GDB
 """""""""
-GDB conntects to OpenOCD through *localhost:3333* instead of *localhost:4444*.
-For example, to debug the EwoK kernel, the file ``gdb.cfg`` can contain ::
+GDB conntects to OpenOCD through *localhost:3333* instead of *localhost:4444* ::
+
+   $ arm-eabi-gdb
+   (gdb) target extended-remote 127.0.0.1:3333
+
+For example, to debug the EwoK kernel ::
 
    target extended-remote 127.0.0.1:3333
    mon reset halt
    symbol-file build/armv7-m/wookey/apps/kernel/kernel.fw1.elf
    b main
    c
-
-It's invocated through the following ::
-
-   arm-eabi-gdb -x gdb.cfg
 
 Other ways
 ^^^^^^^^^^

@@ -1,4 +1,4 @@
-.. _buildprocedure:
+.. _build:
 
 Configuring and building a new firmware
 =======================================
@@ -133,7 +133,7 @@ Build the applets
 -----------------
 
 .. warning:: Required only for the whole WooKey project relying on an external
-             token, but not for the demo examples described in section :ref:`basicapps`.
+             token, but not for the demo examples described in section :ref:`demo`.
 
 Install extra-dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -5,18 +5,20 @@ The 'blinky' basic app
 
 The 'blinky' app is in the directory `app/blinky`.
 
-Compile
-^^^^^^^
+Building and running the demo
+-----------------------------
 
-To load the default Ada/SPARK version of the menuconfig, launch `make`
-with::
+To build a new firmware and to flash the board with it, follow the
+instructions in :ref:`quickstart`.
+
+To choose the 'blinky' profile, you will have to execute `make` with ::
 
    $ make boards/32f407disco/configs/disco_blinky_ada_defconfig
 
-Then, follow the instructions in :ref:`buildprocedure` to compile and to flash the board
-with the new firmware.
+Understanding the demo code
+---------------------------
 
-LEDs configuration 
+LEDs configuration
 ^^^^^^^^^^^^^^^^^^
 
 To use a device, first, it must be declared and registered in the kernel.
@@ -65,7 +67,6 @@ Note the registration of the ISR handler with:
 
 .. code-block:: c
 
-    
     button.gpios[0].exti_trigger = GPIO_EXTI_TRIGGER_RISE;
     button.gpios[0].exti_lock    = GPIO_EXTI_UNLOCKED;
     button.gpios[0].exti_handler = (user_handler_t) exti_button_handler;
@@ -122,12 +123,12 @@ set the global variable `button_pushed` to notify the interrupt event:
   }
 
 The only subtlety here is the *debouncing* handling inside the ISR to avoid
-burst of interrupts. 
+burst of interrupts.
 The debouncing time is arbitrary fixed to 20 milliseconds.
 The `sys_get_systick` syscall is used to return elapsed CPU time since the
 board booted.
 
-Main loop 
+Main loop
 ^^^^^^^^^
 
 After the initialization phase, the main function executes a loop that waits

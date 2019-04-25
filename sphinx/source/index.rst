@@ -12,7 +12,7 @@ Welcome to the WooKey project quick start guide. The philosophy, main purpose
 and features of the project are summarized in the :ref:`target` section.
 More detailed about the project can be found in the :ref:`publi` section.
 
-To experiment with a demo WooKey project on STM32F407 Discovery board,
+To experiment with a demo WooKey project on a STM32F407 Discovery board,
 directly go to the :ref:`quickstart` section.
 
 .. toctree::
@@ -22,7 +22,7 @@ directly go to the :ref:`quickstart` section.
 
    About the WooKey project <target>
    Quickstart <quickstart>
-   Basic applications <basicapps>
+   Demo applications <demo>
    Wookey architecture <architecture>
    EwoK kernel <ewok/index>
    Libraries <libs>

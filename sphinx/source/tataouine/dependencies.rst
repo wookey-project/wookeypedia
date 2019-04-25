@@ -72,7 +72,7 @@ On Debian Buster and higher, this software is packaged under the name *kconfig-f
 
    apt-get install kconfig-frontends
 
-By overloading the KCONF variable (see :ref:`buildprocedure`), you can use an other Kconfig parser.
+By overloading the KCONF variable (see :ref:`build`), you can use an other Kconfig parser.
 
 GNU make
 ^^^^^^^^
