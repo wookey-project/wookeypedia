@@ -42,7 +42,7 @@ Debugging userspace drivers and applications
 --------------------------------------------
 
 The *std library* supports a ``printf()`` function and prints
-the content on the kernel USART through a syscall (see :ref:`libstd`).
+the content on the kernel USART through a syscall (see :ref:`lib_std`).
 
 Using Minicom and GDB
 ---------------------
