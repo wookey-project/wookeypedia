@@ -3,6 +3,10 @@
 WooKey architecture
 ===================
 
+That section roughly describes the rational of the architecture/design choices
+implemented in the WooKey platform. More informations about those security
+concerns are detailed in the section :ref:`publi`.
+
 .. contents::
 
 Hardware design rationale

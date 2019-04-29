@@ -34,7 +34,8 @@ full-fledged set of in-depth security defenses:
   applications in C and Rust.
 - Open source and open hardware
 
-Informations about the security concerns are detailed in the section :ref:`publi`.
+Informations about the security concerns are detailed in the section
+:ref:`publi`.
 
 Even though the current WooKey focuses on the mass
 storage USB class, it's

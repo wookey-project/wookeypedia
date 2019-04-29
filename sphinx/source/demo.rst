@@ -22,6 +22,8 @@ Two demo examples are provided:
     On task manage the LEDs while the other receives events from the blue button.
 
 .. toctree::
+  :maxdepth: 2
+
   Blinky demo <demo/blinky>
   Blinky with IPC demo <demo/blinkyipc>
 

@@ -2,25 +2,21 @@
 
 Quick start
 ===========
-
-This section describe how to build and execute the ‘blinky’ demo 
+This section describe how to build and execute the ‘blinky’ demo
 on a STM32F407 Discovery board.
 
 Pre-requisites
 --------------
-
 To compile and to run the project, some dependencies need to be installed.
 Please check the :ref:`dependencies` section to fetch them.
 
 Configure and build the new firmware
 ------------------------------------
-
 .. hint:: For more details about configuring, compiling and flashing a new
           firmware, refer to the :ref:`build` section.
 
 Fetch the project files
 ^^^^^^^^^^^^^^^^^^^^^^^
-
 Once the dependencies are installed, create a working directory and then fetch
 the project with ``repo`` ::
 
@@ -79,7 +75,7 @@ Debugging
 ---------
 To debug the new firmware, launch ``arm-eabi-gdb`` ::
 
-   arm-eabi-gdb 
+   arm-eabi-gdb
 
 Then, inside GDB, execute the following commands ::
 
@@ -93,3 +89,13 @@ Going further
 -------------
 Read the :ref:`demo` section that roughly describes the user code
 executed by the tasks. You can adapt it to run your own examples.
+
+Troubleshooting
+---------------
+If you any problem while trying to build a new demo firmware, be sure that you
+have carefully read the following:
+
+- :ref:`dependencies`
+- :ref:`build`
+- :ref:`flash`
+
