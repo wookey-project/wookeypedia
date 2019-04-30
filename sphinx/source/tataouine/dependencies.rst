@@ -106,7 +106,7 @@ Python-IntelHex
 The *IntelHex* Python module is needed to generated *.hex* and *.bin* files.
 On any system having python and ``pip`` installed, just run ::
 
-   pip3 install IntelHex
+   pip install IntelHex
 
 
 To flash the firmware on the target board
@@ -135,19 +135,17 @@ To compile the documentation
 ----------------------------
 To generate the whole documentation, the following utilities need to be installed:
 
-- *Doxygen*
-- *Doxygen-latex*
 - *Sphinx*
 - *Imagemagick*
 - *rst2man*, which is part of the *python-docutils* package on Debian.
 
 On debian ::
 
-   apt-get install doxygen
-   apt-get install doxygen-latex
    apt-get install python-sphinx
    apt-get install imagemagick
    apt-get install python-docutils
+   apt-get install texlive-pictures
+   apt-get install texlive-latex-extra
 
 
 Cryptographic tools

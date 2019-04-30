@@ -180,10 +180,10 @@ virgin token*
 
 The reason is that by default, the menuconfig is configured so that we use
 some dedicated smartcard for each cryptographic usage. You can use a single
-smartcard by unsetting the following option in menuconfig:
+smartcard by unsetting the following option in menuconfig ::
 
-*Use a dedicated (different) physical smartcard for each token type
-(AUTH/DFU/<SIG>)*
+  Secure tokens configuration  ---> Use a dedicated (different) physical smartcard
+                                    for each token type (AUTH/DFU/<SIG>)
 
 .. warning:: Using a single smartcard is not recommanded.
 
