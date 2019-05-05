@@ -32,48 +32,48 @@ MANS_SYSCALLS := $(patsubst %.rst,$(BUILD_DIR)/doc/man/man2/%.2,$(notdir $(MANS_
 
 MANS_STD_SRC_DIR := $(PROJ_FILES)/libs/std/doc/functions
 MANS_STD_SRC := \
-	$(MANS_STD_SRC_DIR)/aprintf_flush.rst \
-	$(MANS_STD_SRC_DIR)/aprintf.rst \
-	$(MANS_STD_SRC_DIR)/get_random.rst \
-	$(MANS_STD_SRC_DIR)/hexdump.rst \
-	$(MANS_STD_SRC_DIR)/memcmp.rst \
-	$(MANS_STD_SRC_DIR)/mutex_init.rst \
-	$(MANS_STD_SRC_DIR)/mutex_lock.rst \
-	$(MANS_STD_SRC_DIR)/mutex_trylock.rst \
-	$(MANS_STD_SRC_DIR)/mutex_unlock.rst \
-	$(MANS_STD_SRC_DIR)/semaphore_init.rst \
-	$(MANS_STD_SRC_DIR)/semaphore_lock.rst \
-	$(MANS_STD_SRC_DIR)/semaphore_release.rst \
-	$(MANS_STD_SRC_DIR)/semaphore_trylock.rst \
-	$(MANS_STD_SRC_DIR)/printf.rst \
-	$(MANS_STD_SRC_DIR)/sprintf.rst \
-	$(MANS_STD_SRC_DIR)/snprintf.rst \
-	$(MANS_STD_SRC_DIR)/vprintf.rst \
-	$(MANS_STD_SRC_DIR)/vsprintf.rst \
-	$(MANS_STD_SRC_DIR)/vsnprintf.rst \
-	$(MANS_STD_SRC_DIR)/strcmp.rst \
-	$(MANS_STD_SRC_DIR)/strncmp.rst \
-	$(MANS_STD_SRC_DIR)/strlen.rst \
-	$(MANS_STD_SRC_DIR)/strcpy.rst \
-	$(MANS_STD_SRC_DIR)/strncpy.rst \
-	$(MANS_STD_SRC_DIR)/wfree.rst \
-	$(MANS_STD_SRC_DIR)/wmalloc_init.rst \
-	$(MANS_STD_SRC_DIR)/wmalloc.rst \
-    $(MANS_STD_SRC_DIR)/queue_available_space.rst \
-    $(MANS_STD_SRC_DIR)/queue_create.rst \
-    $(MANS_STD_SRC_DIR)/queue_dequeue.rst \
-    $(MANS_STD_SRC_DIR)/queue_enqueue.rst \
-    $(MANS_STD_SRC_DIR)/queue_is_empty.rst \
-	$(MANS_STD_SRC_DIR)/read_reg_value.rst \
-	$(MANS_STD_SRC_DIR)/write_reg_value.rst \
-	$(MANS_STD_SRC_DIR)/get_reg_value.rst \
-	$(MANS_STD_SRC_DIR)/set_reg_value.rst \
-	$(MANS_STD_SRC_DIR)/read_reg16_value.rst \
-	$(MANS_STD_SRC_DIR)/write_reg16_value.rst \
-	$(MANS_STD_SRC_DIR)/htonl.rst \
-	$(MANS_STD_SRC_DIR)/htons.rst \
-	$(MANS_STD_SRC_DIR)/ntohl.rst \
-	$(MANS_STD_SRC_DIR)/ntohs.rst
+        $(MANS_STD_SRC_DIR)/aprintf_flush.rst \
+        $(MANS_STD_SRC_DIR)/aprintf.rst \
+        $(MANS_STD_SRC_DIR)/get_random.rst \
+        $(MANS_STD_SRC_DIR)/hexdump.rst \
+        $(MANS_STD_SRC_DIR)/memcmp.rst \
+        $(MANS_STD_SRC_DIR)/mutex_init.rst \
+        $(MANS_STD_SRC_DIR)/mutex_lock.rst \
+        $(MANS_STD_SRC_DIR)/mutex_trylock.rst \
+        $(MANS_STD_SRC_DIR)/mutex_unlock.rst \
+        $(MANS_STD_SRC_DIR)/semaphore_init.rst \
+        $(MANS_STD_SRC_DIR)/semaphore_lock.rst \
+        $(MANS_STD_SRC_DIR)/semaphore_release.rst \
+        $(MANS_STD_SRC_DIR)/semaphore_trylock.rst \
+        $(MANS_STD_SRC_DIR)/printf.rst \
+        $(MANS_STD_SRC_DIR)/sprintf.rst \
+        $(MANS_STD_SRC_DIR)/snprintf.rst \
+        $(MANS_STD_SRC_DIR)/vprintf.rst \
+        $(MANS_STD_SRC_DIR)/vsprintf.rst \
+        $(MANS_STD_SRC_DIR)/vsnprintf.rst \
+        $(MANS_STD_SRC_DIR)/strcmp.rst \
+        $(MANS_STD_SRC_DIR)/strncmp.rst \
+        $(MANS_STD_SRC_DIR)/strlen.rst \
+        $(MANS_STD_SRC_DIR)/strcpy.rst \
+        $(MANS_STD_SRC_DIR)/strncpy.rst \
+        $(MANS_STD_SRC_DIR)/wfree.rst \
+        $(MANS_STD_SRC_DIR)/wmalloc_init.rst \
+        $(MANS_STD_SRC_DIR)/wmalloc.rst \
+        $(MANS_STD_SRC_DIR)/queue_available_space.rst \
+        $(MANS_STD_SRC_DIR)/queue_create.rst \
+        $(MANS_STD_SRC_DIR)/queue_dequeue.rst \
+        $(MANS_STD_SRC_DIR)/queue_enqueue.rst \
+        $(MANS_STD_SRC_DIR)/queue_is_empty.rst \
+        $(MANS_STD_SRC_DIR)/read_reg_value.rst \
+        $(MANS_STD_SRC_DIR)/write_reg_value.rst \
+        $(MANS_STD_SRC_DIR)/get_reg_value.rst \
+        $(MANS_STD_SRC_DIR)/set_reg_value.rst \
+        $(MANS_STD_SRC_DIR)/read_reg16_value.rst \
+        $(MANS_STD_SRC_DIR)/write_reg16_value.rst \
+        $(MANS_STD_SRC_DIR)/htonl.rst \
+        $(MANS_STD_SRC_DIR)/htons.rst \
+        $(MANS_STD_SRC_DIR)/ntohl.rst \
+        $(MANS_STD_SRC_DIR)/ntohs.rst
 
 MANS_STD      := $(patsubst %.rst,$(BUILD_DIR)/doc/man/man3/%.3,$(notdir $(MANS_STD_SRC)))
 
@@ -94,17 +94,6 @@ sphinx: $(BUILD_DIR)/doc/sphinx
 
 preparesphinx:
 	$(Q)$(MAKE) -C sphinx/source prepare_sphinx
-
-$(BUILD_DIR)/doc/kernel_api: Doxyfile.api
-	$(call cmd,mkdir)
-	$(call cmd,doxygen)
-
-# TODO: this should be replaced by a formalized (YAML?) devmap which generate the C and Ada sources
-# instead of parsing the sources
-#$(BUILD_DIR)/doc/kernel_devmap: Doxyfile.devmap
-#	$(call cmd,mkdir)
-#	$(call cmd,doxygen)
-#	$(call cmd,doxy_custom)
 
 doc:  $(BUILD_DIR)/doc/sphinx $(BUILD_DIR)/doc/man man
 
