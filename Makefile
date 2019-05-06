@@ -87,8 +87,9 @@ show:
 
 $(BUILD_DIR)/doc/sphinx: preparesphinx
 	$(call cmd,mkdir)
-	$(call cmd,mkhtml)
 	$(call cmd,mklatex)
+	$(call cmd,mkhtml)
+	$(call cmd,mkhtml)
 
 sphinx: $(BUILD_DIR)/doc/sphinx
 
