@@ -173,12 +173,11 @@ downloaded from the following github repository:
 
 https://github.com/martinpaljak/oracle_javacard_sdks.git
 
-This repository hold all the Javacard SDKs an can be hosted typically in /opt.
+This repository hold all the Javacard SDKs an can be hosted typically in ``/opt``.
 
 .. warning:: Update the setenv.sh JAVA_SC_SDK variable with the path of the SDK you
              wish to use
 
-.. danger:: the Java environment is a part of the external tools building process.
-            This requires at least the openjdk, maven and ant tool to build the
-            overall firmware
+.. danger:: Building the external tools requires at least *openjdk*, *maven*
+            and *ant*.
 
