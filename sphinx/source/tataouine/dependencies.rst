@@ -42,16 +42,6 @@ Perl
 ^^^^
 The SDK uses some Perl scripts. It should already be installed on your station.
 
-Python
-^^^^^^
-The SDK uses some Python script.
-The *python-bincopy* package is needed ::
-
-   pip3 install bincopy
-
-This tool is used to generate .hex files from multiple elf files when
-generating the firmware.
-
 A Kconfig parser
 ^^^^^^^^^^^^^^^^
 Various tools for parsing and managing *Kconfig* files exist.
@@ -146,6 +136,7 @@ On debian ::
    apt-get install python-docutils
    apt-get install texlive-pictures
    apt-get install texlive-latex-extra
+   apt-get install latexmk
 
 
 Cryptographic tools
@@ -163,4 +154,31 @@ On debian ::
    apt-get install python-pyscard
    apt-get install python-crypto
 
+
+To compile the Java applets
+---------------------------
+
+The Wookey project is based on a secure element holding applets. The applets sources
+must be compiled using the java and Javacard environment.
+
+On debian ::
+
+   apt install openjdk-11-jdk
+   apt install maven
+   apt install ant
+
+The Javacard-specific toolkit is not a part of the Debian project. Oracle also does
+not deliver any Javacard environment for GNU/Linux. Although, theses JDK can be
+downloaded from the following github repository:
+
+https://github.com/martinpaljak/oracle_javacard_sdks.git
+
+This repository hold all the Javacard SDKs an can be hosted typically in /opt.
+
+.. warning:: Update the setenv.sh JAVA_SC_SDK variable with the path of the SDK you
+             wish to use
+
+.. danger:: the Java environment is a part of the external tools building process.
+            This requires at least the openjdk, maven and ant tool to build the
+            overall firmware
 
