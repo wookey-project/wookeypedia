@@ -26,14 +26,14 @@ There is also a
 
 On Debian Buster and higher, this software is packaged under the name *repo* ::
 
-   apt-get install repo
+   apt install repo
 
 Git
 ^^^
 *Git* distributed version-control system.
 On Debian Buster and higher, this software is packaged under the name *git* ::
 
-   apt-get install git
+   apt install git
 
 To compile the firmware
 -----------------------
@@ -60,7 +60,7 @@ It's also possible to use the *kconfig-frontends*, downloadable from it's develo
 
 On Debian Buster and higher, this software is packaged under the name *kconfig-frontends* ::
 
-   apt-get install kconfig-frontends
+   apt install kconfig-frontends
 
 By overloading the KCONF variable (see :ref:`build`), you can use an other Kconfig parser.
 
@@ -68,18 +68,18 @@ GNU make
 ^^^^^^^^
 Beware that Mac-OS uses the *BSD make*, which is not compatible ::
 
-   apt-get install make
+   apt install make
 
 C cross-compiler for *ARMv7-m*
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Beware to use a *none-eabi* compiler and not a *gnu-eabi* compiler.
 On Debian, it's provided by the *gcc-arm-none-eabi* package ::
 
-   apt-get install gcc-arm-none-eabi
+   apt install gcc-arm-none-eabi
 
 You might also need to install *binutils* for *ARMv7-m* ::
 
-   apt-get install binutils-arm-none-eabi
+   apt install binutils-arm-none-eabi
 
 AdaCore Ada/SPARK
 ^^^^^^^^^^^^^^^^^
@@ -112,7 +112,7 @@ utilities:
 
 On Debian, *openocd* package is available ::
 
-   apt-get install openocd
+   apt install openocd
 
 Note that *openocd* and *st-link* can also be used to debug the platform by
 connecting *gdb-arm-none-eabi*.
@@ -131,12 +131,12 @@ To generate the whole documentation, the following utilities need to be installe
 
 On debian ::
 
-   apt-get install python-sphinx
-   apt-get install imagemagick
-   apt-get install python-docutils
-   apt-get install texlive-pictures
-   apt-get install texlive-latex-extra
-   apt-get install latexmk
+   apt install python-sphinx
+   apt install imagemagick
+   apt install python-docutils
+   apt install texlive-pictures
+   apt install texlive-latex-extra
+   apt install latexmk
 
 
 Cryptographic tools
@@ -151,8 +151,8 @@ interaction and *python-crypto* in order to handle AES cryptographic content.
 
 On debian ::
 
-   apt-get install python-pyscard
-   apt-get install python-crypto
+   apt install python-pyscard
+   apt install python-crypto
 
 
 To compile the Java applets
