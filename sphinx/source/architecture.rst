@@ -160,6 +160,21 @@ stress out that integrity is still at risk. With Wookey, we clearly state that
 straightforward solution for the end user is to handle it in a higher layer
 (e.g. file system).
 
+.. note::
+  Actually, we also support TDES-CBC-ESSIV (i.e. using TDES as the core
+  algorithm to encrypt user data). Although TDES is clearly less modern
+  than AES (TDES has an effective 112 bits security compared to 256 bits for
+  AES), it has one advantage over AES in the WooKey project: the
+  CRYP coprocessor in DES mode can 'forget' the master secret key after
+  key injection and key schedule (which is not the case for AES because
+  of an asymmetrical implementation in hardware of the encryption
+  and decryption key schedules, imposing to reinject the key whenever the
+  direction is switched). Hence, using TDES-CBC-ESSIV avoids cold boot
+  attacks post-user authentication (i.e. master key injection): the master key
+  does not leave in the SoC SRAM anymore, which can be an interesting
+  feature depending on the attack context.
+  This is why we leave to the user the choice of the algorithm. 
+
 External tokens and user authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
