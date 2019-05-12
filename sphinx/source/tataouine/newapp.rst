@@ -1,8 +1,8 @@
 Creating a new Application
 --------------------------
 
-What is a WooKey application ?
-==============================
+What is a WooKey application?
+=============================
 
 An application is a standalone software embedding all the needed content (apart from the application loader)
 and built on top of the EwoK microkernel. Applications interact with EwoK through **syscalls**.
@@ -10,7 +10,7 @@ and built on top of the EwoK microkernel. Applications interact with EwoK throug
 Usually, libraries (such as the standard library) wrap such syscalls exposing higher level helpers. Applications can
 also interact with the hardware if they are allowed to (see the permissions model), and must initialize
 devices using dedicated syscalls. Higher level helpers for hardware interactions are also provided to
-the application in the form of userland drivers libraries (such as the usart library).
+the application in the form of userland drivers libraries (such as the USART library).
 
 An application can use any of the SoCs, boards, cores and drivers sources to be able to run on the target.
 
@@ -79,7 +79,7 @@ Some variables are set by the SDK (through the included m_config.mk file):
    * PROJ_FILES      : the project root directory path
 
 .. caution::
-   Please do not set these variables using **:=**, use instead **?=** for paths and **+=** for flags to support overloading, as shown in the sample Makefile.
+   Please do not set these variables using **:=**, use instead **?=** for paths and **+=** for flags to support overloading, as shown in the sample Makefile
 
 
 The application Kconfig
@@ -110,7 +110,7 @@ Integrating your application to the Tataouine SDK
 =================================================
 
 This is done by updating the manifest file to add your application repository.
-The SDK automatically detects that your application is added to the apps/ subdir
+The SDK automatically detects that your application is added to the apps/ subdirectory
 and integrates it to the configuration subsystem.
 
 Now, you only have to activate it using menuconfig, in the same way you
@@ -130,13 +130,13 @@ integrated in it.
      * The user is responsible of the memory ressource management of new applications (stack usage and so on).
        Some configuration errors here (for instance a stack too small for the app memory needs) will
        not be caught at compile time, and will lead to crashes (due to memory errors caught by the MPU)
-       that can be hard to debug.
+       that can be hard to debug
      * Mistakes and inconsistencies when setting the applications permissions could lead to runtime
        hazardous errors!
      * The user must check the consistency of device drivers usage when adding new
        applications. For instance, if two applications both try to use USART4 concurrently,
        one of it will have its request refused by the kernel. As a general rule of thumb, sharing the
        same piece of hardware in two or more applications (i.e. registers handling the same peripheral) is
-       not permitted and must be resolved by using a userspace proxy.
+       not permitted and must be resolved by using a userspace proxy
 
 

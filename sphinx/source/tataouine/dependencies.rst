@@ -24,14 +24,14 @@ Installing repo is describe in the 'Install Repo' section on
 There is also a
 `repo documentation <https://source.android.com/setup/develop/repo>`_
 
-On Debian Buster and higher, this software is packaged under the name *repo* ::
+On Debian Buster and higher, this software is packaged under the name *repo*: ::
 
    apt install repo
 
 Git
 ^^^
 *Git* distributed version-control system.
-On Debian Buster and higher, this software is packaged under the name *git* ::
+On Debian Buster and higher, this software is packaged under the name *git*: ::
 
    apt install git
 
@@ -45,12 +45,12 @@ The SDK uses some Perl scripts. It should already be installed on your station.
 A Kconfig parser
 ^^^^^^^^^^^^^^^^
 Various tools for parsing and managing *Kconfig* files exist.
-It's possible to use the Python library *kconfiglib* ::
+It is possible to use the Python library *kconfiglib*: ::
 
    pip3 install kconfiglib
 
 
-It's also possible to use the *kconfig-frontends*, downloadable from it's developer's `website <http://ymorin.is-a-geek.org/download/kconfig-frontends/>`_ ::
+It is also possible to use the *kconfig-frontends*, downloadable from its developer's `website <http://ymorin.is-a-geek.org/download/kconfig-frontends/>`_: ::
 
    wget http://ymorin.is-a-geek.org/download/kconfig-frontends/kconfig-frontends-4.11.0.1.tar.bz2
    cd kconfig-frontend-upstream-latest
@@ -58,35 +58,35 @@ It's also possible to use the *kconfig-frontends*, downloadable from it's develo
    make
    make install
 
-On Debian Buster and higher, this software is packaged under the name *kconfig-frontends* ::
+On Debian Buster and higher, this software is packaged under the name *kconfig-frontends*: ::
 
    apt install kconfig-frontends
 
-By overloading the KCONF variable (see :ref:`build`), you can use an other Kconfig parser.
+By overloading the KCONF variable (see :ref:`build`), you can use an other Kconfig parsers.
 
 GNU make
 ^^^^^^^^
-Beware that Mac-OS uses the *BSD make*, which is not compatible ::
+Beware that Mac-OS uses the *BSD make*, which is not compatible: ::
 
    apt install make
 
 C cross-compiler for *ARMv7-m*
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Beware to use a *none-eabi* compiler and not a *gnu-eabi* compiler.
-On Debian, it's provided by the *gcc-arm-none-eabi* package ::
+On Debian, it is provided by the *gcc-arm-none-eabi* package: ::
 
    apt install gcc-arm-none-eabi
 
-You might also need to install *binutils* for *ARMv7-m* ::
+You might also need to install *binutils* for *ARMv7-m*: ::
 
    apt install binutils-arm-none-eabi
 
 AdaCore Ada/SPARK
 ^^^^^^^^^^^^^^^^^
 It can be downloaded here: https://www.adacore.com/download/more
-We recommand you to install the binaries in ``/opt/adacore-arm-eabi``.
+We recommend you to install the binaries in ``/opt/adacore-arm-eabi``.
 
-Remember to set your PATH environement variable ::
+Also, remember to set your PATH environment variable: ::
 
     export PATH="/opt/adacore-arm-eabi/bin:$PATH"
 
@@ -94,7 +94,7 @@ Python-IntelHex
 ^^^^^^^^^^^^^^^
 
 The *IntelHex* Python module is needed to generated *.hex* and *.bin* files.
-On any system having python and ``pip`` installed, just run ::
+On any system having python and ``pip`` installed, just run: ::
 
    pip install IntelHex
 
@@ -102,20 +102,20 @@ On any system having python and ``pip`` installed, just run ::
 To flash the firmware on the target board
 -----------------------------------------
 To flash the newly compiled firmwares on STM32 based microcontrollers and the
-associated development boards, you can use one of those two open source
+associated development boards, you can use one of these two open source
 utilities:
 
    * OpenOCD, which is packaged in various distributions and allows to interact
      with the target
-   * ST-link (the open source version can be found on Github:
+   * ST-link (the open source version can be found on Github):
      https://github.com/texane/stlink.git)
 
-On Debian, *openocd* package is available ::
+On Debian, *openocd* package is available: ::
 
    apt install openocd
 
 Note that *openocd* and *st-link* can also be used to debug the platform by
-connecting *gdb-arm-none-eabi*.
+connecting *gdb-arm-none-eabi* or *gdb-multiarch*.
 
 Note also that the ST-Micro proprietary software also works on Windows, or you
 can use any software able to communicate with the STLinkv2 JTAG interface.
@@ -129,7 +129,7 @@ To generate the whole documentation, the following utilities need to be installe
 - *Imagemagick*
 - *rst2man*, which is part of the *python-docutils* package on Debian.
 
-On debian ::
+On Debian: ::
 
    apt install python-sphinx
    apt install imagemagick
@@ -143,13 +143,13 @@ Cryptographic tools
 -------------------
 
 .. warning:: Cryptographic packages are required only for the whole WooKey project, but
-             not for the demo examples.
+             not for the demo examples
 
 In order to sign and generate keys for firmwares, python cryptographic modules
-are needed. The SDK is using the  *python-pyscard* tool for smartcard
+are needed. The SDK is using the  *python-pyscard* tool for smart card
 interaction and *python-crypto* in order to handle AES cryptographic content.
 
-On debian ::
+On Debian: ::
 
    apt install python-pyscard
    apt install python-crypto
@@ -158,22 +158,22 @@ On debian ::
 To compile the Java applets
 ---------------------------
 
-The Wookey project is based on a secure element holding applets. The applets sources
-must be compiled using the java and Javacard environment.
+The WooKey project is based on a secure element holding applets. The applets sources
+must be compiled using the Java and Javacard environment.
 
-On debian ::
+On Debian: ::
 
    apt install openjdk-11-jdk
    apt install maven
    apt install ant
 
 The Javacard-specific toolkit is not a part of the Debian project. Oracle also does
-not deliver any Javacard environment for GNU/Linux. Although, theses JDK can be
+not deliver any Javacard environment for GNU/Linux. Although, these JDK can be
 downloaded from the following github repository:
 
 https://github.com/martinpaljak/oracle_javacard_sdks.git
 
-This repository hold all the Javacard SDKs an can be hosted typically in ``/opt``.
+This repository holds all the Javacard SDKs an can be hosted typically in ``/opt``.
 
 .. warning:: Update the setenv.sh JAVA_SC_SDK variable with the path of the SDK you
              wish to use

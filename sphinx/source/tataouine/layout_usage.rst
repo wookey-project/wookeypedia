@@ -7,11 +7,11 @@ Generated devinfo structure
 
 All generated header files are based on a generic device description which is defined
 in the *generated/devinfo.h* file. This file is included in the device generated header
-file and then doesn't need to be explicitely included in the driver.
+file and then does not need to be explicitly included in the driver.
 
-The devinfo file generate a dedicated device information structure, which include:
-   * the device's address
-   * the device's size (in bytes)
+The devinfo file generate a dedicated device information structure, which includes:
+   * the device address
+   * the device size (in bytes)
    * the device GPIO table
 
 The device information structure is defined as the following::
@@ -32,7 +32,7 @@ Using the generated data
 ------------------------
 
 Each device GPIO table entry is named after the GPIO name in the JSON file.
-This allows the device driver to use name instead of index in the device definition
+This allows the device driver to use names instead of indices in the device definition
 structure, avoiding any problem if GPIO order is modified in the JSON file.
 
 To this structure, the device IRQ(s) are also defined using preprocessing, and can
@@ -75,7 +75,7 @@ has the following structure::
    };
    #endif
 
-Each GPIO can be accedded, for example, using::
+Each GPIO can be accessed, for example, using::
 
    uint8_t usart1_xmit_port = usart1_dev_infos.gpios[USART1_TX].port;
    uint8_t usart1_xmit_pin = usart1_dev_infos.gpios[USART1_TX].pin;

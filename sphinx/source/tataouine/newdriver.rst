@@ -1,24 +1,25 @@
 Creating a new Driver
 =====================
 
-What is an EwoK userspace driver ?
-----------------------------------
+What is an EwoK userspace driver?
+---------------------------------
 
-A driver, in the EwoK terminology, is built as a userspace library. This library hold the necessary
-functions to initialize and configure a given device and to provide a high level API which should
+A driver, in the EwoK terminology, is built as a userspace library. This library holds the necessary
+functions to initialize and configure a given device and to provide a high level API that should
 abstract the device internals (registers, device address, specific behavior) from the upper layer.
 
 An EwoK driver is allowed to use the following:
 
    * The EwoK kernel API
-   * the EwoK libstd library
+   * The EwoK libstd library
 
 An EwoK driver may, but this should be a voluntary and explicit action, depend on another driver.
-A typical example is a low level iso7816 driver, which manipulate an USART interface, requiring to
+A typical example is a low level iso7816 driver, which manipulates an USART interface, requiring to
 communicate with the USART driver.
 
 .. danger::
-   Dependencies between drivers should be an exception. The usual way is a standalone, autonomous implementation
+   Dependencies between drivers should be an exception. The usual way is a standalone, autonomous implementation for
+   a dedicated and well defined device
 
 .. warning::
    A driver **should not** depend on a userspace library. Libraries are portable components that are hold generic stacks and helper algorithms, but should not provide content to any driver. The libstd is the only exception as it is the EwoK kernel abstraction library
@@ -31,20 +32,20 @@ The driver root directory can be hold in two places in the *Tataouine* directory
    * drivers/socs/*<socname>* for SoC-specific drivers
    * drivers/boards/*<boardname>* for board drivers (usually external peripheral drivers)
 
-SoC drivers handle the implementation of one the target SoC (System on Chip) internal hardware device.
-SoCs content depend on the SoC architecture and familly, and usually hold a huge number of devices.
+SoC drivers handle the implementation of one of the target SoCs (System on Chip) internal hardware devices.
+SoCs content depend on the SoC architecture and family, and usually embed a huge number of devices.
 
-board drivers handle the implementation of any peripheral that is connected to the SoC through any
-of its I/O. A typical example is a touchscreen, an external memory controller and so on.
+Board drivers handle the implementation of any peripheral that is connected to the SoC through any
+of its I/O lines. A typical example is a touchscreen, an external memory controller and so on.
 These peripherals are connected to the SoC using one of its I/O. This means that they depend on a
-SoC driver which handle the SoC I/O device (SPI bus, I2S bus, etc.)
+SoC driver which handles the SoC I/O device through a bus (SPI bus, I2S bus, etc.)
 
 
 Given a device name AIO4237 (whatever this device does), let's imagine the associated device driver.
 To avoid any misunderstanding on the driver usage, we name the driver accordingly: *aio4237*.
 
 .. warning::
-   Beware to name your driver properly. This is mostly important for board drivers as peripheral list may vary and be more or less complex depending on the board. A good name avoid unpleasant collision or misunderstanding between the various drivers needed
+   Beware to name your driver properly. This is mostly important for board drivers as peripheral list may vary and be more or less complex depending on the board. A good name avoids unpleasant collision or misunderstanding between the various drivers needed
 
 If this device is a SoC device, the driver will be stored in drivers/socs/*<socname>*/aio4237.
 If this device is a board device, the driver will be stored in drivers/board/*<boardname>*/aio4237.
@@ -56,11 +57,11 @@ A basic driver requires only the following files:
 
    * A Makefile, holding the basic build target
    * A Kconfig file, to (en|dis)able the driver
-   * one source file, whatever its name is
-   * an *api/* directory, which hold the driver API for upper stacks
+   * At least one source file, whatever its name is
+   * An *api/* directory, which contains the driver API for upper stacks
 
 .. warning::
-   By convention, the driver API should be named using the driver name. Here, the API file would be *aio4237.h*. This avoid any header collision.
+   By convention, the driver API should be named using the driver name. Here, the API file would be *aio4237.h*. This avoids any header collision
 
 
 About the driver build mechanism
@@ -195,7 +196,7 @@ For example, if the driver's Makefile has built the *aio4237.o* file, from the *
 Configuring the driver
 """"""""""""""""""""""
 
-The driver source root directory must hold a Kconfig file. This file will be automatically loaded by the configuration mechanism and will make your driver appear in the driver list.
+The driver source root directory must hold a Kconfig file. This file will be automatically loaded by the configuration mechanism and will make your driver appear in the drivers list.
 
 Each driver's Kconfig must contain, at least, the following::
 
@@ -237,7 +238,7 @@ A driver, like other EwoK userspace components, can have various other configura
    endif
 
 .. warning::
-   You are free to add whatever entry you wish in the driver Kconfig file, but each entry **must be named with the driver Kconfig prefix**. This avoid any collision or errors. It also helps when grep'ing in the generated .config file
+   You are free to add whatever entry you wish in the driver Kconfig file, but each entry **must be named with the driver Kconfig prefix**. This avoids any collision or errors. It also helps when grep'ing in the generated .config file
 
 Integrating your driver to the Tataouine SDK
 """"""""""""""""""""""""""""""""""""""""""""
@@ -248,54 +249,54 @@ Now, you only have to activate it using menuconfig, in the same way you configur
 
    make menuconfig
 
-Go to Userspace drivers and features, Drivers. You should see your driver and should be able to activate it. Until your configuration is saved, you can now directly compile and flash the new version of the firmware with an application using your driver integrated in it.
+Go to 'Userspace drivers and features, Drivers'. You should see your driver and should be able to activate it. Until your configuration is saved, you can now directly compile and flash the new version of the firmware with an application using your driver integrated in it.
 
 Interacting with devices
 ------------------------
 
-Getting device informatons
+Getting device information
 """"""""""""""""""""""""""
 
-All devices have their own datasheet, describing their behavior and programing interface. SoC devices are described in the SoC developer's guide.
+All devices have their own datasheet, describing their behavior and programming interface. SoC devices are described in the SoC developer's guide.
 In Tataouine, the device list is handled through a unique JSON file:
 
    * layout/arch/socs/*<socname>*/soc-devmap-*<boardname>*.json
 
-This file hold all the necessary informations for device drivers developers, including:
+This file hold all the necessary information for device drivers developers, including:
 
-   * The device **type** (*block*, which means that the device is memory mapped, host in the SoC) or *peripheral*, which means that the device is onboard, acceded through an I/O bus
+   * The device **type** (*block*, which means that the device is memory mapped, host in the SoC) or *peripheral*, which means that the device is onboard, accessed through an I/O bus
    * The device **address** (when the device is memory mapped)
    * The device **size** (when the device is memory mapped)
    * The device associated **gpio** list. Each GPIO pin/port couple is associated to a canonical name. Only block devices communicating with the outside world have GPIOs
-   * The device associated **irq** list. Each IRQ is associated to a canonical name.
-   * The device associated **dma** channels, for device supporting DMA transaction from or toward the device
+   * The device associated **irq** list. Each IRQ is associated to a canonical name
+   * The device associated **dma** channels, for device supporting DMA transactions from or toward the device
    * The device associated EwoK **permission**. This permission will be required when the device is requested by the userspace task
 
 Other fields (RCC clocks and registers) are used by the EwoK kernel to enable the device input clock.
 
-The JSON file is used in order to generate, for each device, a static const structure which can be used by the driver to declare the device informations without
-being SoC or board specific. This permit to keep the driver implementation portable between various SoCs or boards using the same device.
+The JSON file is used in order to generate, for each device, a static const structure which can be used by the driver to declare the device information without
+being SoC or board specific. This allows to keep the driver implementation portable between various SoCs or boards using the same device.
 
-All informations about how devices header are generated and named can be found in the :ref:`hardware layout chapter <layout>`.
+All information about how devices header are generated and named can be found in the :ref:`hardware layout chapter <layout>`.
 
 The way this structure is used by the device driver is described below.
 
 Declaring the device
 """"""""""""""""""""
 
-On EwoK paradigm (see the EwoK API documentation), each application is executed respecting two sequencial phases:
+In EwoK paradigm (see the EwoK API documentation), each application is executed respecting two sequential phases:
 
-   * One init phase, in which the application can declare ressources (including devices)
-   * One nominal phase, in which the application can use ressources
+   * One init phase, in which the application can declare resources (including devices)
+   * One nominal phase, in which the application can use declared resources
 
 As a consequence, in the EwoK drivers terminology, each driver's initialization API is separated in two independent functions:
 
    * The declaration function, to register the device
-   * The device configuration function, to set registers and device's internal
+   * The device configuration function, to set registers and devices inner interfaces
 
-We have define the following naming system:
+We have defined the following naming system:
 
-   * *aio4237_early_init()* is called during the init phase and declare the ressources against the microkernel
+   * *aio4237_early_init()* is called during the init phase and declare the resources against the microkernel
    * *aio4237_init()* configure the device once it is mapped, during the nominal phase
 
 
@@ -305,13 +306,13 @@ We have define the following naming system:
 .. danger::
    Don't try to declare any ressource (device or other) out of the early_init function, as other functions are called after the end of the init phase. The kernel refuses any ressource registration until the init phase is completed
 
-The early_init function typically use the sys_init(INIT_DEVACCESS) EwoK syscall to request a new device.
+The early_init function typically uses the sys_init(INIT_DEVACCESS) EwoK syscall to request a new device.
 The complete usage of this syscall to declare a new device is explained in the :ref:`EwoK complete API explanation <ewok-devices>`.
 
 .. hint::
-   Be careful to the way devices have to be declared. GPIOs, IRQs and Posthooks principles are deeply described in the :ref:`EwoK API documentation <ewok-devices>` and must be scrupulously respected
+   Be careful of the way devices have to be declared. GPIOs, IRQs and Posthooks principles are deeply described in the :ref:`EwoK API documentation <ewok-devices>` and must be respected
 
-As explained before, fullfilling the device informations is done for most of the device informations, by using the generated device header.
+As explained before, fulfilling the device information is done for most of the device elements by using the generated device header.
 When using the generated header described in the :ref:`Hardware layout <layout>` page, a typical device declaration would look like the following::
 
    static device_t  aio4237_dev;
@@ -386,9 +387,8 @@ When using the generated header described in the :ref:`Hardware layout <layout>`
      return MBED_ERROR_DENIED;
    }
 
-From now on, the *aio4237_init()* function content is cleary device dependent, as it configure the device's registers. All other device driver API are free as they are device-dependent.
 
 .. hint::
-   From all your device driver API, take care to use the libstd mbed_error_t return type instead of custom return types. This permit to use an unified, embedded systems centric return values which permit to simplify the applications and libraries API handling. This type is defined in the libc/types.h header of the libstd.
+   From all your device driver API, take care to use the libstd mbed_error_t return type instead of custom return types. This allows to use unified, embedded systems centric return values which permit to simplify the applications and libraries API handling. This type is defined in the libc/types.h header of the libstd
 
 

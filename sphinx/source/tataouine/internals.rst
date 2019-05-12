@@ -6,7 +6,8 @@ The build system internals
 .. contents::
 
 
-The WooKey build system is based on Makefiles and Kconfig. It requires GNU Make syntax.
+The WooKey build system is based on Makefiles and Kconfig. It uses specific GNU Make syntax (and hence
+requires GNU Make).
 
 Global Makefile hierarchy
 --------------------------
@@ -20,6 +21,7 @@ Here is a list of the Makefiles in the project:
    * ./libs/Makefile, manages the libraries build
    * ./external/Makefile, manages the external projects build
    * ./doc/Makefile, builds the documentation
+   * ./javacard/Makefile, builds the token Javacard applets
 
 Other Makefiles (.objs, .conf, .gen) are included in theses Makefiles.
 
@@ -61,7 +63,7 @@ The buildcmd is the name of the command, as defined in the m_build.mk file. This
 to be included explicitly, as it is included by m_generic.mk.
 The buildcmd corresponds to the command name without the "(quiet\_)\_cmd\_" string.
 
-Here is an example of a classical compilation of object files from source files:::
+Here is an example of a classical compilation of object files from source files: ::
 
    %.o:%.c
    	$(call if_changed,cc_o_c)

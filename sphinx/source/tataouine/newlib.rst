@@ -1,12 +1,12 @@
 Creating a new library
 ======================
 
-What is an EwoK userspace library ?
------------------------------------
+What is an EwoK userspace library?
+----------------------------------
 
 A library, in the EwoK terminology, is an implementation of a portable toolkit or protocol stack in order
 to share useful content between applications.
-Libraries are statically linked to each application requiring it, which means that there is no runtime shared objects. As a consequence, libraries, like drivers, must be position independent.
+Libraries are statically linked to each application requiring them, which means that there are no runtime shared objects. As a consequence, libraries, like drivers, must be position independent.
 
 .. danger::
    Do not write position-dependent code in libraries
@@ -14,11 +14,12 @@ Libraries are statically linked to each application requiring it, which means th
 
 An EwoK userspace library usually provides:
 
-   * A protocol stack (SCSI, DFU, ISO7816, Ethernet, ...)
-   * A toolkit (graphic user interface API, firmware handling API, ...)
+   * A protocol stack (SCSI, DFU, ISO7816, SD, etc.)
+   * A toolkit (graphic user interface API, firmware handling API, etc.)
+   * An independent algorithmic element (cryptographic algorithms such as AES or hash functions, etc.)
 
 
-EwoK libraries can depend on each others and on drivers. Although, take care to make at most portable as possible the library/driver interactions to support driver substitution from a given target board to another target board.
+EwoK libraries can depend on each others and on drivers. Although, take care to make as portable as possible the library/driver interactions to support driver substitution from a given target board to another target board.
 
 The library source directory
 ----------------------------
@@ -45,12 +46,12 @@ A basic library requires only the following files:
 
 
 About the library build mechanism
---------------------------------
+---------------------------------
 
-The library's Makefile
-""""""""""""""""""""""
+The library Makefile
+""""""""""""""""""""
 
-A library's Makefile is short and straightforward. Like drivers Makefile, it looks like the following (for the DFU stack library)::
+A library Makefile is short and straightforward. Like drivers Makefile, it looks like the following (for the DFU stack library)::
 
    ###################################################################
    # About the library name and path
@@ -134,17 +135,17 @@ A library's Makefile is short and straightforward. Like drivers Makefile, it loo
 
 
 Considering that the sources are hold in the library root directory. Only
-the *LIB_NAME* variable needs to be updated. The other part of the Makefile
+the *LIB_NAME* variable needs to be updated. The other parts of the Makefile
 are generic to any library.
 
-Here, we see that the library's Makefile support the following targets:
+Here, we see that the library Makefile supports the following targets:
 
    * all (and default): build the library
    * doc: build the doc, if there is some
    * show: show the library build info (sources, objects, etc.)
    * lib: called by all target, build the library
 
-You should not need to take care about CFLAGS, as libraries CFLAGS are
+You should not need to take care of CFLAGS, as libraries CFLAGS are
 distributed by the LIBS_CFLAGS variable. Although, it is possible
 to add any other compilation flag if needed.
 
@@ -162,7 +163,7 @@ The libraries build directory
 """""""""""""""""""""""""""""
 
 All libraries are built in their *APP_BUILD_DIR* directory. This directory must
-be named as shown above. for DFU library, all library's built files are hold in the $(BUILD_DIR)/libs/libdfu directory.
+be named as shown above. For the DFU library, all the built files are hold in the $(BUILD_DIR)/libs/libdfu directory.
 
 In this directory, you will find:
 
@@ -170,15 +171,15 @@ In this directory, you will find:
    * The library itself (lib*<libname>*.a)
    * All the object and library compilation commands
 
-The library's compilation command files are hold in files named like the corresponding object file, prefixed with a dot, finishing with a .cmd extension.
-For example, if the library's Makefile has built the *dfu.o* file, from the *dfu.c* file, the compilation step can be found in the library's build directory under the name *.dfu.o.cmd*
+The library compilation command files are hold in files named like the corresponding object file, prefixed with a dot, finishing with a .cmd extension.
+For example, if the library Makefile has built the *dfu.o* file, from the *dfu.c* file, the compilation step can be found in the library build directory under the name *.dfu.o.cmd*
 
 Configuring the library
 """""""""""""""""""""""
 
 The library source root directory must hold a Kconfig file. This file will be automatically loaded by the configuration mechanism and will make your library appear in the libraries list.
 
-Each library's Kconfig must contain, at least, the following::
+Each library Kconfig must contain, at least, the following::
 
    config USR_LIB_DFU
      bool  "userspace DFU stack library"
@@ -187,7 +188,7 @@ Each library's Kconfig must contain, at least, the following::
      This is an USB DFU device-side protocol stack implementation
 
 .. danger::
-   The Kconfig library entry **must** be named using the following: USR_LIB_*<drvname>*. This is required as the library list and library CFLAGS list is calculated using the USR_LIB prefix.
+   The Kconfig library entry **must** be named using the following: USR_LIB_*<drvname>*. This is required as the library list and library CFLAGS list are calculated using the USR_LIB prefix
 
 A library, like other EwoK userspace components, can have various other configuration items in this same file. Here is an example of such a more complete configurable library Kconfig file::
 
@@ -218,7 +219,7 @@ A library, like other EwoK userspace components, can have various other configur
    endif
 
 .. warning::
-   You are free to add whatever entry you wish in the library's Kconfig file, but each entry **must be named with the library Kconfig prefix**. This avoid any collision or errors. It also helps when grep'ing in the generated .config file
+   You are free to add whatever entry you wish in the library's Kconfig file, but each entry **must be named with the library Kconfig prefix**. This avoids any collision or errors. This also helps when grep'ing in the generated .config file
 
 Integrating your library to the Tataouine SDK
 """""""""""""""""""""""""""""""""""""""""""""
@@ -229,5 +230,5 @@ Now, you only have to activate it using menuconfig, in the same way you configur
 
    make menuconfig
 
-Go to Userspace drivers and features, Libraries. You should see your library and should be able to activate it. Until your configuration is saved, you can now directly compile and flash the new version of the firmware with an application using your library integrated in it.
+Go to 'Userspace drivers and features, Libraries'. You should see your library and should be able to activate it. Until your configuration is saved, you can now directly compile and flash the new version of the firmware with an application using your library integrated in it.
 
