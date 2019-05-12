@@ -4,7 +4,7 @@ WooKey architecture
 ===================
 
 That section roughly describes the rational of the architecture/design choices
-implemented in the WooKey platform. More informations about those security
+implemented in the WooKey platform. More information about those security
 concerns are detailed in the section :ref:`publi`.
 
 .. contents::
@@ -300,11 +300,6 @@ crypto task to drive ciphering operations without knowing it.
    :align: center
 
 
-.. image:: img/crypto_dfu.png
-   :alt: Wookey cryptography
-   :width: 90%
-   :align: center
-
 Firmware signature and encryption
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -354,6 +349,11 @@ on data written to flash. He would still need to perform a fault on the
 signature check as well as on the hash check on boot, and more importantly to
 bypass the DFU token authentication and secure channel. This theoretical
 multi-faults and multi-bypass scenario seems quite complex to achieve.
+
+.. image:: img/crypto_dfu.png
+   :alt: Wookey cryptography
+   :width: 90%
+   :align: center
 
 DFU mode defense in depth
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -419,7 +419,7 @@ nominal mode, and DFU1 that contains the kernel and the tasks of the DFU mode.
 The second bank is a replica of the first one with a mirrored layout containing
 a different version for Firmware2 and DFU2. The advantage of dual-banking is
 that a bank (the one being executed) can be write-protected with hardware
-ensurance, while the other bank is being updated.
+insurance, while the other bank is being updated.
 
 The Boot Information section contains the current state of the firmware in the
 bank, namely a version number, a flag indicating if the last update has been

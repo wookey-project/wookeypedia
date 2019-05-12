@@ -71,13 +71,13 @@
 %\vskip3.65cm
 %\rotatebox{90}{
 \begin{tikzpicture}[overlay, remember picture]
-\node[minimum width=8.5cm, minimum height=1.15cm, fill=gray!20, yshift=1.2cm, xshift=4.4cm] (a) {};
+\node[minimum width=10cm, minimum height=1.15cm, fill=gray!20, yshift=1.2cm, xshift=4.4cm] (a) {};
 \node[rotate=-90, yshift=.2cm, xshift=-.15cm] (alabel) at (a.east) {$\scriptstyle\text{\underline{Open session}}$};
 
-\node[minimum width=8.5cm, minimum height=1.0cm, fill=gray!40, yshift=-.2cm, xshift=4.4cm] (b) {};
+\node[minimum width=10cm, minimum height=1.0cm, fill=gray!40, yshift=-.2cm, xshift=4.4cm] (b) {};
 \node[rotate=-90, yshift=.2cm, xshift=.05cm] (blabel) at (b.east) {$\scriptstyle\text{\underline{Chunk 0}}$};
 
-\node[minimum width=8.5cm, minimum height=1.0cm, fill=gray!40, yshift=-1.65cm, xshift=4.4cm] (c) {};
+\node[minimum width=10cm, minimum height=1.0cm, fill=gray!40, yshift=-1.65cm, xshift=4.4cm] (c) {};
 \node[rotate=-90, yshift=.2cm, xshift=.05cm] (blabel) at (c.east) {$\scriptstyle\text{\underline{Chunk n}}$};
 \end{tikzpicture}
 \newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
@@ -118,7 +118,7 @@
 }
 \\
 \vskip3.5cm
-\scalebox{.75}{
+\scalebox{.75}{\hskip-11cm
     \begin{tikzpicture}[overlay, remember picture,rotate=90,transform shape,
 node distance = 0mm,
   start chain = going right,
