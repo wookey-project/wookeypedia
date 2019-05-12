@@ -175,6 +175,10 @@ straightforward solution for the end user is to handle it in a higher layer
   feature depending on the attack context.
   This is why we leave to the user the choice of the algorithm. 
 
+.. hint::
+  TDES-CBC-ESSIV and AES-CBC-ESSIV can be configured in the menuconfig
+  'Block device FDE (Full Disk Encryption) options' submenu.
+
 External tokens and user authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
