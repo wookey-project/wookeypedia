@@ -81,7 +81,7 @@ Then, inside GDB, execute the following commands ::
 
    target extended-remote 127.0.0.1:3333
    mon reset halt
-   symbol-file build/armv7-m/wookey/apps/kernel/kernel.fw1.elf
+   symbol-file build/armv7-m/wookey/kernel/kernel.fw1.elf
    b main
    c
 
