@@ -30,6 +30,7 @@ directly go to the :ref:`quickstart` section.
    Drivers <drivers>
    Tataouine SDK <tataouine>
    Publications <publi>
+   Roadmap <roadmap>
 
 
 .. Indices and tables
