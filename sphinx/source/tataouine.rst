@@ -6,6 +6,7 @@ Tataouine SDK
 .. toctree::
    Tataouine dependencies <tataouine/dependencies>
    Downloading Tataouine with repo <tataouine/repo>
+   About the external deps <tataouine/externals>
    About the configuration <tataouine/config>
    Building a new firmware <tataouine/build>
    Flashing a new firmware <tataouine/flash>
