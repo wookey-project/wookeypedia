@@ -67,9 +67,9 @@ Components planned updates
      - Update
    * - ``EwoK``
      - Finalize the Ada/SPARK implementation. The ADA kernel should no more rely on any C code
-   * - Tataouine
+   * - ``Tataouine``
      - Support for RDP2 lock tooling through make target(s). Set device OTP area when locked
-   * - Bootloader
+   * - ``Bootloader``
      - Usage of flash OTP area for intelligent RDP2 lock check, in association with tataouine
    * - ``libmassstorage``
      - Moved USB BULK stack into a dedicated library. libmassstorage becomes libscsi
