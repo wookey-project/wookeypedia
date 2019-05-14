@@ -39,9 +39,10 @@ Maturity level consideration in Wookey:
    * up to ``0.6``, the component is stable for a given usage, but is neither portable nor architecture-clean. It may require a cleaner rewrite (automaton design, and so on). The quality check is incomplete, the documentation may be missing
    * up to ``0.8``, the component is stable. The code architecture may requires some enhancement (style, simplification, optimization). The RTE check should have been passed at least one time. The documentation may still be missing. All core features should ee written and stable. Optional features may be missing.
    * up to ``1.0``, the component architecture should be clean. Component architecture, style, RTE check should be okay. The documentation should be written. The component reaches the 1.0 version when no part is missing
+   * after ``1.0``, the `master` branch of the component evolves including new features, potential bugfixes, etc.
 
 
-Evolution of the maturity level:
+Lifecycle of the component and evolution of the maturity level:
 
    * First complete release or huge evolution with potential API incompatible content impact the major value (aka ``x``).
    * New feature releases impact the minor value (aka ``y``)
@@ -97,3 +98,7 @@ Ecosystem wished updates
 .. note::
    This project is Open-Source and contributions are welcomes! If you wish to implement or update any
    software feature, merge requests are accepted
+
+
+.. hint::
+   Community updates or evolution is supported through classical github `pull requests <https://help.github.com/en/articles/about-pull-requests>`_
