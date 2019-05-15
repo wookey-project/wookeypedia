@@ -6,31 +6,19 @@ Hardware layout
 Managing the portability
 ------------------------
 
-There are multiple issues when dealing with portability management. The initial one is the architecture (ASP) support.
-Architecture-specific content, in the kernel, should be hosted in the arch/<arch_type> directory. The other
-parts of the kernel should be portable enough to support various architectures without requesting complex modifications
-or implementation design.
-
-This is, for this part of the portability, mostly a kernel-specific constraint.
-
-Handing multiple SoCs and boards
---------------------------------
-
-The other part of the portability problem is the way to handle multiple SoCs, for which potential IPs (Intellectual
-Property) may exist in different (but not all) SoCs. This means that the driver associated to the IP should be portable
-enough to support the IP instantiation in various SoCs.
-
-In the same way, a given SoC may be configured in various ways in term of board I/O (e.g. what GPIO is connected where).
-This is a board specification and should not affect the driver implementation as the IP programming interface is not modified.
+Architecture-specific content of the kernel should be hosted in the
+*arch/<arch_type>* directory.
+The other parts of the kernel should be portable enough to support various
+architectures without requesting complex modifications or implementation
+design.
 
 Handling heterogeneous boards
-"""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In order to support various boards, the WooKey project has designed a specific file in JSON format, declaring a dictionary
-of SoC devices (named 'block') and board peripherals (named 'peripheral'). Peripherals can be acceded only through one of the
-SoC block (SPI bus device, CAN bus, USART or any SoC component able to generate I/O with the external world).
+For each supported board, there is a specific file in JSON format,
+describing its SoC and peripherals.
 
-The JSON file as the following syntax: ::
+The example below defines a SoC USART1 device: ::
 
    {
       "usart1": {
@@ -54,21 +42,100 @@ The JSON file as the following syntax: ::
       },
    }
 
-The above example is the definition of a SoC USART1 device. This dictionary entry
-hosts all the required information to generate:
+This entry defines all the required information to generate:
 
-   * a kernel header named devmap.h, hosting allowed devices list
-   * userspace headers, hosting information that generic drivers need (IRQ number, GPIO references, device mapping address and size)
+   * a kernel header named ``devmap.h``
+   * userspace headers, hosting information that generic drivers need (IRQ
+     number, GPIO references, device mapping address and size)
 
-Device maps are generated at pre-build time, from a single source JSON file, as shown below:
+Device maps are generated at build time, as shown below:
 
 .. image:: img/layout.png
    :scale: 100 %
    :alt: ewok icon
    :align: center
 
-In order to support multiple boards, we manage multiple JSON files, holding various devices information. JSON files are named with the
-current board configured in the configuration system of the Tataouine SDK.
 
+Drivers layout
+--------------
 
+Generated devinfo structure
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+All generated header files are based on a generic device description which is
+defined in the ``generated/devinfo.h`` file.
+
+The devinfo file generate a dedicated device information structure, which includes:
+
+   * the device address
+   * the device size (in bytes)
+   * the device GPIO table
+
+The device information structure is: :: 
+
+   struct user_driver_device_gpio_infos {
+       uint8_t    port;
+       uint8_t    pin;
+   };
+
+   struct user_driver_device_infos {
+       physaddr_t address;
+       uint32_t   size;
+       struct user_driver_device_gpio_infos gpios[14];
+   };
+
+Using the generated data
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Each device GPIO table entry is named after the GPIO name in the JSON file.
+This allows the device driver to use names instead of indices in the device definition
+structure, avoiding any problem if GPIO order is modified in the JSON file.
+
+To this structure, the device IRQ(s) are also defined using preprocessing, and can
+be directly used in the device driver.
+
+For the USART1 device declared as a JSON structure described previously, the header file generated
+has the following structure::
+
+   #ifndef USART1_H_
+   # define USART1_H_
+
+   #include "generated/devinfo.h"
+
+   #define USART1_IRQ 53
+   /* naming indexes in structure gpios[] table */
+   #define USART1_TX 0
+   #define USART1_RX 1
+   #define USART1_SC_TX 2
+   #define USART1_SC_CK 3
+
+   static const struct user_driver_device_infos usart1_dev_infos = {
+       .address = 0x40011000,
+       .size    = 0x400,
+       .gpios = {
+         { GPIO_PB, 6 },
+         { GPIO_PB, 7 },
+         { GPIO_PA, 9 },
+         { GPIO_PA, 8 },
+         { 0, 0 },
+         { 0, 0 },
+         { 0, 0 },
+         { 0, 0 },
+         { 0, 0 },
+         { 0, 0 },
+         { 0, 0 },
+         { 0, 0 },
+         { 0, 0 },
+         { 0, 0 },
+       }
+   };
+   #endif
+
+Each GPIO can be accessed, for example, using::
+
+   uint8_t usart1_xmit_port = usart1_dev_infos.gpios[USART1_TX].port;
+   uint8_t usart1_xmit_pin = usart1_dev_infos.gpios[USART1_TX].pin;
+
+   uint8_t usart1_rcv_port = usart1_dev_infos.gpios[USART1_RX].port;
+   uint8_t usart1_rcv_pin = usart1_dev_infos.gpios[USART1_RX].pin;
 
