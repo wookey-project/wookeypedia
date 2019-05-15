@@ -9,18 +9,18 @@ About the components versioning
 Versions of the components
 """"""""""""""""""""""""""
 
-The Wookey project is composed of multiple software and hardware components.
-These components are versioned depending on their level of maturity, using the standard x.y.z triplet, where:
+The WooKey project is composed of multiple software and hardware components.
+These components are versioned depending on their maturity level, using the standard x.y.z triplet, where:
 
-   * x is the major version
-   * y is the minor update step
-   * z is the current patchset
+   * **x** is the major version
+   * **y** is the minor update step
+   * **z** is the current patchset
 
-In Wookey, we consider that a software component reach its relase 1.0.0 when:
+In WooKey, we consider that a software component reaches its release 1.0.0 when:
 
-   * All the features requested by the development team has been implemented and improved
-   * The code quality is good enough (this part is mostly subjective, we use various code checkers to validate RTE absence, code complexity and style, etc.)
-   * The component design is portable and generic enough (depending on the componnent
+   * All the features requested by the development team have been implemented and improved
+   * The code quality is good enough (this part is mostly subjective, we use various code checkers to validate RTE - Run Time Errors - absence, code complexity and style, etc.)
+   * The component design is portable and generic enough (depending on the component)
    * The component documentation is complete
 
 About component maturity
@@ -31,18 +31,18 @@ About component maturity
    :alt: maturity level
    :align: center
 
-Maturity level consideration in Wookey:
+Maturity level consideration in WooKey:
 
 
    * Up to ``0.2``, the component is a draft, neither stable nor clean
    * Up to ``0.4``, the component has a part of the requested features written. These features may be unstable in some cases. Some other features are missing, the code architecture is not clean, the quality check and the documentation is not yet made
    * up to ``0.6``, the component is stable for a given usage, but is neither portable nor architecture-clean. It may require a cleaner rewrite (automaton design, and so on). The quality check is incomplete, the documentation may be missing
-   * up to ``0.8``, the component is stable. The code architecture may requires some enhancement (style, simplification, optimization). The RTE check should have been passed at least one time. The documentation may still be missing. All core features should ee written and stable. Optional features may be missing.
+   * up to ``0.8``, the component is stable. The code architecture may require some enhancement (style, simplification, optimization). The RTE check (through static analysis and so on) should have been passed at least one time. The documentation may still be missing. All core features should be written and stable. Optional features may be missing.
    * up to ``1.0``, the component architecture should be clean. Component architecture, style, RTE check should be okay. The documentation should be written. The component reaches the 1.0 version when no part is missing
    * after ``1.0``, the `master` branch of the component evolves including new features, potential bugfixes, etc.
 
 
-Lifecycle of the component and evolution of the maturity level:
+Life-cycle of the component and evolution of the maturity level:
 
    * First complete release or huge evolution with potential API incompatible content impact the major value (aka ``x``).
    * New feature releases impact the minor value (aka ``y``)
@@ -53,8 +53,8 @@ Planned Updates and wishlist
 
 The following roadmap describes:
 
-   * the various components planned updates
-   * potential new features the project team wish to implement or to see on the Wookey ecosystem in the next months
+   * The various components planned updates
+   * Potential new features the project team wishes to implement or to see in the WooKey ecosystem in the next months
 
 
 Components planned updates
@@ -71,11 +71,11 @@ Components planned updates
    * - ``Tataouine``
      - Support for RDP2 lock tooling through make target(s). Set device OTP area when locked
    * - ``Bootloader``
-     - Usage of flash OTP area for intelligent RDP2 lock check, in association with tataouine
+     - Usage of flash OTP area for more efficient RDP2 lock check, in association with Tataouine
    * - ``libmassstorage``
-     - Moved USB BULK stack into a dedicated library. libmassstorage becomes libscsi
+     - Move USB BULK stack into a dedicated library. libmassstorage becomes libscsi
    * - ``STM32F4 USB driver``
-     - Clean reimplementation of the USB FS/HS driver, control plane planeed as a libusbcontrol independent library
+     - Clean reimplementation of the USB FS/HS driver, control plane inside a libusbcontrol independent library
    * - ``libstd``
      - Full cleaning of the allocator implementation. Add PRNG support
 
@@ -96,7 +96,7 @@ Ecosystem wished updates
 
 
 .. note::
-   This project is Open-Source and contributions are welcomes! If you wish to implement or update any
+   This project is Open-Source and contributions are welcome! If you wish to implement or update any
    software feature, merge requests are accepted
 
 
