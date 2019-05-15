@@ -1,5 +1,5 @@
-About the configuration
-=======================
+Configuration
+=============
 
 .. contents::
 

@@ -50,8 +50,8 @@ To avoid any misunderstanding on the driver usage, we name the driver accordingl
 If this device is a SoC device, the driver will be stored in drivers/socs/*<socname>*/aio4237.
 If this device is a board device, the driver will be stored in drivers/board/*<boardname>*/aio4237.
 
-About the driver sources integration
-""""""""""""""""""""""""""""""""""""
+Sources integration
+"""""""""""""""""""
 
 A basic driver requires only the following files:
 
@@ -64,8 +64,8 @@ A basic driver requires only the following files:
    By convention, the driver API should be named using the driver name. Here, the API file would be *aio4237.h*. This avoids any header collision
 
 
-About the driver build mechanism
---------------------------------
+Build mechanism
+---------------
 
 The driver's Makefile
 """""""""""""""""""""

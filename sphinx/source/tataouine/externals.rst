@@ -1,5 +1,5 @@
-About the external dependencies
-===============================
+External dependencies
+=====================
 
 .. contents::
 

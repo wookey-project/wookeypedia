@@ -21,8 +21,8 @@ An EwoK userspace library usually provides:
 
 EwoK libraries can depend on each others and on drivers. Although, take care to make as portable as possible the library/driver interactions to support driver substitution from a given target board to another target board.
 
-The library source directory
-----------------------------
+Library source directory
+------------------------
 
 The library root directory is held in the libs/ directory in the *Tataouine* directories hierarchy.
 
@@ -31,8 +31,8 @@ A library should be named wisely, depending on its content. When implementing a 
 .. hint::
    A library should not require a specific permission. Only on rare cases (e.g. for TRNG access) a permission can be requested. Other permissions (like device access permission) are handled by the driver with which the library is communicating
 
-About the library integration
-"""""""""""""""""""""""""""""
+Library integration
+"""""""""""""""""""
 
 A basic library requires only the following files:
 
@@ -45,11 +45,11 @@ A basic library requires only the following files:
    By convention, the library API should be named using the library name
 
 
-About the library build mechanism
----------------------------------
+Library build mechanism
+-----------------------
 
-The library Makefile
-""""""""""""""""""""
+Makefile
+""""""""
 
 A library Makefile is short and straightforward. Like drivers Makefile, it looks like the following (for the DFU stack library)::
 
@@ -159,8 +159,8 @@ to add any other compilation flag if needed.
    Beware to use **CFLAGS +=** to keep the previous CFLAGS content
 
 
-The libraries build directory
-"""""""""""""""""""""""""""""
+Build directory
+"""""""""""""""
 
 All libraries are built in their *APP_BUILD_DIR* directory. This directory must
 be named as shown above. For the DFU library, all the built files are hold in the $(BUILD_DIR)/libs/libdfu directory.

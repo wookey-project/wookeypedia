@@ -1,5 +1,5 @@
-About the hardware layout
-=========================
+Hardware layout
+===============
 
 .. _layout:
 
