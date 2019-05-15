@@ -2,18 +2,25 @@
 
 Quick start
 ===========
-This section describe how to build and execute the ‘blinky’ demo
-on a STM32F407 Discovery board.
+
+.. contents::
+
+This section describes how to build and execute the ‘blinky’ demo
+on a STM32F407 Discovery board. It summarises informations thoroughly detailed
+here:
+
+- :ref:`dependencies`
+- :ref:`build`
+- :ref:`flash`
+
 
 Pre-requisites
 --------------
+
+Install the dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^
 To compile and to run the project, some dependencies need to be installed.
 Please check the :ref:`dependencies` section to fetch them.
-
-Configure and build the new firmware
-------------------------------------
-.. hint:: For more details about configuring, compiling and flashing a new
-          firmware, refer to the :ref:`build` section.
 
 Fetch the project files
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -25,23 +32,28 @@ the project with ``repo`` ::
    repo init -u https://github.com/wookey-project/manifest.git -m disco407.xml
    repo sync
 
+Build the firmware
+------------------
+
 Set the environment
 ^^^^^^^^^^^^^^^^^^^
 Set the needed environment variables by sourcing the ``setenv.sh`` script ::
 
    . setenv.sh
 
-Configure the target
-^^^^^^^^^^^^^^^^^^^^
+Configuration
+^^^^^^^^^^^^^
 List the predefined configuration profiles ::
 
    make defconfig_list
 
 Two demo examples are described in section :ref:`demo`.
-To build the 'blinky' project, choose the *disco_blinky_ada_defconfig* profile ::
+To build the *blinky* project, choose the ``disco_blinky_ada_defconfig`` profile ::
 
    make boards/32f407disco/configs/disco_blinky_ada_defconfig
 
+Building the binary files
+^^^^^^^^^^^^^^^^^^^^^^^^^
 Then, you can launch the compilation ::
 
    make

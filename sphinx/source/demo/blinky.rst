@@ -3,7 +3,7 @@
 Blinky demo
 ===========
 
-The 'blinky' demo is in the directory `app/blinky`.
+The 'blinky' demo is in the directory ``app/blinky``.
 
 Building and running the demo
 -----------------------------
@@ -11,7 +11,7 @@ Building and running the demo
 To build a new firmware and to flash the board with it, follow the
 instructions in :ref:`quickstart`.
 
-To choose the 'blinky' profile, you will have to execute `make` with ::
+To choose the 'blinky' profile, you will have to execute ``make`` with ::
 
    $ make boards/32f407disco/configs/disco_blinky_ada_defconfig
 
@@ -22,7 +22,7 @@ LEDs configuration
 ^^^^^^^^^^^^^^^^^^
 
 To use a device, first, it must be declared and registered in the kernel.
-A `device_t` structure is associated to the LEDs. It describes its memory
+A ``device_t`` structure is associated to the LEDs. It describes its memory
 mapping, the GPIOs and the EXTIs of the device.
 
 .. code-block:: C
@@ -49,13 +49,13 @@ mapping, the GPIOs and the EXTIs of the device.
                              GPIO_MASK_SET_TYPE | GPIO_MASK_SET_SPEED;
     ...
 
-Then, the `sys_init` syscall is used to register the device with the kernel:
+Then, the ``sys_init()`` syscall is used to register the device with the kernel:
 
 .. code-block:: c
 
     ret = sys_init(INIT_DEVACCESS, &leds, &desc_leds);
 
-The `desc_leds` variable is a descriptor returned by the syscall. It's
+The ``desc_leds`` variable is a descriptor returned by the syscall. It's
 ignored in that example (it's used only by some few syscalls :ref:`sys_cfg`).
 
 Button configuration
@@ -71,34 +71,36 @@ Note the registration of the ISR handler with:
     button.gpios[0].exti_lock    = GPIO_EXTI_UNLOCKED;
     button.gpios[0].exti_handler = (user_handler_t) exti_button_handler;
 
-The `GPIO_EXTI_TRIGGER_RISE` configures the IRQ associated to the GPIO to be
+The ``GPIO_EXTI_TRIGGER_RISE`` configures the IRQ associated to the GPIO to be
 triggered only on a rising edge (corresponding to a button push in our case).
 
-The `GPIO_EXTI_UNLOCKED` has a special meaning. The `GPIO_EXTI_LOCKED` means
-that the EXTI line is muted and that it must be voluntary "unlocked"
+The ``GPIO_EXTI_UNLOCKED`` has a special meaning. The ``GPIO_EXTI_LOCKED``
+means that the EXTI line is muted and that it must be voluntary "unlocked"
 using a specific syscall to receive further EXTIs.
 
-The `exti_handler` field is initialized with the address of the ISR handler
+The ``exti_handler`` field is initialized with the address of the ISR handler
 that will be executed for each EXTI interrupt.
 
 Leaving the initialization phase
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When all devices are registered, they still can't be used by the app.
-Before, the initialization phase must be leaved using the `sys_init(INIT_DONE)` syscall before using them:
+Before, the initialization phase must be leaved using the
+``sys_init(INIT_DONE)`` syscall before using them:
 
 .. code-block:: c
 
     /* Devices and resources registration is finished */
     ret = sys_init(INIT_DONE);
 
-Be aware that after that, no more further device or resource registration is possible.
+Be aware that after that, no more further device or resource registration is
+possible.
 
 ISR handler
 ^^^^^^^^^^^
 
-In our example, the ISR handler `exti_button_handler()`
-set the global variable `button_pushed` to notify the interrupt event:
+In our example, the ISR handler ``exti_button_handler()``
+set the global variable ``button_pushed`` to notify the interrupt event:
 
 .. code-block:: c
 
@@ -125,14 +127,14 @@ set the global variable `button_pushed` to notify the interrupt event:
 The only subtlety here is the *debouncing* handling inside the ISR to avoid
 burst of interrupts.
 The debouncing time is arbitrary fixed to 20 milliseconds.
-The `sys_get_systick` syscall is used to return elapsed CPU time since the
+The ``sys_get_systick()`` syscall is used to return elapsed CPU time since the
 board booted.
 
 Main loop
 ^^^^^^^^^
 
 After the initialization phase, the main function executes a loop that waits
-for interrupt notifications by checking the value of `button_pushed`.
+for interrupt notifications by checking the value of ``button_pushed``.
 When the Button is pushed, LEDs blinking pattern is switched.
 
 .. code-block:: c
@@ -156,7 +158,7 @@ When the Button is pushed, LEDs blinking pattern is switched.
         ...
 
 To make the LEDs blinking, their related GPIO must be set to ON of OFF
-using the `sys_cfg` syscall:
+using the ``sys_cfg()`` syscall:
 
 .. code-block:: c
 
@@ -184,5 +186,5 @@ Then, the task sleeps 500 milliseconds:
         sys_sleep (500, SLEEP_MODE_INTERRUPTIBLE);
 
 If the button is pushed during that sleeping time, the task is awake
-due to the `SLEEP_MODE_INTERRUPTIBLE` option.
+due to the ``SLEEP_MODE_INTERRUPTIBLE`` option.
 

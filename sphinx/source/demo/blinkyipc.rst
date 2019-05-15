@@ -11,7 +11,7 @@ handling the button push events, and one 'leds' app handling the LEDs toggling.
 When the button is pushed, the 'button' app send a message to the 'leds' app
 by using the **IPC** mechanism.
 
-To load the default Ada/SPARK version of the menuconfig, launch `make`
+To load the default Ada/SPARK version of the menuconfig, launch ``make``
 with ::
 
   make boards/32f407disco/configs/disco_blinky_ipc_ada_defconfig
@@ -24,7 +24,8 @@ Getting the leds application id
 
 The button application must get the *task id* of the leds
 application to be able to communicate with it.
-During the initialization phase, it performs a `sys_init(INIT_GETTASKID)` syscall to get this id:
+During the initialization phase, it performs a ``sys_init(INIT_GETTASKID)``
+syscall to get this id:
 
 .. code-block:: c
 
@@ -39,7 +40,7 @@ message to the 'leds' application by using IPCs.
 EwoK IPC can be synchronous (blocking) of asynchronous (not blocking) as
 described in :ref:`sys_ipc`.
 
-Here, the `IPC_SEND_SYNC` flag means that the syscall is blocking and that
+Here, the ``IPC_SEND_SYNC`` flag means that the syscall is blocking and that
 the task is blocked until the message is read by the receiver.
 
 .. code-block:: c
@@ -55,7 +56,7 @@ Yielding
 ^^^^^^^^
 
 After sending the IPC to the leds task, the button task **yields** using the
-`sys_yield` syscall. The task is put in a sleeping state and it will be
+``sys_yield()`` syscall. The task is put in a sleeping state and it will be
 awaken by a new interrupt.
 Yielding permits to release the CPU when no work have to be performed by
 the task.
@@ -74,7 +75,7 @@ Receiving a message by using IPCs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The task checks for and read an incoming message using the
-`sys_ipc(IPC_RECV_ASYNC` syscall:
+``sys_ipc(IPC_RECV_ASYNC)`` syscall:
 
 .. code-block:: c
 
@@ -94,9 +95,9 @@ the button is not pushed.
 
 Since the IPC reception is asynchronous, three cases can occur:
 
-  * `SYS_E_DONE`: there is an awaiting message sent by the button application
-  * `SYS_E_BUSY`: there is no awaiting message
-  * `SYS_E_DENIED` or `SYS_E_INVAL`: these are syscall errors and should not
+  * ``SYS_E_DONE``: there is an awaiting message sent by the button application
+  * ``SYS_E_BUSY``: there is no awaiting message
+  * ``SYS_E_DENIED`` or ``SYS_E_INVAL``: these are syscall errors and should not
     occur in a nominal behavior. Possible causes are missing permissions or
     improper parameters (ie. invalid task id)
 
