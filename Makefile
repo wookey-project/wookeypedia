@@ -71,9 +71,7 @@ MANS_STD_SRC := \
         $(MANS_STD_SRC_DIR)/read_reg16_value.rst \
         $(MANS_STD_SRC_DIR)/write_reg16_value.rst \
         $(MANS_STD_SRC_DIR)/htonl.rst \
-        $(MANS_STD_SRC_DIR)/htons.rst \
-        $(MANS_STD_SRC_DIR)/ntohl.rst \
-        $(MANS_STD_SRC_DIR)/ntohs.rst
+        $(MANS_STD_SRC_DIR)/htons.rst
 
 MANS_STD      := $(patsubst %.rst,$(BUILD_DIR)/doc/man/man3/%.3,$(notdir $(MANS_STD_SRC)))
 
