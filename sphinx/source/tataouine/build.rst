@@ -204,7 +204,7 @@ images) and the bootloader. The DFU images contain only one of the banks.
 
 Singing is done using the *sign* target of the Makefile with options: ::
 
-   make sign tosign=flip:flop version=1.0
+   make sign tosign=flip:flop version=1.0.1.0
 
 This target will generate, aside the <boardname>.hex, the following files:
 
