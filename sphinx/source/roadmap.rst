@@ -77,7 +77,7 @@ Components planned updates
    * - ``STM32F4 USB driver``
      - Clean reimplementation of the USB FS/HS driver, control plane planeed as a libusbcontrol independent library
    * - ``libstd``
-     - Full cleaning of the allocator implementation
+     - Full cleaning of the allocator implementation. Add PRNG support
 
 
 Ecosystem wished updates
