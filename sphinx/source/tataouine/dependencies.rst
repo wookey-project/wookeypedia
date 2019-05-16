@@ -14,9 +14,9 @@ To fetch and to manage the project
 Repo
 ^^^^
 The WooKey project deployment depends on repo, a tool made by Google to manage
-the Android projects.
-It allows the support of various profiles and various end-user applications,
-drivers and libraries without requiring complex modification of the SDK.
+the Android projects. It allows the support of various profiles and various
+end-user applications, drivers and libraries without requiring complex
+modification of the SDK.
 
 Installing repo is describe in the 'Install Repo' section on
 `this page <https://source.android.com/setup/build/downloading>`_.
@@ -50,7 +50,8 @@ It is possible to use the Python library *kconfiglib*: ::
    pip3 install kconfiglib
 
 
-It is also possible to use the *kconfig-frontends*, downloadable from its developer's `website <http://ymorin.is-a-geek.org/download/kconfig-frontends/>`_: ::
+It is also possible to use the *kconfig-frontends*, downloadable from its
+developer's `website <http://ymorin.is-a-geek.org/download/kconfig-frontends/>`_: ::
 
    wget http://ymorin.is-a-geek.org/download/kconfig-frontends/kconfig-frontends-4.11.0.1.tar.bz2
    cd kconfig-frontend-upstream-latest
@@ -58,11 +59,13 @@ It is also possible to use the *kconfig-frontends*, downloadable from its develo
    make
    make install
 
-On Debian Buster and higher, this software is packaged under the name *kconfig-frontends*: ::
+On Debian Buster and higher, this software is packaged under the name
+*kconfig-frontends*: ::
 
    apt install kconfig-frontends
 
-By overloading the KCONF variable (see :ref:`build`), you can use an other Kconfig parsers.
+By overloading the ``KCONF`` variable (see :ref:`build`), you can use an other
+Kconfig parsers.
 
 GNU make
 ^^^^^^^^
@@ -83,12 +86,24 @@ You might also need to install *binutils* for *ARMv7-m*: ::
 
 AdaCore Ada/SPARK
 ^^^^^^^^^^^^^^^^^
-It can be downloaded here: https://www.adacore.com/download/more
+The binaries for cross-compiling ARM binaries can be downloaded here:
+https://www.adacore.com/download/more.
+
+For cross-compiling ARM binaries from Linux x86, you should
+select the ``ARM ELF (32 bits)(hosted on Linux64)``.
+
 We recommend you to install the binaries in ``/opt/adacore-arm-eabi``.
+If you install the binaries in another directory, you will have to set
+the ``ADA_RUNTIME`` variable from the ``setenv.sh`` file (see :ref:`build`).
 
 Also, remember to set your PATH environment variable: ::
 
     export PATH="/opt/adacore-arm-eabi/bin:$PATH"
+
+To run 32-bit binaries, you will need to install *glibc* 32-bit version. On
+Debian: ::
+
+   apt install libc6-i386
 
 Python-IntelHex
 ^^^^^^^^^^^^^^^
@@ -97,6 +112,8 @@ The *IntelHex* Python module is needed to generated *.hex* and *.bin* files.
 On any system having python and ``pip`` installed, just run: ::
 
    pip install IntelHex
+
+.. warning:: Use ``pip`` and not ``pip3``!
 
 
 To flash the firmware on the target board
