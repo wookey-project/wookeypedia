@@ -1,3 +1,5 @@
+.. _newdrv:
+
 Creating a new Driver
 =====================
 

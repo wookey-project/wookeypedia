@@ -1,3 +1,5 @@
+.. _newlib:
+
 Creating a new library
 ======================
 
