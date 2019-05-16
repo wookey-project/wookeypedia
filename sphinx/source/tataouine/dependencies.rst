@@ -197,6 +197,8 @@ This repository holds all the Javacard SDKs an can be hosted typically in ``/opt
 .. warning:: Update the setenv.sh JAVA_SC_SDK variable with the path of the SDK you
              wish to use
 
+.. note:: When using the JCOP J3D081 Javacard (see :ref:`javacard`), use the SDK 3.0.3
+
 .. danger:: Building the external tools requires at least *openjdk*, *maven*
             and *ant*.
 
