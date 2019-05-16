@@ -136,6 +136,7 @@ On Debian: ::
    apt install python-docutils
    apt install texlive-pictures
    apt install texlive-latex-extra
+   apt install texlive-fonts-recommended
    apt install latexmk
 
 
