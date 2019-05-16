@@ -18,5 +18,6 @@ sphinx/source/img/maturity.png
 sphinx/source/autogen.drvs.rst
 sphinx/source/autogen.ewok.rst
 sphinx/source/autogen.libs.rst
+sphinx/source/javacard
 sphinx/source/_downloads/*.pdf
 *.gen
