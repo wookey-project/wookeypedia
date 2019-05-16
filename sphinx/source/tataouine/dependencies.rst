@@ -138,6 +138,7 @@ On Debian: ::
    apt install texlive-latex-extra
    apt install texlive-fonts-recommended
    apt install latexmk
+   apt install ghostscript
 
 
 Cryptographic tools
