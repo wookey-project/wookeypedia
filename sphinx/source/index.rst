@@ -28,6 +28,7 @@ directly go to the :ref:`quickstart` section.
    EwoK kernel <ewok/index>
    Libraries <libs>
    Drivers <drivers>
+   Javacard Applets <javacard/index>
    Tataouine SDK <tataouine>
    Publications <publi>
    Roadmap <roadmap>
