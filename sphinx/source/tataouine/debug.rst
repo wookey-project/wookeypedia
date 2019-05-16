@@ -1,5 +1,7 @@
-Debugging and logging with WooKey
-=================================
+.. _debug:
+
+Debugging and logging
+=====================
 
 .. contents::
 
