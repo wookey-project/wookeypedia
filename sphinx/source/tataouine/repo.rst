@@ -48,7 +48,7 @@ Initialize the SDK
 
 Initialize the SDK is made using the standard repo command: ::
 
-   repo init -u https://github.com/wookey-project/manifest.git -m default.xml
+   repo init -u https://github.com/wookey-project/manifest.git
    repo sync
 
 The manifest name can be replaced by any of the existing manifests of the
