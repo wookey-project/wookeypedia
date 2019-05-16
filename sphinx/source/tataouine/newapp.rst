@@ -1,8 +1,10 @@
 Creating a new Application
 --------------------------
 
+.. contents::
+
 What is a WooKey application?
-=============================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 An application is a standalone software embedding all the needed content (apart from the application loader)
 and built on top of the EwoK microkernel. Applications interact with EwoK through **syscalls**.
@@ -15,7 +17,7 @@ the application in the form of userland drivers libraries (such as the USART lib
 An application can use any of the SoCs, boards, cores and drivers sources to be able to run on the target.
 
 The application source directory structure
-==========================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A typical application named *myapp* is hosted in apps/myapp.
 
@@ -36,10 +38,10 @@ The myapp directory should look like this:
    ./README.md
 
 Writing your first basic application
-====================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The application Makefile
-^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""
 
 The application Makefile allows to specify which library is needed by
 the application. The Makefile is also the link between the SDK and the
@@ -60,6 +62,7 @@ by Tataouine through the APPS_CFLAGS variable.
 As a consequence, including a library or a driver in the C code can be done by using the following syntax:
 
 .. code-block:: c
+
    #include <api/headername.h>
 
 The application layout is automatically generated.
@@ -83,7 +86,7 @@ Some variables are set by the SDK (through the included m_config.mk file):
 
 
 The application Kconfig
-^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""
 
 Like all applications, yours must be configured. A typical example is the
 permissions configuration, but also the required memory or stack. All these information can
@@ -107,7 +110,7 @@ Here is a sample Kconfig file.
 
 
 Integrating your application to the Tataouine SDK
-=================================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This is done by updating the manifest file to add your application repository.
 The SDK automatically detects that your application is added to the apps/ subdirectory
