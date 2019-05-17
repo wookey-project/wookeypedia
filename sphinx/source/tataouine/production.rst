@@ -32,13 +32,9 @@ Three levels of RDP exist:
   * RDP1: in this level, some (but not all) debug features are locked. It is not possible to read the internal flash form the SWD debug interface, but it is still possible to debug and interact with elements in the internal SRAM. This protection level must **not be considered** as secure since the SRAM might leak sensitive information! Moreover, this level is **reversible** (at the expense of erasing the internal flash).
   * RDP2: in this level, all the debug features and internal flash reading are locked. We strongly advise to use this protection mode in WooKey's production phase. This level is **irreversible** for obvious security reasons.
 
-All these elements are summarized in ST's Application Note AN4701 that can be found here:
+All these elements are summarized in ST's Application Note AN4701 that can be found `here <https://www.st.com/content/ccc/resource/technical/document/application_note/89/12/c5/e2/0d/0e/45/7f/DM00186528.pdf/files/DM00186528.pdf/jcr:content/translations/en.DM00186528.pdf>`_.
 
-https://www.st.com/content/ccc/resource/technical/document/application_note/89/12/c5/e2/0d/0e/45/7f/DM00186528.pdf/files/DM00186528.pdf/jcr:content/translations/en.DM00186528.pdf
-
-More practically, the transition to RDP2 can be performed on a board by using ST's ST-LINK utility dedicated tool:
-
-https://www.st.com/content/ccc/resource/technical/document/user_manual/e6/10/d8/80/d6/1d/4a/f2/CD00262073.pdf/files/CD00262073.pdf/jcr:content/translations/en.CD00262073.pdf
+More practically, the transition to RDP2 can be performed on a board by using ST's `ST-LINK utility dedicated tool <https://www.st.com/content/ccc/resource/technical/document/user_manual/e6/10/d8/80/d6/1d/4a/f2/CD00262073.pdf/files/CD00262073.pdf/jcr:content/translations/en.CD00262073.pdf>`_.
 
 See the **Option bytes commands**, specifically using ``-OB RDP=2``. This tool is a **Windows only** tool.
 
