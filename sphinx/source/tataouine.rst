@@ -10,6 +10,7 @@ Tataouine SDK
    Configuration <tataouine/config>
    Building a new firmware <tataouine/build>
    Flashing a new firmware <tataouine/flash>
+   Production mode <tataouine/production>
    Debugging the project <tataouine/debug>
    Creating a new driver <tataouine/newdriver>
    Creating a new library <tataouine/newlib>
