@@ -20,4 +20,6 @@ sphinx/source/autogen.ewok.rst
 sphinx/source/autogen.libs.rst
 sphinx/source/javacard
 sphinx/source/_downloads/*.pdf
+sphinx/source/hard.rst
+sphinx/source/hardware
 *.gen
