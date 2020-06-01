@@ -59,6 +59,7 @@ images:
 .PHONY: html
 html: images
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+	rm -rf $(BUILDDIR)/html/_downloads
 	cp -r source/_downloads $(BUILDDIR)/html/_downloads
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
