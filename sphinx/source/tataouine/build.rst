@@ -144,10 +144,14 @@ Install extra-dependencies
 The applets sources are hosted in the ``javacard/`` directory.
 In order to compile JavaCard applets, you will need various tools:
 
-   * A *Java SDK*, that provides a Java compiler. *OpenJDK 8u191* or greater should work.
-
    * A *JavaCard SDK* (specific to Globalplatform Javacard environment). This JDK
-     can be found on the Oracle website.
+     can be found on the Oracle website, or you can download them for Linux here:
+    https://github.com/martinpaljak/oracle_javacard_sdks
+
+   * A *Java SDK*, that provides a Java compiler. *OpenJDK 8u191* or greater should work, but
+   please beware of possible compatibility issues between the JDK and the Javacard SDK (see below).
+   You can find a compatibility matrix here: https://github.com/martinpaljak/ant-javacard/wiki/Version-compatibility
+   By default, our applets use the JC303 (3.0.3) SDK, which is only compatible with JDK-8 and JDK-11.
 
    * Two jars:
      * ``ant-javacard.jar``
